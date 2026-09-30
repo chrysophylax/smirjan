@@ -1,103 +1,103 @@
 # Leipzig-Jakarta list (Tadmor 2009)
-# Source: Concepticon conceptlist Tadmor-2009-100 (https://concepticon.clld.org), CC BY 4.0
-# number	gloss
-1	fire
-2	nose
-3	to go
-4	water
-5	mouth
-6	tongue
-7	blood
-8	bone
-9	2sg pronoun
-10	root
-11	to come
-12	breast
-13	rain
-14	1sg pronoun
-15	name
-16	louse
-17	wing
-18	flesh/meat
-19	arm/hand
-20	fly
-21	night
-22	ear
-23	neck
-24	far
-25	to do/make
-26	house
-27	stone/rock
-28	bitter
-29	to say
-30	tooth
-31	hair
-32	big
-33	one
-34	who?
-35	3sg pronoun
-36	to hit/beat
-37	leg/foot
-38	horn
-39	this
-40	fish
-41	yesterday
-42	to drink
-43	black
-44	navel
-45	to stand
-46	to bite
-47	back
-48	wind
-49	smoke
-50	what?
-51	child (kin term)
-52	egg
-53	to give
-54	new
-55	to burn (intr.)
-56	not
-57	good
-58	to know
-59	knee
-60	sand
-61	to laugh
-62	to hear
-63	soil
-64	leaf
-65	red
-66	liver
-67	to hide
-68	skin/hide
-69	to suck
-70	to carry
-71	ant
-72	heavy
-73	to take
-74	old
-75	to eat
-76	thigh
-77	thick
-78	long
-79	to blow
-80	wood
-81	to run
-82	to fall
-83	eye
-84	ash
-85	tail
-86	dog
-87	to cry/weep
-88	to tie
-89	to see
-90	sweet
-91	rope
-92	shade/shadow
-93	bird
-94	salt
-95	small
-96	wide
-97	star
-98	in
-99	hard
-100	to crush/grind
+# Source: Concepticon conceptlist Tadmor-2009-100 (https://concepticon.clld.org, v3.4.0), CC BY 4.0
+# number	concepticon_id	gloss
+1	221	fire
+2	1221	nose
+3	695	to go
+4	948	water
+5	674	mouth
+6	1205	tongue
+7	946	blood
+8	1394	bone
+9	1215	2sg pronoun
+10	670	root
+11	1446	to come
+12	1402	breast
+13	658	rain
+14	1209	1sg pronoun
+15	1405	name
+16	1392	louse
+17	1257	wing
+18	2615	flesh/meat
+19	2121	arm/hand
+20	1504	fly
+21	1233	night
+22	1247	ear
+23	1333	neck
+24	1406	far
+25	2575	to do/make
+26	1252	house
+27	2125	stone/rock
+28	887	bitter
+29	1458	to say
+30	1380	tooth
+31	1040	hair
+32	1202	big
+33	1493	one
+34	1235	who?
+35	262	3sg pronoun
+36	2133	to hit/beat
+37	2098	leg/foot
+38	1393	horn
+39	1214	this
+40	227	fish
+41	1174	yesterday
+42	1401	to drink
+43	163	black
+44	1838	navel
+45	1442	to stand
+46	1403	to bite
+47	1291	back
+48	960	wind
+49	778	smoke
+50	1236	what?
+51	1801	child (kin term)
+52	744	egg
+53	1447	to give
+54	1231	new
+55	1428	to burn (intr.)
+56	1240	not
+57	1035	good
+58	3626	to know
+59	1371	knee
+60	671	sand
+61	1355	to laugh
+62	1408	to hear
+63	1228	soil
+64	628	leaf
+65	156	red
+66	1224	liver
+67	2486	to hide
+68	763	skin/hide
+69	1421	to suck
+70	700	to carry
+71	587	ant
+72	1210	heavy
+73	1749	to take
+74	1229	old
+75	1336	to eat
+76	471	thigh
+77	1244	thick
+78	1203	long
+79	175	to blow
+80	1803	wood
+81	1519	to run
+82	1280	to fall
+83	1248	eye
+84	646	ash
+85	1220	tail
+86	2009	dog
+87	1839	to cry/weep
+88	1917	to tie
+89	1409	to see
+90	717	sweet
+91	1218	rope
+92	1388	shade/shadow
+93	937	bird
+94	1274	salt
+95	1246	small
+96	1243	wide
+97	1430	star
+98	1460	in
+99	1884	hard
+100	1033	to crush/grind

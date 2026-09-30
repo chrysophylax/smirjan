@@ -34,7 +34,8 @@ final class DefinitionParser {
             "stress", "stress-fallback", "stress-mark", "secondary-stress", "secondary-stress-mark",
             "stress-monosyllables", "syllable-separator",
             "tones", "tone-bearing", "tone-position", "tone-contour",
-            "filter", "reject");
+            "filter", "reject",
+            "compounds", "compound-rate", "compound-types", "compound-order", "compound-separator");
     /** Keys whose repeated lines add to each other rather than replace. */
     private static final Set<String> ACCUMULATING = Set.of(
             "syllable", "syllable-initial", "syllable-medial", "syllable-final", "syllable-mono",
@@ -346,6 +347,7 @@ final class DefinitionParser {
         }
 
         tones(def, byKey);
+        compounds(def, byKey);
         Map<String, Character> classOf = new java.util.HashMap<>();
         Set<String> nuclear = new java.util.HashSet<>();
         for (PhonemeClass c : def.classes.values()) {
@@ -491,6 +493,62 @@ final class DefinitionParser {
                 def.toneContours.put(seq.toString(), mark(tok.substring(eq + 1)));
             }
         }
+    }
+
+    private static void compounds(Definition def, Map<String, List<Entry>> byKey) throws DefinitionException {
+        Entry e;
+        if ((e = one(byKey, "compounds")) != null) {
+            try {
+                def.compounds = bool(e.value);
+            } catch (IllegalArgumentException ex) {
+                throw DefinitionException.at(e.line, "compounds: " + ex.getMessage());
+            }
+        }
+        if ((e = one(byKey, "compound-rate")) != null) {
+            def.compoundRate = fraction(e);
+        }
+        def.compoundTypes = choices(one(byKey, "compound-types"), List.of("determinative", "dvandva"),
+                Map.of("determinative", "determinative", "tatpurusha", "determinative", "dvandva", "dvandva",
+                        "coordinative", "dvandva"), def.settings, "list:compound-types");
+        def.compoundOrder = choices(one(byKey, "compound-order"), List.of("head-final"),
+                Map.of("head-final", "head-final", "head-first", "head-first",
+                        "head-initial", "head-first", "left-headed", "head-first", "right-headed", "head-final"),
+                def.settings, "list:compound-order");
+        if ((e = one(byKey, "compound-separator")) != null) {
+            def.compoundSeparator = switch (e.value.toLowerCase()) {
+                case "none", "" -> "";
+                case "space" -> " ";
+                case "hyphen" -> "-";
+                default -> e.value;
+            };
+        }
+    }
+
+    /** A ranked list of fixed choices, e.g. {@code head-final*95 head-first*5}. */
+    private static Weighted<String> choices(Entry e, List<String> dflt, Map<String, String> allowed, Settings s,
+                                            String label) throws DefinitionException {
+        if (e == null) {
+            return Weighted.build(dflt, null, s, label);
+        }
+        List<String> items = new ArrayList<>();
+        List<Double> weights = new ArrayList<>();
+        for (String tok : tokens(e.value)) {
+            Weight w = weight(tok, e);
+            String v = allowed.get(w.item.toLowerCase());
+            if (v == null) {
+                throw DefinitionException.at(e.line, e.key + ": unknown value '" + w.item + "' (expected "
+                        + String.join(", ", new java.util.TreeSet<>(allowed.values())) + ")");
+            }
+            if (items.contains(v)) {
+                throw DefinitionException.at(e.line, e.key + ": '" + v + "' given twice");
+            }
+            items.add(v);
+            weights.add(w.weight);
+        }
+        if (items.isEmpty()) {
+            throw DefinitionException.at(e.line, e.key + ": nothing given");
+        }
+        return Weighted.build(items, weights, s, label);
     }
 
     private static void filters(Definition def, Entry e, List<String> phonemes, Map<String, Character> classOf,

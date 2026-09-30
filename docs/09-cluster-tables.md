@@ -91,14 +91,20 @@ saŋku santampi kempi piŋkatim pusimpa lintuŋkam
 
 ## Substitutions in detail
 
-- The replacement becomes a single segment in the syllable of the pair's
-  **first** phoneme.
-- If either phoneme of the pair was in the nucleus, the replacement is too.
+- A replacement made of **two phonemes** takes the pair's two places. With
+  `n` + `k` → `ŋk`, the `ŋ` stays the coda of one syllable and the `k` stays
+  the onset of the next: *saŋ.ku*, not *saŋk.u*. Replacements are split into
+  your defined phonemes, longest first.
+- Any other replacement (one phoneme, or three or more) becomes a single
+  segment in the syllable of the pair's **first** phoneme. If either phoneme of
+  the pair was in the nucleus, the replacement is too.
 - After a replacement, the new segment is checked against its neighbours again,
   so replacements can feed further rules. A chain that never settles makes the
   word fail rather than loop forever.
 - Tables are applied **before** [filters](08-filters-and-rejects.md), so
   filters see the result of the tables.
+- Tables also apply where the two words of a solid
+  [compound](11-compounds.md#solid-compounds) meet.
 
 ## Tables or filters?
 

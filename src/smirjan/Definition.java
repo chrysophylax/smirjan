@@ -47,6 +47,16 @@ final class Definition {
     TonePosition tonePosition;
     final Map<String, String> toneContours = new HashMap<>();
 
+    boolean compounds;
+    /** With --assign: the share of meanings expressed as compounds. Otherwise: the share of output that is compounds. */
+    double compoundRate = 0.25;
+    /** "dvandva" and/or "determinative", ranked. */
+    Weighted<String> compoundTypes;
+    /** For determinative compounds: "head-final" and/or "head-first", ranked. */
+    Weighted<String> compoundOrder;
+    /** Written between the parts of a compound; "" writes one solid word. */
+    String compoundSeparator = "";
+
     final ClusterTable clusters = new ClusterTable();
     final List<Filter> filters = new ArrayList<>();
     final List<Pattern> rejects = new ArrayList<>();

@@ -75,6 +75,9 @@ Because marks are added last, patterns only ever see plain phonemes, never
 `ˈ`, accents or syllable separators. `^` and `$` match the start and end of the
 word.
 
+In a solid [compound](11-compounds.md#solid-compounds), the parts have already
+been filtered, so at the join filters only rewrite matches that span it.
+
 Filter output keeps its syllable. Replaced text belongs to the syllable where
 the match started, and it's split back into the phonemes you defined. So in
 *latʃi*, `tʃ` is the onset and `i` the nucleus. Stress and tone still land on

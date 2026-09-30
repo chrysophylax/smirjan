@@ -22,6 +22,8 @@ import java.util.Map;
  */
 final class ClusterTable {
     private final Map<String, Map<String, String>> cells = new HashMap<>();
+    /** Phonemes of all classes, longest first, for splitting replacements. */
+    private List<String> phonemes = List.of();
 
     boolean isEmpty() {
         return cells.isEmpty();
@@ -38,8 +40,9 @@ final class ClusterTable {
 
     /**
      * Applies the tables in place. Returns false if a forbidden pair is found.
-     * A substituted pair becomes one segment in the first element's syllable and
-     * is checked again against its new neighbours.
+     * A replacement of two phonemes (ŋk, uu) takes the pair's two places;
+     * anything else becomes one segment in the first element's syllable. The
+     * result is checked again against its new neighbours.
      */
     boolean apply(List<Seg> segs) {
         int i = 0;
@@ -58,9 +61,17 @@ final class ClusterTable {
             if (++guard > 1000) {
                 return false; // substitutions feeding each other forever
             }
-            Seg.Role role = a.role() == Seg.Role.NUCLEUS || b.role() == Seg.Role.NUCLEUS ? Seg.Role.NUCLEUS : a.role();
-            segs.set(i, new Seg(cell, a.syl(), role, null));
-            segs.remove(i + 1);
+            List<String> parts = split(cell);
+            if (parts.size() == 2) {
+                // Two phonemes replace two: each keeps its original place (n+k -> ŋ.k).
+                segs.set(i, new Seg(parts.get(0), a.syl(), a.role(), null));
+                segs.set(i + 1, new Seg(parts.get(1), b.syl(), b.role(), null));
+            } else {
+                Seg.Role role = a.role() == Seg.Role.NUCLEUS || b.role() == Seg.Role.NUCLEUS
+                        ? Seg.Role.NUCLEUS : a.role();
+                segs.set(i, new Seg(cell, a.syl(), role, null));
+                segs.remove(i + 1);
+            }
             i = Math.max(0, i - 1);
         }
         return true;
@@ -69,6 +80,16 @@ final class ClusterTable {
     /** Parses one table. Labels may be phonemes or single-letter class names. */
     static void parse(List<String> rows, List<Integer> lines, Map<Character, PhonemeClass> classes, ClusterTable into)
             throws DefinitionException {
+        List<String> all = new ArrayList<>();
+        for (PhonemeClass c : classes.values()) {
+            for (String p : c.list()) {
+                if (!all.contains(p)) {
+                    all.add(p);
+                }
+            }
+        }
+        all.sort(java.util.Comparator.comparingInt(String::length).reversed());
+        into.phonemes = all;
         String[] header = rows.get(0).substring(1).strip().split("\\s+");
         if (header.length == 0 || header[0].isEmpty()) {
             throw DefinitionException.at(lines.get(0), "cluster table header lists no phonemes");
@@ -94,6 +115,30 @@ final class ClusterTable {
                 }
             }
         }
+    }
+
+    /** Splits a replacement into defined phonemes, longest first; unknown characters join the one before. */
+    private List<String> split(String cell) {
+        List<String> out = new ArrayList<>();
+        int i = 0;
+        outer:
+        while (i < cell.length()) {
+            for (String p : phonemes) {
+                if (cell.startsWith(p, i)) {
+                    out.add(p);
+                    i += p.length();
+                    continue outer;
+                }
+            }
+            int end = i + Character.charCount(cell.codePointAt(i));
+            if (out.isEmpty()) {
+                out.add(cell.substring(i, end));
+            } else {
+                out.add(out.removeLast() + cell.substring(i, end));
+            }
+            i = end;
+        }
+        return out;
     }
 
     private static List<String> expand(String label, Map<Character, PhonemeClass> classes) {

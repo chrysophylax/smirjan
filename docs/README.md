@@ -18,8 +18,12 @@ in these pages was produced by running those files.
 8. [Filters and rejects](08-filters-and-rejects.md): rewriting and discarding words with patterns
 9. [Cluster tables](09-cluster-tables.md): controlling adjacent phonemes
 10. [Output formats and meaning lists](10-output-and-meaning-lists.md): `--tsv`, `--assign`, duplicates, exit codes
-11. [A complete language](11-a-complete-language.md): Var Ysalenn, step by step
-12. [Reference](reference.md): every key and flag on one page
+11. [Compounds](11-compounds.md): dvandva and determinative compounds, head order, meanings mined from Concepticon
+12. [A complete language](12-a-complete-language.md): Var Ysalenn, step by step
+13. [Reference](reference.md): every key and flag on one page
 
-Stress and tone are optional. A language has none unless its `.def` file asks
-for them.
+Stress, tone and compounds are optional. A language has none of them unless
+its `.def` file asks for them.
+
+The bundled meaning data comes from Concepticon and NoRaRe, both CC BY 4.0.
+See [NOTICE.md](../NOTICE.md) for credits.

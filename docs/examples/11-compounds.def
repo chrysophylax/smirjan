@@ -1,0 +1,14 @@
+# Compounds written as two words, mostly dvandvas.
+seed: compounds
+
+C: t k n s m l r p v
+V: a i u e o
+
+syllable: CV CVC
+word-syllables: 1 2
+
+compounds: yes
+compound-rate: 40%
+compound-types: dvandva determinative
+compound-order: head-final*90 head-first*10
+compound-separator: space

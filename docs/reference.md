@@ -9,7 +9,7 @@ smirjan [--tsv] [--assign=lpj|dlg|wlt] <definitions.def> <count>
 | flag | meaning |
 |---|---|
 | `--tsv` | tab-separated output with a header row ([details](10-output-and-meaning-lists.md#--tsv)) |
-| `--assign=LIST`, `--assign LIST` | pair words with meanings from `lpj`, `dlg` or `wlt` ([details](10-output-and-meaning-lists.md#--assign-meaning-lists)) |
+| `--assign=LIST`, `--assign LIST` | pair words with meanings from `lpj`, `dlg` or `wlt` ([details](10-output-and-meaning-lists.md#--assign-meaning-lists)); with `compounds: yes`, some meanings become [compounds](11-compounds.md) |
 | `-h`, `--help` | usage |
 
 Exit status: 0 success, 1 bad definition file, 2 bad arguments, 3 fewer
@@ -101,6 +101,18 @@ Diacritic names: `acute`, `grave`, `macron`, `circumflex`, `caron`, `tilde`,
 `double-acute`, `double-grave`, `breve`, `inverted-breve`, `diaeresis`, `ring`,
 `dot`, `vertical-line`.
 
+## Compounds
+
+| key | default | values |
+|---|---|---|
+| `compounds` | `no` | `yes`, `no` |
+| `compound-rate` | `25%` | with `--assign`: chance for a meaning of average complexity; without: share of output |
+| `compound-types` | `determinative dvandva` | ranked or weighted `dvandva`, `determinative` |
+| `compound-order` | `head-final` | ranked or weighted `head-final`, `head-first`, e.g. `head-final*95 head-first*5` |
+| `compound-separator` | `none` | `none` (one solid word), `space`, `hyphen`, or any text |
+
+See [Compounds](11-compounds.md).
+
 ## Phonotactics
 
 | key | meaning |
@@ -112,4 +124,5 @@ Diacritic names: `acute`, `grave`, `macron`, `circumflex`, `caron`, `tilde`,
 Patterns are Java regular expressions; `{C}` matches any phoneme of class `C`.
 
 Processing order: shapes → cluster tables → filters → rejects → mora target →
-stress and tone.
+stress and tone. A solid compound's join goes through cluster tables, filters
+(matches spanning the join only) and rejects, and is then stressed as a whole.

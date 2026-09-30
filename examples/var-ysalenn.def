@@ -48,3 +48,13 @@ dd  -  +  +
 n   +  -  +
 nn  +  -  +
 ch  +  +  -
+
+# Compounds. The language has "a large corpus of samāhāra dvandva-type
+# compounds", written as two words: keiz kair 'body' (lit. bones bloods).
+# With --assign, dvandvas are built from two related meanings; the rarer
+# determinative compounds are mostly head-final, as in its SAE models.
+compounds: yes
+compound-rate: 40%
+compound-types: dvandva*3 determinative
+compound-order: head-final*95 head-first*5
+compound-separator: space

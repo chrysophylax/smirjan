@@ -11,15 +11,16 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Standard meaning lists bundled from Concepticon (CC BY 4.0), and seeded
- * assignment of generated words to their meanings.
+ * Standard meaning lists bundled from Concepticon (CC BY 4.0). {@link Lexicon}
+ * pairs them with generated words.
  */
 enum Meanings {
     LPJ("lpj", "Leipzig-Jakarta list"),
     DLG("dlg", "Dolgopolsky list"),
     WLT("wlt", "Loanword Typology (WOLD) meaning list");
 
-    record Meaning(int number, String gloss) {}
+    /** @param concept the Concepticon concept set ID, or 0 where the list entry has none */
+    record Meaning(int number, int concept, String gloss) {}
 
     final String key;
     final String title;
@@ -52,8 +53,8 @@ enum Meanings {
                 if (line.isBlank() || line.startsWith("#")) {
                     continue;
                 }
-                String[] cols = line.split("\t", 2);
-                out.add(new Meaning(Integer.parseInt(cols[0]), cols[1]));
+                String[] cols = line.split("\t", 3);
+                out.add(new Meaning(Integer.parseInt(cols[0]), cols[1].isEmpty() ? 0 : Integer.parseInt(cols[1]), cols[2]));
             }
             return out;
         } catch (IOException e) {
@@ -61,28 +62,15 @@ enum Meanings {
         }
     }
 
-    /**
-     * Pairs each word with a distinct meaning, chosen by a seeded shuffle that is
-     * independent of word generation, so the words are the same with or without
-     * --assign. The result is in list order; words beyond the list's length
-     * follow with a null meaning.
-     */
-    <W> List<Assigned<W>> assign(List<W> words, String seed) {
+    /** The list in a seeded random order: the order in which meanings are handed out. */
+    List<Meaning> shuffled(String seed) {
         List<Meaning> meanings = new ArrayList<>(load());
         Random r = Rng.stream(seed, "assign:" + key);
         for (int i = meanings.size() - 1; i > 0; i--) { // Fisher-Yates, stable across JDKs
             int j = r.nextInt(i + 1);
             meanings.set(j, meanings.set(i, meanings.get(j)));
         }
-        List<Assigned<W>> out = new ArrayList<>();
-        for (int i = 0; i < words.size(); i++) {
-            out.add(new Assigned<>(words.get(i), i < meanings.size() ? meanings.get(i) : null));
-        }
-        out.sort((a, b) -> a.meaning == null || b.meaning == null
-                ? Boolean.compare(a.meaning == null, b.meaning == null)
-                : Integer.compare(a.meaning.number, b.meaning.number));
-        return out;
+        return meanings;
     }
 
-    record Assigned<W>(W word, Meaning meaning) {}
 }

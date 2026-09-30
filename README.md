@@ -28,6 +28,11 @@ num
   [Lexifer](https://lingweenie.org/conlang/lexifer/).
 - `--tsv` gives structured output, and `--assign` pairs words with meanings
   from the Leipzig-Jakarta, Dolgopolsky or WOLD lists.
+- Compounds can be dvandva or determinative, head-final or head-first, written
+  solid or as separate words. With `--assign`, they're built from related
+  meanings mined from Concepticon and NoRaRe (*bee* + *beehive* = 'honey').
+
+The bundled meaning data is CC BY 4.0; see [NOTICE.md](NOTICE.md).
 
 ## Quick start
 

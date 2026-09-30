@@ -82,7 +82,10 @@ To get one word for every meaning, ask for the list's size:
 ```
 
 With `--tsv`, two columns are added at the end: `meaning_number` (the
-number in the published list) and `meaning`.
+number in the published list) and `meaning`. With `compounds: yes`, two more
+follow, `compound` and `components` ([chapter 11](11-compounds.md)). A
+compound written as separate words lists each column per part, joined with
+` + ` (`di.tud + ir.ler`).
 
 ```
 $ ./smirjan --tsv --assign=dlg docs/examples/06-stress.def 4
@@ -94,7 +97,8 @@ taˈse.kor	t a s e k o r	ta.se.kor	3	4	1.1.2	2		9	tooth
 ```
 
 The lists are bundled with smirjan, taken from
-[Concepticon](https://concepticon.clld.org) (CC BY 4.0).
+[Concepticon](https://concepticon.clld.org) (CC BY 4.0); see
+[NOTICE.md](../NOTICE.md).
 
 ## Duplicates
 
@@ -113,4 +117,4 @@ affects frequencies in small phonologies.
 | 2 | bad command-line arguments |
 | 3 | fewer distinct words exist than were asked for (the ones found are still printed) |
 
-Next: [A complete language](11-a-complete-language.md)
+Next: [Compounds](11-compounds.md)

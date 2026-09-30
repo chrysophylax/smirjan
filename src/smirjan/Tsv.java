@@ -23,6 +23,39 @@ final class Tsv {
      * </ul>
      */
     static String row(Generator.Word w, boolean hasTones) {
+        return String.join("\t", columns(w, hasTones));
+    }
+
+    /**
+     * A compound written as separate words has no single stress or syllable
+     * string, so each column lists its parts' values joined with " + ".
+     * Totals (syllable_count, morae) are summed.
+     */
+    static List<String> columns(Generator.Word w, boolean hasTones) {
+        Generator.Compound c = w.compound();
+        if (c == null || c.separator().isEmpty()) {
+            return single(w, hasTones);
+        }
+        List<List<String>> parts = c.parts().stream().map(p -> columns(p, hasTones)).toList();
+        List<String> out = new ArrayList<>(List.of(clean(w.text())));
+        for (int col = 1; col < HEADER.split("\t").length; col++) {
+            final int k = col;
+            if (col == 3 || col == 4) {
+                out.add(Integer.toString(parts.stream().mapToInt(p -> Integer.parseInt(p.get(k))).sum()));
+            } else {
+                List<String> values = parts.stream().map(p -> p.get(k)).toList();
+                out.add(values.stream().allMatch(String::isEmpty) ? "" : String.join(" + ", values));
+            }
+        }
+        return out;
+    }
+
+    /** Extra columns with --assign, and with compounds: yes. */
+    static String extraHeader(boolean assigned, boolean compounds) {
+        return (assigned ? "\tmeaning_number\tmeaning" : "") + (compounds ? "\tcompound\tcomponents" : "");
+    }
+
+    private static List<String> single(Generator.Word w, boolean hasTones) {
         StringJoiner phonemes = new StringJoiner(" ");
         StringJoiner syllables = new StringJoiner(".");
         StringJoiner weights = new StringJoiner(".");
@@ -47,7 +80,7 @@ final class Tsv {
                 w.primary() >= 0 ? Integer.toString(w.primary() + 1) : "",
                 hasTones ? String.join(".", w.tones()) : ""));
         cols.replaceAll(Tsv::clean);
-        return String.join("\t", cols);
+        return cols;
     }
 
     private static String nfc(String s) {
@@ -55,7 +88,7 @@ final class Tsv {
     }
 
     /** TSV fields cannot hold tabs or line breaks. */
-    private static String clean(String s) {
+    static String clean(String s) {
         return s.replaceAll("[\\t\\r\\n]", " ");
     }
 }

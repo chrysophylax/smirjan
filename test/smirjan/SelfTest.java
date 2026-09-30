@@ -24,6 +24,8 @@ public final class SelfTest {
         tsv();
         filterResegments();
         meanings();
+        compounds();
+        clusterSplit();
         errors();
 
         System.out.println(passed + " passed, " + failures.size() + " failed");
@@ -225,19 +227,147 @@ public final class SelfTest {
         check(Meanings.LPJ.load().getFirst().gloss().equals("fire"), "lpj starts with fire");
         check(Meanings.parse("dolgopolsky") == Meanings.DLG, "list aliases");
 
-        List<String> ws = words("seed: s\nC: p t k s m n l r\nV: a i u e o\nsyllable: CV CVC\n", 40);
-        var a = Meanings.LPJ.assign(ws, "s");
-        check(a.equals(Meanings.LPJ.assign(ws, "s")), "assignment is replicable");
-        check(!a.equals(Meanings.LPJ.assign(ws, "other")), "assignment depends on the seed");
-        check(a.stream().map(x -> x.meaning().number()).distinct().count() == 40, "distinct meanings");
-        check(a.stream().map(Meanings.Assigned::word).sorted().toList().equals(ws.stream().sorted().toList()),
-                "every word assigned once");
+        String d = "seed: s\nC: p t k s m n l r\nV: a i u e o\nsyllable: CV CVC\n";
+        List<String> ws = words(d, 40);
+        List<Lexicon.Entry> a = assign(d, Meanings.LPJ, 40);
+        check(render(a).equals(render(assign(d, Meanings.LPJ, 40))), "assignment is replicable");
+        check(!render(a).equals(render(assign(d.replace("seed: s", "seed: other"), Meanings.LPJ, 40))),
+                "assignment depends on the seed");
+        check(a.stream().map(Lexicon.Entry::number).distinct().count() == 40, "distinct meanings");
+        check(a.stream().map(e -> e.word().text()).sorted().toList().equals(ws.stream().sorted().toList()),
+                "the same words as without --assign, each assigned once");
         for (int i = 1; i < a.size(); i++) {
-            check(a.get(i - 1).meaning().number() < a.get(i).meaning().number(), "output in list order");
+            check(a.get(i - 1).number() < a.get(i).number(), "output in list order");
         }
-        var over = Meanings.DLG.assign(ws, "s");
-        check(over.stream().filter(x -> x.meaning() != null).count() == 15, "15 dolgopolsky meanings used");
-        check(over.subList(15, 40).stream().allMatch(x -> x.meaning() == null), "extra words unassigned, last");
+        List<Lexicon.Entry> over = assign(d, Meanings.DLG, 40);
+        check(over.size() == 40 && over.stream().filter(e -> e.number() != null).count() == 15,
+                "15 dolgopolsky meanings used");
+        check(over.subList(15, 40).stream().allMatch(e -> e.number() == null && e.gloss().isEmpty()),
+                "extra words unassigned, last");
+    }
+
+    static List<Lexicon.Entry> assign(String def, Meanings list, int count) throws DefinitionException {
+        Definition d = DefinitionParser.parse(def);
+        return Lexicon.build(d, new Generator(d), list, count);
+    }
+
+    static final String CPD = "seed: s\nC: p t k s m n l r\nV: a i u e o\nsyllable: CV CVC\nword-syllables: 1 2\n";
+
+    static void compounds() throws Exception {
+        // With --assign: compounds are made of words that also stand for their component meanings.
+        Definition def = DefinitionParser.parse(CPD + "compounds: yes\ncompound-rate: 100%\n"
+                + "compound-separator: space\ncompound-types: dvandva determinative\n");
+        List<Lexicon.Entry> lex = Lexicon.build(def, new Generator(def), Meanings.WLT, 300);
+        List<Lexicon.Entry> cps = lex.stream().filter(e -> !e.parts().isEmpty()).toList();
+        check(cps.size() > 20, "compounds made: " + cps.size());
+        java.util.Map<Integer, String> wordOf = new java.util.HashMap<>();
+        for (Lexicon.Entry e : lex) {
+            if (e.concept() > 0 && e.parts().isEmpty()) {
+                check(wordOf.putIfAbsent(e.concept(), e.word().text()) == null, "one simple word per concept");
+            }
+        }
+        for (Lexicon.Entry e : cps) {
+            check(e.word().text().equals(e.parts().get(0).word().text() + " " + e.parts().get(1).word().text()),
+                    "compound is its parts joined: " + e.word().text());
+            for (Lexicon.Entry p : e.parts()) {
+                check(p.parts().isEmpty(), "components are simple words");
+                check(p.word().text().equals(wordOf.get(p.concept())), "component reuses its meaning's word");
+            }
+        }
+        check(lex.stream().filter(Lexicon.Entry::requested).count() == 300, "300 requested meanings");
+        check(lex.stream().map(e -> e.word().text()).distinct().count() == lex.size(), "no duplicate words");
+        check(render(lex).equals(render(Lexicon.build(def, new Generator(def), Meanings.WLT, 300))),
+                "compounding is replicable");
+
+        // Basic vocabulary is rarely compounded: the Leipzig-Jakarta list is mostly simple words.
+        Definition half = DefinitionParser.parse(CPD + "compounds: yes\n");
+        long lpj = Lexicon.build(half, new Generator(half), Meanings.LPJ, 100).stream()
+                .filter(e -> !e.parts().isEmpty()).count();
+        long wlt = Lexicon.build(half, new Generator(half), Meanings.WLT, 1460).stream()
+                .filter(e -> !e.parts().isEmpty()).count();
+        check(lpj < 10 && wlt > 50, "compounds follow simplicity: lpj " + lpj + ", wlt " + wlt);
+
+        // Head order: a determinative's head is a broader term whenever the meaning has one.
+        Definition hf = DefinitionParser.parse(CPD + "compounds: yes\ncompound-rate: 100%\n"
+                + "compound-types: determinative\ncompound-order: head-final\n");
+        java.util.Map<String, String> heads = java.util.Map.of("the old man", "the man", "the young woman",
+                "the woman", "the molar tooth", "the tooth", "the lunch", "the meal");
+        int checked = 0;
+        for (Lexicon.Entry e : Lexicon.build(hf, new Generator(hf), Meanings.WLT, 1460)) {
+            if (e.parts().isEmpty()) {
+                continue;
+            }
+            check(e.kind().equals("head-final"), "only head-final compounds");
+            if (heads.containsKey(e.gloss())) {
+                checked++;
+                check(e.parts().get(1).gloss().equals(heads.get(e.gloss())), e.gloss() + ": head last: " + e.parts());
+            }
+        }
+        check(checked >= 1, "broader-headed compounds checked: " + checked);
+
+        // Without --assign: compounds of earlier words, at roughly the compound rate.
+        List<Generator.Word> ws = new ArrayList<>();
+        Definition free = DefinitionParser.parse(CPD + "compounds: yes\ncompound-rate: 40%\n"
+                + "compound-order: head-final*50 head-first*50\n");
+        new Generator(free).generateWords(1000, ws::add);
+        List<String> simple = ws.stream().filter(w -> w.compound() == null).map(Generator.Word::text).toList();
+        long made = ws.stream().filter(w -> w.compound() != null).count();
+        check(made > 300 && made < 500, "about 40% compounds: " + made);
+        for (Generator.Word w : ws) {
+            if (w.compound() != null) {
+                check(simple.contains(w.compound().parts().get(0).text())
+                        && simple.contains(w.compound().parts().get(1).text()), "parts were printed first");
+            }
+        }
+        check(ws.stream().map(Generator.Word::text).distinct().count() == ws.size(), "no duplicate compounds");
+
+        // Solid compounds: the join obeys cluster tables and rejects, and is stressed as one word.
+        Definition solid = DefinitionParser.parse("seed: s\nC: p t\nN: n\nV: a\nsyllable-initial: CV\n"
+                + "syllable-final: CVN\nsyllable-mono: CVN\nsyllable: CV\nword-syllables: 1\n"
+                + "% p\nn mp\n\nstress: final\nstress-monosyllables: yes\n");
+        Generator g = new Generator(solid);
+        Generator.Word a = g.nextSimple();
+        Generator.Word b = g.nextSimple();
+        check(a.text().equals("ˈtan") && b.text().equals("ˈpan"), "solid parts: " + a.text() + " " + b.text());
+        Generator.Word c = g.compound("dvandva", a, b);
+        check(c != null && c.text().equals("tamˈpan"), "n+p becomes mp at the join: " + (c == null ? null : c.text()));
+        check(c != null && c.syllables().size() == 2 && c.primary() == 1, "stressed as one word");
+
+        // Filters only rewrite across the join, so parts aren't filtered twice.
+        Definition fil = DefinitionParser.parse("seed: s\nC: t\nV: a\nsyllable: CV\nword-syllables: 1\n"
+                + "filter: a > aa; aat > ad\ncompounds: yes\n");
+        Generator fg = new Generator(fil);
+        Generator.Word x = fg.nextSimple();
+        Generator.Word y = new Generator.Word("taa", x.syllables(), x.morae(), -1, x.tones(), x.marks(), null);
+        Generator.Word joined = fg.compound("dvandva", x, y);
+        check(joined != null && joined.text().equals("tadaa"), "filter across the join only: "
+                + (joined == null ? null : joined.text()));
+
+        // Tones stay lexical in solid compounds.
+        Definition tone = DefinitionParser.parse("seed: s\nC: p t k s\nV: a i u\nsyllable: CV\n"
+                + "word-syllables: 1\ntones: acute grave\ncompounds: yes\n");
+        Generator tg = new Generator(tone);
+        Generator.Word t1 = tg.nextSimple();
+        Generator.Word t2 = tg.nextSimple();
+        Generator.Word tc = tg.compound("dvandva", t1, t2);
+        check(tc != null && tc.text().equals(t1.text() + t2.text()), "lexical tones kept: " + t1.text() + "+"
+                + t2.text() + "=" + (tc == null ? null : tc.text()));
+    }
+
+    static String render(List<Lexicon.Entry> lex) {
+        StringBuilder sb = new StringBuilder();
+        lex.forEach(e -> sb.append(e.word().text()).append('\t').append(e.gloss()).append('\n'));
+        return sb.toString();
+    }
+
+    static void clusterSplit() throws Exception {
+        // A two-phoneme replacement keeps both positions: n+k -> ŋ.k, not ŋk.
+        Definition def = DefinitionParser.parse("seed: s\nC: k\nN: n ŋ\nV: a\nsyllable-initial: CVN\n"
+                + "syllable-final: CV\nsyllable: CV\nword-syllables: 2\nsyllable-separator: .\n% k\nn ŋk\n");
+        List<Generator.Word> ws = new ArrayList<>();
+        new Generator(def).generateWords(1, ws::add);
+        check(ws.getFirst().text().equals("kaŋ.ka"), "cluster split: " + ws.getFirst().text());
+        check(Tsv.row(ws.getFirst(), false).split("\t")[1].equals("k a ŋ k a"), "phonemes after split");
     }
 
     static void errors() {
@@ -248,6 +378,9 @@ public final class SelfTest {
         error("C: p\nV: a\nsyllable: CV\ndistribution: normal\n", "unknown distribution");
         error("C: p\nV: a\nsyllable: CV\n% p\na + +\n", "row has 2 cells");
         error("C: p\nV: a\nsyllable: (CV\n", "missing ')'");
+        error("C: p\nV: a\nsyllable: CV\ncompound-order: head-last\n", "unknown value 'head-last'");
+        error("C: p\nV: a\nsyllable: CV\ncompound-types: dvandva dvandva\n", "given twice");
+        error("C: p\nV: a\nsyllable: CV\ncompounds: maybe\n", "compounds:");
     }
 
     // ---------------------------------------------------------------- helpers

@@ -34,6 +34,14 @@ final class Filter {
     }
 
     List<Seg> apply(List<Seg> segs) {
+        return apply(segs, -1);
+    }
+
+    /**
+     * With {@code boundary >= 0}, only rewrites matches that span that character
+     * offset: the join of a compound, whose parts were already filtered.
+     */
+    List<Seg> apply(List<Seg> segs, int boundary) {
         StringBuilder plain = new StringBuilder();
         List<Integer> owner = new ArrayList<>();
         for (int i = 0; i < segs.size(); i++) {
@@ -46,7 +54,11 @@ final class Filter {
             return segs;
         }
         Matcher m = pattern.matcher(plain);
-        if (!m.find()) {
+        boolean any = false;
+        while (!any && m.find()) {
+            any = spans(m, boundary);
+        }
+        if (!any) {
             return segs;
         }
         m.reset();
@@ -58,6 +70,9 @@ final class Filter {
         List<Seg> replacements = new ArrayList<>();
         int last = 0;
         while (m.find()) {
+            if (!spans(m, boundary)) {
+                continue; // left in place; appendReplacement copies it with the next gap
+            }
             int before = sb.length();
             m.appendReplacement(sb, replacement);
             for (int j = last; j < m.start(); j++) {
@@ -99,6 +114,10 @@ final class Filter {
             i = j;
         }
         return out;
+    }
+
+    private static boolean spans(Matcher m, int boundary) {
+        return boundary < 0 || (m.start() < boundary && m.end() > boundary);
     }
 
     /**

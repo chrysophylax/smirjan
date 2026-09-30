@@ -1,4 +1,4 @@
-# 11. A complete language: Var Ysalenn
+# 12. A complete language: Var Ysalenn
 
 This chapter builds a definition for an existing conlang, Var Ysalenn, from its
 grammar description ([`research/var-ysalenn-linguifex.pdf`](../research/var-ysalenn-linguifex.pdf)).
@@ -110,10 +110,46 @@ The printed words are unchanged, and `--tsv` records the stress:
 
 The description mentions no tone, so there's no `tones:` line.
 
+## Step 5: compounds
+
+Var Ysalenn has "a large corpus of samāhāra dvandva-type compounds", written
+as two words: *keiz kair* 'body', literally 'bones bloods'. So we turn on
+[compounds](11-compounds.md), mostly dvandvas, written with a space. The
+description doesn't say which way determinative compounds are headed. Its SAE
+models are head-final, so that's the main order, with a little room for the
+other:
+
+```
+compounds: yes
+compound-rate: 40%
+compound-types: dvandva*3 determinative
+compound-order: head-final*95 head-first*5
+compound-separator: space
+```
+
+With a meaning list, compounds are built from words for related meanings. From
+the full WOLD list (`… 1460 --assign=wlt`), 140 of the 1460 meanings become
+compounds:
+
+```
+tadkea le	the livestock	= the ox + the bull
+keirler kozcheir	the boar	= the sow + the pig
+renarde eztis	the honey	= the bee + the beehive
+leddrea tazded	the thunder	= the bolt of lightning + the lightning
+yl rermoston	the east	= the dawn + the morning
+onyd tu	the older sibling	= the older sister + the older brother
+kagky dyrnod	the beak	= the nose + the mouth
+telmi norla	the hut	= the house + the garden-house
+```
+
+Each part is also a word in its own right: *tadkea* 'ox', *le* 'bull',
+*renarde* 'bee', *yl* 'dawn'.
+
 ## Result
 
 The sample words *var* and *kair* are among the words this definition
-generates. A first vocabulary:
+generates. A first basic vocabulary (the Leipzig-Jakarta list is almost all
+simple words, so no compounds show up here):
 
 ```
 $ ./smirjan examples/var-ysalenn.def 10 --assign=lpj

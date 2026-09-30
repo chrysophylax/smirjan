@@ -92,25 +92,29 @@ public final class Main {
         int made;
         if (assign == null) {
             if (tsv) {
-                out.println(Tsv.HEADER);
-                made = gen.generateWords(count, w -> out.println(Tsv.row(w, hasTones)));
+                out.println(Tsv.HEADER + Tsv.extraHeader(false, def.compounds));
+                made = gen.generateWords(count, w -> out.println(Tsv.row(w, hasTones)
+                        + (def.compounds ? "\t" + compoundColumns(w, parts(w)) : "")));
             } else {
                 made = gen.generate(count, out::println);
             }
         } else {
-            List<Generator.Word> words = new ArrayList<>();
-            made = gen.generateWords(count, words::add);
-            List<Meanings.Assigned<Generator.Word>> assigned = assign.assign(words, def.settings.seed);
+            List<Lexicon.Entry> entries = Lexicon.build(def, gen, assign, count);
             if (tsv) {
-                out.println(Tsv.HEADER + "\tmeaning_number\tmeaning");
+                out.println(Tsv.HEADER + Tsv.extraHeader(true, def.compounds));
             }
-            for (var a : assigned) {
-                String number = a.meaning() == null ? "" : Integer.toString(a.meaning().number());
-                String gloss = a.meaning() == null ? "" : a.meaning().gloss();
-                out.println(tsv
-                        ? Tsv.row(a.word(), hasTones) + "\t" + number + "\t" + gloss
-                        : a.word().text() + "\t" + gloss);
+            for (Lexicon.Entry e : entries) {
+                String number = e.number() == null ? "" : Integer.toString(e.number());
+                List<String> glosses = e.parts().stream().map(Lexicon.Entry::gloss).toList();
+                if (tsv) {
+                    out.println(Tsv.row(e.word(), hasTones) + "\t" + number + "\t" + Tsv.clean(e.gloss())
+                            + (def.compounds ? "\t" + compoundColumns(e.word(), glosses) : ""));
+                } else {
+                    out.println(e.word().text() + "\t" + e.gloss()
+                            + (glosses.isEmpty() ? "" : "\t= " + String.join(" + ", glosses)));
+                }
             }
+            made = (int) entries.stream().filter(Lexicon.Entry::requested).count();
             int size = assign.load().size();
             if (made > size) {
                 System.err.println("smirjan: the " + assign.title + " has " + size + " meanings; "
@@ -122,6 +126,15 @@ public final class Main {
             System.err.println("smirjan: only " + made + " distinct words could be generated from " + file);
             System.exit(3);
         }
+    }
+
+    /** The compound and components columns: the kind, and the parts joined with " + ". */
+    private static String compoundColumns(Generator.Word w, List<String> parts) {
+        return (w.compound() == null ? "" : w.compound().kind()) + "\t" + Tsv.clean(String.join(" + ", parts));
+    }
+
+    private static List<String> parts(Generator.Word w) {
+        return w.compound() == null ? List.of() : w.compound().parts().stream().map(Generator.Word::text).toList();
     }
 
     private static Meanings meaningList(String name) {
