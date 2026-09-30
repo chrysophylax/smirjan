@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Launcher: smirjan <definitions.def> <count>
+here="$(dirname "$(readlink -f "$0")")"
+java="${JAVA_HOME:+$JAVA_HOME/bin/}java"
+exec "$java" -jar "$here/build/smirjan.jar" "$@"
