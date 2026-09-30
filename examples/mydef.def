@@ -1,0 +1,45 @@
+# A small language exercising most of smirjan's features.
+
+seed: gobbledygook
+distribution: gusein-zade      # or: yule (see yule-b / yule-c), zipf, flat
+jitter: 10%                    # seeded noise on every weight
+random-rate: 30%               # default chance for optional (?) elements
+
+# Classes: most frequent first. A class may include earlier classes.
+P: p t k b d g
+F: s þ h
+N: n m ŋ
+L: r l
+C: P F N L j w
+V: a i u e o
+A: aː iː uː                    # long vowels
+
+nucleus: V A
+
+# Syllable shapes, most common first.
+syllable-initial: CV C[-ŋ]VC V (C)A
+syllable: CV CVC CA C1VC2 CVL?
+syllable-final: CV CVN CVC1C1?
+syllable-mono: CVC C[-r]VC1C2 CA
+
+word-syllables: 2 3 1 4
+
+# Weight: long vowels are bimoraic, codas weigh one mora.
+morae: onset=0 nucleus=1 coda=1 A=2
+heavy-morae: 2
+stress: heavy-penult           # Latin-style
+secondary-stress: alternating
+syllable-separator: .
+
+# Pitch accent on the stressed syllable.
+tones: - acute
+tone-bearing: stressed
+
+# Nasal + stop clusters: rows are the first phoneme, columns the second.
+% p  t  k  b  d  g
+n mp +  ŋk mb +  ŋg
+m +  nt ŋk +  nd ŋg
+ŋ -  -  +  -  -  +
+
+filter: ti > tʃi; {N}{N} > n
+reject: ww jj wu ji hh

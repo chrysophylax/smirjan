@@ -1,0 +1,13 @@
+# Pitch accent: only the stressed syllable carries a tone.
+seed: pitch accent
+
+C: t k n s m r p
+V: a i u e o
+
+syllable: CV CVC
+word-syllables: 2 3
+
+stress: free
+stress-mark: none
+tones: acute circumflex
+tone-bearing: stressed

@@ -1,0 +1,9 @@
+# Optional elements: ?, ?N and parentheses.
+seed: optional
+random-rate: 40%
+
+C: t k n s m l r p
+N: n m
+V: a i u e o
+
+syllable: CVN? (C)V CVC?10

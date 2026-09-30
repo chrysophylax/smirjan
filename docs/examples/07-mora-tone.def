@@ -1,0 +1,16 @@
+# Tone on each mora: long vowels carry two tones, which combine into contours.
+seed: mora tone
+
+C: t k n s m l p
+V: a i u
+A: aː iː uː
+
+nucleus: V A
+morae: A=2
+
+syllable: CV CA
+word-syllables: 1 2
+
+tones: acute grave
+tone-bearing: mora
+tone-contour: acute+grave=circumflex grave+acute=caron

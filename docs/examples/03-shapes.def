@@ -1,0 +1,7 @@
+# Several syllable shapes, most common first.
+seed: shapes
+
+C: t k n s m l r p
+V: a i u e o
+
+syllable: CV CVC V

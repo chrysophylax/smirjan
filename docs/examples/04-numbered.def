@@ -1,0 +1,8 @@
+# Numbered slots: same number = same phoneme, different numbers = different phonemes.
+seed: numbered
+
+C: t k s p
+V: a i u
+
+word-syllables: 1
+syllable: CVC1C2 CVC1C1

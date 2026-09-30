@@ -1,0 +1,13 @@
+# A cluster table for nasal + stop sequences across syllables.
+seed: clusters
+
+C: t k p s l m n
+N: m n
+V: a i u e o
+
+syllable: CV CVN
+word-syllables: 2 3
+
+% p  t  k  s  l
+m +  nt ŋk -  -
+n mp +  ŋk +  ll

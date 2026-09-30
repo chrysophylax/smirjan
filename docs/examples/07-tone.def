@@ -1,0 +1,11 @@
+# One tone per syllable, written as accents on the vowel.
+seed: tone
+
+C: t k n s m l p
+N: n ŋ
+V: a i u e o
+
+syllable: CV CVN
+word-syllables: 1 2
+
+tones: - acute grave

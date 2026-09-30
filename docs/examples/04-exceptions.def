@@ -1,0 +1,13 @@
+# Exceptions: leave phonemes out of one slot, or allow only some.
+seed: exceptions
+
+C: t k n s m l r p ŋ
+N: n m ŋ
+V: a i u e o
+
+# ŋ never starts a syllable, and r never starts a word.
+syllable-initial: C[-ŋ r]V C[-ŋ r]VN
+# Before a nasal coda, the onset is never a nasal itself.
+syllable:         C[-ŋ]V C[-N]VN
+# Word-final syllables end in n or m only.
+syllable-final:   C[-ŋ]V C[-N]VN[+n m]

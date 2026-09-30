@@ -1,0 +1,11 @@
+# Different shapes for the beginning, middle and end of a word.
+seed: positions
+
+C: t k n s m l r p
+N: n m
+V: a i u e o
+
+syllable-initial: CV V
+syllable-medial:  CV
+syllable-final:   CVN CV
+syllable-mono:    CVN

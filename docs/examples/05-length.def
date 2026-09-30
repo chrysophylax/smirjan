@@ -1,0 +1,8 @@
+# Word length in syllables.
+seed: length
+
+C: t k n s m l r p
+V: a i u e o
+
+syllable: CV CVC
+word-syllables: 1-2 3*0.5

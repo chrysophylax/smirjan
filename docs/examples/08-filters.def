@@ -1,0 +1,11 @@
+# Filters rewrite, rejects discard.
+seed: filters
+
+C: t k s n m l p
+V: a i u e o
+
+syllable: CV CVC
+word-syllables: 2 3
+
+filter: ti > tʃi; si > ʃi; {C}l > ll
+reject: ^{C}u u$ ll.*ll

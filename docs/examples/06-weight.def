@@ -1,0 +1,17 @@
+# Latin-style, weight-sensitive stress with secondary stress, marked with accents.
+seed: latin
+
+C: t k n s m l r p
+V: a e i o u
+A: aː eː iː oː uː
+
+nucleus: V A
+morae: A=2
+heavy-morae: 2
+
+syllable: CV CVC CA
+word-syllables: 3 4 5
+
+stress: heavy-penult
+secondary-stress: alternating
+syllable-separator: .

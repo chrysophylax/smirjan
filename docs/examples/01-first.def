@@ -1,0 +1,7 @@
+# The smallest useful definition: two classes and one syllable shape.
+seed: first steps
+
+C: p t k m n s
+V: a i u
+
+syllable: CV

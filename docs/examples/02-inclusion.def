@@ -1,0 +1,10 @@
+# Classes can be built from classes defined above them.
+seed: inclusion
+
+P: p t k
+N: m n
+F: s h
+C: P N F l      # p t k m n s h l, in that rank order
+V: a i u e o
+
+syllable: CV CVC

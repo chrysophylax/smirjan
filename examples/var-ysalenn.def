@@ -1,0 +1,50 @@
+# Var Ysalenn [ʋaɾ ˈy.salɛnː], Chrysophylax 2017.
+# Source: research/var-ysalenn-linguifex.pdf (Linguifex).
+#
+# Output is in the orthography, not IPA:
+#   ch /x/   dd /ð/   ts /t͡s/   tz /d͡z/   nn lengthened /nː/
+# Other letters have their IPA value. v is [ʋ] or [v]; r is a tap or trill.
+#
+# The article gives the inventory and syllable shapes but no phoneme
+# frequencies. The rank orders below are guesses.
+
+seed: var ysalenn
+distribution: gusein-zade
+
+# Onsets: p t k d g v x h r l m n s*
+# The article marks s with an unexplained asterisk, so s is ranked last.
+C: t k d n l r m v p g h ch s
+
+# Vowels i y u e o a, then the diphthongs ea ou ai ei.
+V: a e i y o u ai ei ea ou
+
+# Codas: d g r l ð x s z t͡s d͡z N
+K: r l n s z d m dd ch g ts tz
+# Word-final codas also allow the marginal long nasal (as in Ysalenn).
+E: K nn
+
+# Syllables are mostly CVC, then CV, VC and V. Vowel-initial syllables are
+# only allowed word-initially, so no vowel hiatus can look like a
+# diphthong digraph (e + a -> "ea").
+syllable-initial: CVK CV VK V
+syllable-medial:  CVK CV
+syllable-final:   CVE CV
+syllable-mono:    CVE CV VE
+
+# Mostly short words for a naming language: var, ysal, keiz kair, Ysalenn.
+word-syllables: 2 1 3
+
+# Initial stress ([ˈy.salɛnː]). The orthography doesn't mark it, so no mark
+# is printed, but --tsv still reports it.
+stress: initial
+stress-mark: none
+secondary-stress-mark: none
+
+# Across a syllable boundary, reject letter sequences that would read as a
+# different digraph: d+d (dd = /ð/), n+n (nn = /nː/), ch+h.
+%   d  n  h
+d   -  +  +
+dd  -  +  +
+n   +  -  +
+nn  +  -  +
+ch  +  +  -

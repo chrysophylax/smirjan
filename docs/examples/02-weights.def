@@ -1,0 +1,8 @@
+# Explicit weights override the rank-based distribution for one list.
+seed: weights
+
+C: t*10 k*5 s*1
+V: a
+
+syllable: CV
+word-syllables: 1

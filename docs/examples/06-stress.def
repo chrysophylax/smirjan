@@ -1,0 +1,11 @@
+# Fixed penultimate stress, IPA marks, syllable dots.
+seed: stress
+
+C: t k n s m l r p
+V: a i u e o
+
+syllable: CV CVC
+word-syllables: 2 3 4
+
+stress: penult
+syllable-separator: .

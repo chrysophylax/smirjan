@@ -1,0 +1,9 @@
+# One consonant class and one vowel, so we can count how often each consonant is picked.
+seed: frequency
+distribution: gusein-zade
+
+C: t n k s m p
+V: a
+
+syllable: CV
+word-syllables: 50

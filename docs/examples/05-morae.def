@@ -1,0 +1,12 @@
+# Word length in morae: every word weighs exactly 3 or 4 morae.
+seed: morae
+
+C: t k n s m l r p
+V: a i u e o
+A: aː iː uː
+
+nucleus: V A
+morae: onset=0 nucleus=1 coda=1 A=2
+
+syllable: CV CVC CA
+word-morae: 3 4

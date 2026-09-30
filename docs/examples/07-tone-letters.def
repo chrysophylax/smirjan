@@ -1,0 +1,10 @@
+# Chao tone letters after each syllable.
+seed: tone letters
+
+C: t k n s m l p
+V: a i u e o
+
+syllable: CV
+word-syllables: 1 2
+
+tones: ˥ ˧ ˩ ˧˥ ˥˩
