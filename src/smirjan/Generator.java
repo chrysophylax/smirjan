@@ -42,7 +42,12 @@ final class Generator {
      * @param compound  how the word was compounded, or null for a simple word
      */
     record Word(String text, List<List<Seg>> syllables, int[] morae, int primary, List<String> tones,
-                List<SylTone> marks, Compound compound) {}
+                List<SylTone> marks, Compound compound) {
+        /** The compound kind, "" for a simple word. */
+        String kind() {
+            return compound == null ? "" : compound.kind();
+        }
+    }
 
     /**
      * @param kind      dvandva, head-final or head-first
@@ -115,11 +120,7 @@ final class Generator {
 
     /** Picks a compound kind by the definition's weights: dvandva, head-final or head-first. */
     String compoundKind() {
-        return compoundKind(compoundRng);
-    }
-
-    String compoundKind(Random r) {
-        return def.compoundTypes.pick(r).equals("dvandva") ? "dvandva" : def.compoundOrder.pick(r);
+        return def.compoundTypes.pick(compoundRng).equals("dvandva") ? "dvandva" : def.compoundOrder.pick(compoundRng);
     }
 
     Random compoundRandom() {

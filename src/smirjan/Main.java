@@ -16,7 +16,7 @@ public final class Main {
     private Main() {}
 
     public static void main(String[] args) {
-        boolean tsv = false;
+        boolean tsvOutput = false;
         Meanings assign = null;
         List<String> positional = new ArrayList<>();
         for (int i = 0; i < args.length; i++) {
@@ -26,7 +26,7 @@ public final class Main {
                     usage(System.out);
                     return;
                 }
-                case "--tsv" -> tsv = true;
+                case "--tsv" -> tsvOutput = true;
                 case "--assign" -> {
                     if (i + 1 >= args.length) {
                         fail("--assign needs a list: lpj, dlg or wlt");
@@ -87,28 +87,24 @@ public final class Main {
 
         PrintStream out = new PrintStream(
                 new BufferedOutputStream(new FileOutputStream(FileDescriptor.out)), false, StandardCharsets.UTF_8);
-        boolean hasTones = def.tones != null;
         Generator gen = new Generator(def);
+        Tsv tsv = tsvOutput ? new Tsv(def, assign != null) : null;
+        if (tsv != null) {
+            out.println(tsv.header());
+        }
         int made;
         if (assign == null) {
-            if (tsv) {
-                out.println(Tsv.HEADER + Tsv.extraHeader(false, def.compounds));
-                made = gen.generateWords(count, w -> out.println(Tsv.row(w, hasTones)
-                        + (def.compounds ? "\t" + compoundColumns(w, parts(w)) : "")));
+            if (tsv != null) {
+                made = gen.generateWords(count, w -> out.println(tsv.row(w, null, "", parts(w))));
             } else {
                 made = gen.generate(count, out::println);
             }
         } else {
             List<Lexicon.Entry> entries = Lexicon.build(def, gen, assign, count);
-            if (tsv) {
-                out.println(Tsv.HEADER + Tsv.extraHeader(true, def.compounds));
-            }
             for (Lexicon.Entry e : entries) {
-                String number = e.number() == null ? "" : Integer.toString(e.number());
                 List<String> glosses = e.parts().stream().map(Lexicon.Entry::gloss).toList();
-                if (tsv) {
-                    out.println(Tsv.row(e.word(), hasTones) + "\t" + number + "\t" + Tsv.clean(e.gloss())
-                            + (def.compounds ? "\t" + compoundColumns(e.word(), glosses) : ""));
+                if (tsv != null) {
+                    out.println(tsv.row(e.word(), e.number(), e.gloss(), glosses));
                 } else {
                     out.println(e.word().text() + "\t" + e.gloss()
                             + (glosses.isEmpty() ? "" : "\t= " + String.join(" + ", glosses)));
@@ -126,11 +122,6 @@ public final class Main {
             System.err.println("smirjan: only " + made + " distinct words could be generated from " + file);
             System.exit(3);
         }
-    }
-
-    /** The compound and components columns: the kind, and the parts joined with " + ". */
-    private static String compoundColumns(Generator.Word w, List<String> parts) {
-        return (w.compound() == null ? "" : w.compound().kind()) + "\t" + Tsv.clean(String.join(" + ", parts));
     }
 
     private static List<String> parts(Generator.Word w) {

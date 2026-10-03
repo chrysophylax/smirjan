@@ -69,9 +69,10 @@ final class DefinitionParser {
         Definition def = new Definition();
         settings(def, entries);
         classes(def, entries);
-        rest(def, entries);
+        List<String> phonemes = phonemesLongestFirst(def.classes);
+        rest(def, entries, phonemes);
         for (Table t : tables) {
-            ClusterTable.parse(t.rows, t.lines, def.classes, def.clusters);
+            ClusterTable.parse(t.rows, t.lines, def.classes, phonemes, def.clusters);
         }
         return def;
     }
@@ -236,7 +237,21 @@ final class DefinitionParser {
 
     // --------------------------------------------------------------- rest
 
-    private static void rest(Definition def, List<Entry> entries) throws DefinitionException {
+    /** Every phoneme of every class, once, longest first: the order for splitting text into phonemes. */
+    private static List<String> phonemesLongestFirst(Map<Character, PhonemeClass> classes) {
+        List<String> phonemes = new ArrayList<>();
+        for (PhonemeClass c : classes.values()) {
+            for (String p : c.list()) {
+                if (!phonemes.contains(p)) {
+                    phonemes.add(p);
+                }
+            }
+        }
+        phonemes.sort(Comparator.comparingInt(String::length).reversed());
+        return phonemes;
+    }
+
+    private static void rest(Definition def, List<Entry> entries, List<String> phonemes) throws DefinitionException {
         Map<String, List<Entry>> byKey = new java.util.LinkedHashMap<>();
         for (Entry e : entries) {
             if (e.key.length() == 1 || SETTINGS.contains(e.key)) {
@@ -264,15 +279,6 @@ final class DefinitionParser {
             def.nuclei.add('V');
         }
 
-        List<String> phonemes = new ArrayList<>();
-        for (PhonemeClass c : def.classes.values()) {
-            for (String p : c.list()) {
-                if (!phonemes.contains(p)) {
-                    phonemes.add(p);
-                }
-            }
-        }
-        phonemes.sort(Comparator.comparingInt(String::length).reversed());
         Template.Context ctx = new Template.Context(def.classes, phonemes, def.nuclei, def.settings);
 
         def.syllable = shapes(byKey, "syllable", ctx, def.settings);

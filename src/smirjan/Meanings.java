@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Consumer;
 
 /**
  * Standard meaning lists bundled from Concepticon (CC BY 4.0). {@link Lexicon}
@@ -40,26 +41,17 @@ enum Meanings {
         };
     }
 
+    private List<Meaning> list;
+
     /** The list in its published order. */
-    List<Meaning> load() {
-        String resource = "meanings/" + key + ".tsv";
-        try (InputStream in = Meanings.class.getResourceAsStream(resource)) {
-            if (in == null) {
-                throw new IllegalStateException("missing bundled resource " + resource);
-            }
+    synchronized List<Meaning> load() {
+        if (list == null) {
             List<Meaning> out = new ArrayList<>();
-            BufferedReader r = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
-            for (String line; (line = r.readLine()) != null; ) {
-                if (line.isBlank() || line.startsWith("#")) {
-                    continue;
-                }
-                String[] cols = line.split("\t", 3);
-                out.add(new Meaning(Integer.parseInt(cols[0]), cols[1].isEmpty() ? 0 : Integer.parseInt(cols[1]), cols[2]));
-            }
-            return out;
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
+            read(key + ".tsv", cols -> out.add(new Meaning(Integer.parseInt(cols[0]),
+                    cols[1].isEmpty() ? 0 : Integer.parseInt(cols[1]), cols[2])));
+            list = List.copyOf(out);
         }
+        return list;
     }
 
     /** The list in a seeded random order: the order in which meanings are handed out. */
@@ -73,4 +65,21 @@ enum Meanings {
         return meanings;
     }
 
+    /** Reads a bundled tab-separated file, skipping blank and '#' lines. */
+    static void read(String name, Consumer<String[]> row) {
+        String resource = "meanings/" + name;
+        try (InputStream in = Meanings.class.getResourceAsStream(resource)) {
+            if (in == null) {
+                throw new IllegalStateException("missing bundled resource " + resource);
+            }
+            BufferedReader r = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
+            for (String line; (line = r.readLine()) != null; ) {
+                if (!line.isBlank() && !line.startsWith("#")) {
+                    row.accept(line.split("\t", -1));
+                }
+            }
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
 }

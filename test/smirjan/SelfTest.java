@@ -297,7 +297,7 @@ public final class SelfTest {
             if (e.parts().isEmpty()) {
                 continue;
             }
-            check(e.kind().equals("head-final"), "only head-final compounds");
+            check(e.word().kind().equals("head-final"), "only head-final compounds");
             if (heads.containsKey(e.gloss())) {
                 checked++;
                 check(e.parts().get(1).gloss().equals(heads.get(e.gloss())), e.gloss() + ": head last: " + e.parts());

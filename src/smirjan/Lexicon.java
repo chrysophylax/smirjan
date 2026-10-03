@@ -3,10 +3,14 @@ package smirjan;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.regex.Pattern;
 
 /**
  * Pairs generated words with meanings from a list (--assign), expressing some
@@ -42,11 +46,7 @@ final class Lexicon {
      *                  than brought in as a component
      */
     record Entry(Integer number, int concept, String gloss, Generator.Word word, List<Entry> parts,
-                 boolean requested) {
-        String kind() {
-            return word.compound() == null ? "" : word.compound().kind();
-        }
-    }
+                 boolean requested) {}
 
     private final Definition def;
     private final Generator gen;
@@ -57,7 +57,7 @@ final class Lexicon {
     /** The word each concept is expressed by, for reusing component words. */
     private final Map<Integer, Entry> byConcept = new HashMap<>();
     /** Component pairs already used, in either order: one pair makes one compound. */
-    private final java.util.Set<String> pairs = new java.util.HashSet<>();
+    private final Set<String> pairs = new HashSet<>();
 
     private Lexicon(Definition def, Generator gen, Meanings list) {
         this.def = def;
@@ -148,9 +148,10 @@ final class Lexicon {
         if (c == null || !c.isThing()) {
             return null;
         }
-        String kind = gen.compoundKind(r);
+        String kind = gen.compoundKind();
+        Function<Random, int[]> draw = kind.equals("dvandva") ? dvandva(c.id()) : determinative(c.id(), kind);
         for (int attempt = 0; attempt < PAIR_ATTEMPTS; attempt++) {
-            int[] pair = kind.equals("dvandva") ? dvandva(c.id(), r) : determinative(c.id(), kind, r);
+            int[] pair = draw.apply(r);
             if (pair == null) {
                 return null;
             }
@@ -166,10 +167,11 @@ final class Lexicon {
             Generator.Word w = gen.compound(kind, a.word, b.word);
             if (w != null) {
                 pairs.add(key);
-                if (!entries.contains(a)) {
+                // A component is new unless it is the concept's recorded entry.
+                if (byConcept.get(a.concept) != a) {
                     add(a);
                 }
-                if (!entries.contains(b)) {
+                if (byConcept.get(b.concept) != b) {
                     add(b);
                 }
                 return new Entry(m.number(), m.concept(), m.gloss(), w, List.of(a, b), true);
@@ -196,9 +198,12 @@ final class Lexicon {
 
     // ------------------------------------------------------ choosing parts
 
+    // The candidates for a meaning stay the same across attempts, so each
+    // method gathers them once and returns a function drawing one pair.
+
     /** Two coordinate things that together make up {@code target}. */
-    private int[] dvandva(int target, Random r) {
-        Map<Integer, Double> pool = new LinkedHashMap<>();
+    private Function<Random, int[]> dvandva(int target) {
+        Map<Integer, Double> candidates = new LinkedHashMap<>();
         for (ConceptGraph.Link l : graph.links(target)) {
             double w = switch (l.kind()) {
                 case PART -> 1.0;
@@ -207,23 +212,26 @@ final class Lexicon {
                 case SIMILAR -> 0.3;
                 case WHOLE, BROADER -> 0;
             };
-            offer(pool, target, l.concept(), w, true);
+            offer(candidates, target, l.concept(), w, true);
         }
-        community(pool, target, true);
-        Integer a = pick(pool, r);
-        if (a == null) {
-            return null;
-        }
-        pool.remove(a);
-        // Coordinates are more convincing from the same semantic field.
-        String field = graph.concept(a).field();
-        pool.replaceAll((k, w) -> graph.concept(k).field().equals(field) ? 2 * w : w);
-        Integer b = pick(pool, r);
-        return b == null ? null : new int[] {a, b};
+        community(candidates, target, true);
+        return r -> {
+            Map<Integer, Double> pool = new LinkedHashMap<>(candidates);
+            Integer a = Weighted.of(pool).pick(r);
+            if (a == null) {
+                return null;
+            }
+            pool.remove(a);
+            // Coordinates are more convincing from the same semantic field.
+            String field = graph.concept(a).field();
+            pool.replaceAll((k, w) -> graph.concept(k).field().equals(field) ? 2 * w : w);
+            Integer b = Weighted.of(pool).pick(r);
+            return b == null ? null : new int[] {a, b};
+        };
     }
 
     /** A head naming what kind of thing {@code target} is, and a modifier; in written order. */
-    private int[] determinative(int target, String order, Random r) {
+    private Function<Random, int[]> determinative(int target, String order) {
         Map<Integer, Double> heads = new LinkedHashMap<>();
         Map<Integer, Double> broader = new LinkedHashMap<>();
         Map<Integer, Double> modifiers = new LinkedHashMap<>();
@@ -238,16 +246,20 @@ final class Lexicon {
         community(heads, target, true);
         community(modifiers, target, false);
         // A broader term is the natural head (ant: insect); fall back to close relatives.
-        Integer head = pick(broader.isEmpty() ? heads : broader, r);
-        if (head == null) {
-            return null;
-        }
-        modifiers.remove(head);
-        Integer mod = pick(modifiers, r);
-        if (mod == null) {
-            return null;
-        }
-        return order.equals("head-first") ? new int[] {head, mod} : new int[] {mod, head};
+        Map<Integer, Double> headPool = broader.isEmpty() ? heads : broader;
+        return r -> {
+            Integer head = Weighted.of(headPool).pick(r);
+            if (head == null) {
+                return null;
+            }
+            Map<Integer, Double> mods = new LinkedHashMap<>(modifiers);
+            mods.remove(head);
+            Integer mod = Weighted.of(mods).pick(r);
+            if (mod == null) {
+                return null;
+            }
+            return order.equals("head-first") ? new int[] {head, mod} : new int[] {mod, head};
+        };
     }
 
     /**
@@ -280,11 +292,15 @@ final class Lexicon {
         }
     }
 
+    private static final Pattern PARENTHESES = Pattern.compile("\\(.*?\\)");
+    private static final Pattern ARTICLE = Pattern.compile("^(the|to|a) ");
+    private static final Pattern ALTERNATIVES = Pattern.compile("/| or |,");
+
     /** A part that is one of the meaning's own glosses (leg/foot: foot) says nothing new. */
     private static boolean restates(ConceptGraph.Concept part, ConceptGraph.Concept whole) {
         String p = headword(part.gloss());
-        for (String alt : whole.gloss().toLowerCase().replaceAll("\\(.*?\\)", "").split("/| or |,")) {
-            if (alt.strip().replaceFirst("^(the|to|a) ", "").equals(p)) {
+        for (String alt : ALTERNATIVES.split(withoutParentheses(whole.gloss()))) {
+            if (withoutArticle(alt.strip()).equals(p)) {
                 return true;
             }
         }
@@ -292,29 +308,16 @@ final class Lexicon {
     }
 
     private static String headword(String gloss) {
-        String g = gloss.toLowerCase().replaceAll("\\(.*?\\)", "").strip();
-        g = g.replaceFirst("^(the|to|a) ", "");
+        String g = withoutArticle(withoutParentheses(gloss).strip());
         int cut = g.indexOf('/');
         return (cut > 0 ? g.substring(0, cut) : g).strip();
     }
 
-    private static Integer pick(Map<Integer, Double> pool, Random r) {
-        double total = 0;
-        for (double w : pool.values()) {
-            total += w;
-        }
-        if (total <= 0) {
-            return null;
-        }
-        double x = r.nextDouble() * total;
-        Integer last = null;
-        for (Map.Entry<Integer, Double> e : pool.entrySet()) {
-            last = e.getKey();
-            x -= e.getValue();
-            if (x < 0) {
-                return last;
-            }
-        }
-        return last;
+    private static String withoutParentheses(String gloss) {
+        return PARENTHESES.matcher(gloss.toLowerCase()).replaceAll("");
+    }
+
+    private static String withoutArticle(String gloss) {
+        return ARTICLE.matcher(gloss).replaceFirst("");
     }
 }

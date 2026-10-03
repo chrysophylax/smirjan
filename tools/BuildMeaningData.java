@@ -138,16 +138,16 @@ public class BuildMeaningData {
             }
             switch (r.get("RELATION")) {
                 case "partof" -> { // SOURCE has TARGET as a part
-                    rel.computeIfAbsent(s, k -> new TreeMap<>()).put(t, "part");
-                    rel.computeIfAbsent(t, k -> new TreeMap<>()).put(s, "whole");
+                    link(rel, s, t, "part", true);
+                    link(rel, t, s, "whole", true);
                 }
                 case "narrower", "instanceof" -> { // TARGET is a kind of SOURCE
-                    rel.computeIfAbsent(s, k -> new TreeMap<>()).put(t, "narrower");
-                    rel.computeIfAbsent(t, k -> new TreeMap<>()).put(s, "broader");
+                    link(rel, s, t, "narrower", true);
+                    link(rel, t, s, "broader", true);
                 }
                 case "similar" -> {
-                    rel.computeIfAbsent(s, k -> new TreeMap<>()).putIfAbsent(t, "similar");
-                    rel.computeIfAbsent(t, k -> new TreeMap<>()).putIfAbsent(s, "similar");
+                    link(rel, s, t, "similar", false);
+                    link(rel, t, s, "similar", false);
                 }
                 default -> { }
             }
@@ -167,7 +167,7 @@ public class BuildMeaningData {
                 Integer t = urbanIds.get(m.group(1));
                 if (t != null && t != s && Integer.parseInt(m.group(2)) > 0
                         && concepts.containsKey(s) && concepts.containsKey(t)) {
-                    rel.computeIfAbsent(t, k -> new TreeMap<>()).putIfAbsent(s, "derived");
+                    link(rel, t, s, "derived", false);
                     derived++;
                 }
             }
@@ -188,6 +188,16 @@ public class BuildMeaningData {
         write("relations.tsv", rs.toString());
         System.out.println(concepts.size() + " concepts, " + concepts.values().stream().filter(c -> !c.community.isEmpty()).count()
                 + " in CLICS communities, " + rel.size() + " with relations, " + derived + " derivations");
+    }
+
+    /** Records that {@code from} relates to {@code to} as {@code kind}, replacing any earlier kind if {@code overwrite}. */
+    static void link(Map<Integer, Map<Integer, String>> rel, int from, int to, String kind, boolean overwrite) {
+        Map<Integer, String> links = rel.computeIfAbsent(from, k -> new TreeMap<>());
+        if (overwrite) {
+            links.put(to, kind);
+        } else {
+            links.putIfAbsent(to, kind);
+        }
     }
 
     /** "the bone" -> "bone"; list glosses otherwise stay as published. */

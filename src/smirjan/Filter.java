@@ -127,34 +127,17 @@ final class Filter {
      */
     private void resegment(String text, Seg from, List<Seg> out) {
         int start = out.size();
-        int i = 0;
-        outer:
-        while (i < text.length()) {
-            String piece = null;
-            for (String p : phonemesLongestFirst) {
-                if (text.startsWith(p, i)) {
-                    piece = p;
-                    break;
-                }
+        for (Phonemes.Token t : Phonemes.tokens(text, phonemesLongestFirst)) {
+            String piece = t.text();
+            boolean attach = !t.known() && (out.size() > start
+                    || (!out.isEmpty() && out.getLast().syl() == from.syl() && isModifierOnly(piece)));
+            if (attach) {
+                Seg prev = out.removeLast();
+                String joined = prev.text() + piece;
+                out.add(new Seg(joined, prev.syl(), prev.role(), classOf.getOrDefault(joined, prev.cls())));
+            } else {
+                out.add(new Seg(piece, from.syl(), role(piece, from, out), classOf.get(piece)));
             }
-            if (piece == null) {
-                int end = i + Character.charCount(text.codePointAt(i));
-                while (end < text.length() && Template.isMark(text.codePointAt(end))) {
-                    end += Character.charCount(text.codePointAt(end));
-                }
-                piece = text.substring(i, end);
-                boolean attach = out.size() > start
-                        || (!out.isEmpty() && out.getLast().syl() == from.syl() && isModifierOnly(piece));
-                if (attach) {
-                    Seg prev = out.removeLast();
-                    String joined = prev.text() + piece;
-                    out.add(new Seg(joined, prev.syl(), prev.role(), classOf.getOrDefault(joined, prev.cls())));
-                    i = end;
-                    continue outer;
-                }
-            }
-            out.add(new Seg(piece, from.syl(), role(piece, from, out), classOf.get(piece)));
-            i += piece.length();
         }
     }
 

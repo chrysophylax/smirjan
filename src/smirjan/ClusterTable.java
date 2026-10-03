@@ -78,18 +78,9 @@ final class ClusterTable {
     }
 
     /** Parses one table. Labels may be phonemes or single-letter class names. */
-    static void parse(List<String> rows, List<Integer> lines, Map<Character, PhonemeClass> classes, ClusterTable into)
-            throws DefinitionException {
-        List<String> all = new ArrayList<>();
-        for (PhonemeClass c : classes.values()) {
-            for (String p : c.list()) {
-                if (!all.contains(p)) {
-                    all.add(p);
-                }
-            }
-        }
-        all.sort(java.util.Comparator.comparingInt(String::length).reversed());
-        into.phonemes = all;
+    static void parse(List<String> rows, List<Integer> lines, Map<Character, PhonemeClass> classes,
+            List<String> phonemesLongestFirst, ClusterTable into) throws DefinitionException {
+        into.phonemes = phonemesLongestFirst;
         String[] header = rows.get(0).substring(1).strip().split("\\s+");
         if (header.length == 0 || header[0].isEmpty()) {
             throw DefinitionException.at(lines.get(0), "cluster table header lists no phonemes");
@@ -120,23 +111,8 @@ final class ClusterTable {
     /** Splits a replacement into defined phonemes, longest first; unknown characters join the one before. */
     private List<String> split(String cell) {
         List<String> out = new ArrayList<>();
-        int i = 0;
-        outer:
-        while (i < cell.length()) {
-            for (String p : phonemes) {
-                if (cell.startsWith(p, i)) {
-                    out.add(p);
-                    i += p.length();
-                    continue outer;
-                }
-            }
-            int end = i + Character.charCount(cell.codePointAt(i));
-            if (out.isEmpty()) {
-                out.add(cell.substring(i, end));
-            } else {
-                out.add(out.removeLast() + cell.substring(i, end));
-            }
-            i = end;
+        for (Phonemes.Token t : Phonemes.tokens(cell, phonemes)) {
+            out.add(t.known() || out.isEmpty() ? t.text() : out.removeLast() + t.text());
         }
         return out;
     }

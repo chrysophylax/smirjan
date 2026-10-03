@@ -3,6 +3,7 @@ package smirjan;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.function.Predicate;
 
@@ -42,6 +43,12 @@ final class Weighted<T> {
             }
         }
         return new Weighted<>(items, w);
+    }
+
+    /** Items with the given weights, in the map's order. */
+    static <T> Weighted<T> of(Map<T, Double> weighted) {
+        return new Weighted<>(new ArrayList<>(weighted.keySet()),
+                weighted.values().stream().mapToDouble(Double::doubleValue).toArray());
     }
 
     static <T> Weighted<T> uniform(List<T> items) {
