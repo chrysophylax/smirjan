@@ -57,6 +57,14 @@ smirjan finds in data derived from Concepticon and NoRaRe; *bee* and
 determinative, head-final or head-first, and written as one word or as
 separate words.
 
+The `--shift` option, which is used together with `--assign`, simulates
+semantic change on the assigned words. A word acquires a new meaning along a
+shift recorded for its old one in the Database of Semantic Shifts (Zalizniak
+et al. 2024), such as 'tongue' to 'language', and a shift attested in many
+language families is chosen more often than one attested in few. The new
+meaning is carried either by the word itself, which thus becomes polysemous,
+or by a word derived from it.
+
 The bundled meaning data is licensed under CC BY 4.0. The sources and the
 changes made to them are listed in [NOTICE.md](NOTICE.md).
 
@@ -80,7 +88,7 @@ The command line takes a definition file and the number of words to
 generate:
 
 ```
-smirjan [--tsv] [--assign=lpj|dlg|wlt] <definitions.def> <count>
+smirjan [--tsv] [--assign=lpj|dlg|wlt [--shift[=RATE]]] <definitions.def> <count>
 smirjan --version
 ```
 

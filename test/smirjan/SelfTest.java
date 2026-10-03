@@ -25,6 +25,7 @@ public final class SelfTest {
         filterResegments();
         meanings();
         compounds();
+        shifts();
         clusterSplit();
         errors();
         version();
@@ -253,6 +254,24 @@ public final class SelfTest {
     static List<Lexicon.Entry> assign(String def, Meanings list, int count) throws DefinitionException {
         Definition d = DefinitionParser.parse(def);
         return Lexicon.build(d, new Generator(d), list, count);
+    }
+
+    static void shifts() throws Exception {
+        String d = "seed: s\nC: p t k s m n l r\nV: a i u e o\nsyllable: CV CVC\n";
+        List<Lexicon.Entry> lex = assign(d, Meanings.LPJ, 100);
+        List<SemanticShifts.Shift> some = SemanticShifts.simulate(lex, "s", 0.25);
+        check(some.size() == lex.size(), "one result per entry");
+        check(some.equals(SemanticShifts.simulate(lex, "s", 0.25)), "shifts are replicable");
+        check(!some.equals(SemanticShifts.simulate(lex, "other", 0.25)), "shifts depend on the seed");
+        check(SemanticShifts.simulate(lex, "s", 0).stream().allMatch(x -> x == null), "rate 0: no shifts");
+        List<SemanticShifts.Shift> all = SemanticShifts.simulate(lex, "s", 1);
+        long shifted = all.stream().filter(x -> x != null).count();
+        // 82 of the 100 Leipzig-Jakarta meanings have shifts recorded in DatSemShift.
+        check(shifted == 82, "rate 1: every meaning with recorded shifts shifts: " + shifted);
+        long fewer = some.stream().filter(x -> x != null).count();
+        check(fewer > 10 && fewer < 35, "rate 25%: about a quarter shift: " + fewer);
+        int fire = lex.stream().map(Lexicon.Entry::gloss).toList().indexOf("fire");
+        check(all.get(fire) != null && !all.get(fire).target().equals("fire"), "fire shifts: " + all.get(fire));
     }
 
     static final String CPD = "seed: s\nC: p t k s m n l r\nV: a i u e o\nsyllable: CV CVC\nword-syllables: 1 2\n";

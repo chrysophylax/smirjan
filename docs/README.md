@@ -23,7 +23,7 @@ definitions in the repository's top-level `examples/` directory.
 7. [Tone and Pitch Accent](07-tone-and-pitch.md): syllable tone, mora tone, contours, pitch accent
 8. [Filters and Rejects](08-filters-and-rejects.md): rewriting and discarding words with patterns
 9. [Cluster Tables](09-cluster-tables.md): controlling adjacent phonemes
-10. [Output Formats and Meaning Lists](10-output-and-meaning-lists.md): `--tsv`, `--assign`, duplicates, exit codes
+10. [Output Formats and Meaning Lists](10-output-and-meaning-lists.md): `--tsv`, `--assign`, `--shift`, duplicates, exit codes
 11. [Compounds](11-compounds.md): dvandva and determinative compounds, head order, meanings mined from Concepticon
 12. [A Complete Language](12-a-complete-language.md): Var Ysalenn, step by step
 13. [Reference](reference.md): every key and flag on one page

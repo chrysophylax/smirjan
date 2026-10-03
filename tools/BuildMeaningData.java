@@ -35,6 +35,8 @@ import java.util.zip.ZipInputStream;
  *     ontological category, simplicity and CLICS colexification community</li>
  * <li>relations.tsv: part/whole and broader/narrower relations (Concepticon),
  *     and meanings derived from other meanings (Urban 2011)</li>
+ * <li>shifts.tsv: the semantic shifts recorded from each concept in the
+ *     Database of Semantic Shifts (Zalizniak et al. 2024), for --shift</li>
  * </ul>
  */
 public class BuildMeaningData {
@@ -188,6 +190,53 @@ public class BuildMeaningData {
         write("relations.tsv", rs.toString());
         System.out.println(concepts.size() + " concepts, " + concepts.values().stream().filter(c -> !c.community.isEmpty()).count()
                 + " in CLICS communities, " + rel.size() + " with relations, " + derived + " derivations");
+
+        // Database of Semantic Shifts (Zalizniak et al. 2024): for each concept on
+        // the lists, the meanings words for it have shifted to, with the number of
+        // language families attesting the shift as polysemy and as derivation.
+        List<Map<String, String>> zal = tsv(fetch(CONCEPTICON + "conceptlists/Zalizniak-2024-4583.tsv"));
+        Map<String, String> zalGloss = new HashMap<>();
+        for (Map<String, String> r : zal) {
+            // A leading asterisk marks a duplicate entry; the gloss is the same.
+            zalGloss.put(r.get("ID"), r.get("ENGLISH").replaceFirst("^\\*", "").strip().replaceAll("\\s+", " "));
+        }
+        Pattern shift = Pattern.compile("\"ID\": \"([^\"]+)\", \"NAME\": \"[^\"]*\", \"Polysemy\": \\d+, "
+                + "\"Derivation\": \\d+, \"PolysemyByFamily\": (\\d+), \"DerivationByFamily\": (\\d+)");
+        Map<Integer, Map<String, int[]>> shifts = new TreeMap<>();
+        for (Map<String, String> r : zal) {
+            String cid = r.get("CONCEPTICON_ID");
+            if (cid.isEmpty() || !concepts.containsKey(Integer.parseInt(cid))) {
+                continue;
+            }
+            String source = zalGloss.get(r.get("ID"));
+            Matcher m = shift.matcher(r.getOrDefault("TARGET_CONCEPTS", ""));
+            while (m.find()) {
+                String t = zalGloss.get(m.group(1));
+                if (t != null && !t.equals(source)) {
+                    shifts.computeIfAbsent(Integer.parseInt(cid), k -> new TreeMap<>())
+                            .merge(t, new int[] {Integer.parseInt(m.group(2)), Integer.parseInt(m.group(3))},
+                                    (a, b) -> new int[] {Math.max(a[0], b[0]), Math.max(a[1], b[1])});
+                }
+            }
+        }
+        StringBuilder ss = new StringBuilder("""
+                # Semantic shifts from concepts on the bundled lists. Source CC BY 4.0:
+                #   Database of Semantic Shifts (Zalizniak et al. 2024; https://datsemshift.ru),
+                #   via Concepticon conceptlist Zalizniak-2024-4583 (https://concepticon.clld.org, v3.4.0)
+                # polysemy, derivation: number of language families attesting the shift
+                #   by polysemy of one word, and by derivation of one word from another
+                # concepticon_id\ttarget\tpolysemy\tderivation
+                """);
+        int shiftCount = 0;
+        for (var e : shifts.entrySet()) {
+            for (var t : e.getValue().entrySet()) {
+                ss.append(e.getKey()).append('\t').append(t.getKey()).append('\t').append(t.getValue()[0])
+                        .append('\t').append(t.getValue()[1]).append('\n');
+                shiftCount++;
+            }
+        }
+        write("shifts.tsv", ss.toString());
+        System.out.println(shiftCount + " semantic shifts from " + shifts.size() + " concepts");
     }
 
     /** Records that {@code from} relates to {@code to} as {@code kind}, replacing any earlier kind if {@code overwrite}. */
