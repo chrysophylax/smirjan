@@ -1,4 +1,4 @@
-# Word length in syllables.
+# Lengths of one and two syllables, and of three with half their weight.
 seed: length
 
 C: t k n s m l r p

@@ -1,4 +1,4 @@
-# A cluster table for nasal + stop sequences across syllables.
+# A cluster table that assimilates a nasal to a following stop across the syllable boundary.
 seed: clusters
 
 C: t k p s l m n

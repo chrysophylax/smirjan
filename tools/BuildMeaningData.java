@@ -22,7 +22,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- * Regenerates the bundled meaning data in src/smirjan/meanings/ from pinned
+ * Regenerates the bundled meaning data in resources/smirjan/meanings/ from pinned
  * releases of Concepticon and NoRaRe (CLDF), both CC BY 4.0. Run from the
  * repository root:
  *
@@ -44,7 +44,7 @@ public class BuildMeaningData {
             + "895b055b9e5dd339bbd2b67509802d85aea72126/cldf/"; // v1.1
     static final String COMMUNITY = "Rzymski-2020-1624-COMMUNITY";
 
-    static final Path OUT = Path.of("src/smirjan/meanings");
+    static final Path OUT = Path.of("resources/smirjan/meanings");
 
     record Concept(int id, String gloss, String field, String category, String simplicity, String community) {}
 

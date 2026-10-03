@@ -1,30 +1,48 @@
 # Reference
 
-## Command line
+This page lists the command-line options and every key of the definition
+file, with their defaults and permitted values. It is meant to be consulted
+rather than read through; each feature is introduced with examples in the
+[tutorial](README.md).
+
+## Command Line
 
 ```
 smirjan [--tsv] [--assign=lpj|dlg|wlt] <definitions.def> <count>
+smirjan --version
 ```
 
-| flag | meaning |
+| option | description |
 |---|---|
-| `--tsv` | tab-separated output with a header row ([details](10-output-and-meaning-lists.md#--tsv)) |
-| `--assign=LIST`, `--assign LIST` | pair words with meanings from `lpj`, `dlg` or `wlt` ([details](10-output-and-meaning-lists.md#--assign-meaning-lists)); with `compounds: yes`, some meanings become [compounds](11-compounds.md) |
-| `-h`, `--help` | usage |
+| `--tsv` | Prints tab-separated output with a header row ([details](10-output-and-meaning-lists.md#--tsv)) |
+| `--assign=LIST`, `--assign LIST` | Pairs words with meanings from `lpj`, `dlg` or `wlt` ([details](10-output-and-meaning-lists.md#--assign-meaning-lists)); with `compounds: yes`, some meanings become [compounds](11-compounds.md) |
+| `-h`, `--help` | Prints usage information. |
+| `--version` | Prints the version: a release number, or `dev` for local builds. |
 
-Exit status: 0 success, 1 bad definition file, 2 bad arguments, 3 fewer
-distinct words possible than requested.
+Exit status:
 
-## File format
+| status | meaning |
+|---|---|
+| 0 | success |
+| 1 | missing, unreadable or invalid definition file |
+| 2 | invalid arguments |
+| 3 | fewer distinct words can be generated than requested |
 
-`key: value`, one per line. `#` starts a comment at line start or after a
-space. Multi-letter keys are case-insensitive. UTF-8, normalised to NFC.
-Unknown keys are errors.
+## File Format
 
-Keys marked **repeatable** add up over several lines; for other keys the last
-line wins.
+A definition file contains one `key: value` entry per line. A `#` begins a
+comment when it stands at the start of a line or follows a space, so that `#`
+can still occur inside a value. Keys of more than one letter are
+case-insensitive, whereas a single-letter key is the name of a class and must
+be an uppercase letter. Files are read as UTF-8 and normalised to NFC, so that a
+phoneme typed with a precomposed character and the same phoneme typed with a
+combining diacritic are treated as identical. An unknown key is an error
+rather than being ignored, which catches misspelt keys.
 
-## Randomness and frequency
+Keys marked **repeatable** accumulate their values over several lines. For any
+other key, the last line takes effect.
+
+## Randomness and Frequency
 
 | key | default | values |
 |---|---|---|
@@ -36,24 +54,31 @@ line wins.
 | `jitter` | `10%` | `0` up to (not including) `100%` |
 | `random-rate` | `30%` | `0`–`100%`; default chance of optional elements |
 
-Percentages may be written `30%`, `30` or `0.3`.
+Percentages can be written as `30%`, `30` or `0.3`.
+
+Under `gusein-zade`, the phoneme of rank r in a class of n receives the weight
+(1/n)(1/r + … + 1/n), the expected r-th largest frequency of a point drawn
+uniformly from the simplex of frequency profiles (Gusein-Zade 1988, formula
+(1)). These weights sum to one. The logarithmic approximation given in the same
+paper is not used, because it sums to less than one
+([proofs/GuseinZade.v](../proofs/GuseinZade.v)).
 
 ## Classes
 
-| key | meaning |
+| key | description |
 |---|---|
-| `A` … `Z` | a class: phonemes separated by spaces, most frequent first. May include classes defined above it. `p*3` sets an explicit weight. |
-| `nucleus` | classes whose slots form the syllable nucleus (default `V`) |
+| `A` … `Z` | Defines a class: phonemes separated by spaces, most frequent first. A class can include classes defined above it. `p*3` sets an explicit weight. |
+| `nucleus` | Lists the classes whose slots form the syllable nucleus (default `V`). |
 
 ## Shapes
 
-| key | meaning |
+| key | description |
 |---|---|
-| `syllable` | syllable shapes, most frequent first (**repeatable**) |
-| `syllable-initial` | shapes for the first syllable of a polysyllabic word (**repeatable**) |
-| `syllable-medial` | shapes for middle syllables (**repeatable**) |
-| `syllable-final` | shapes for the last syllable of a polysyllabic word (**repeatable**) |
-| `syllable-mono` | shapes for one-syllable words (**repeatable**) |
+| `syllable` | Syllable shapes, most frequent first (**repeatable**). |
+| `syllable-initial` | Shapes for the first syllable of a polysyllabic word (**repeatable**). |
+| `syllable-medial` | Shapes for medial syllables (**repeatable**). |
+| `syllable-final` | Shapes for the last syllable of a polysyllabic word (**repeatable**). |
+| `syllable-mono` | Shapes for monosyllabic words (**repeatable**). |
 
 Positional keys fall back to `syllable`. Shape syntax:
 
@@ -61,20 +86,20 @@ Positional keys fall back to `syllable`. Shape syntax:
 |---|---|
 | `C` | a phoneme from class `C` |
 | literal text | that phoneme |
-| `X?` / `X?25` | optional, at the seeded default rate / at exactly 25 % |
+| `X?` / `X?25` | optional, at the seeded default rate / at exactly 25% |
 | `(…)` | optional group |
 | `C1`, `C2` | same number = same phoneme; different numbers = different phonemes (per syllable) |
 | `C[-r l]` | exclude phonemes; `C[-N]` excludes a class |
 | `C[+p t]` | only these phonemes |
 
-## Word length and weight
+## Word Length and Weight
 
 | key | default | meaning |
 |---|---|---|
 | `word-syllables` | `2 1 3` | lengths, most frequent first; ranges `1-3`, weights `3*0.5` |
 | `word-morae` | none | required total weights, most frequent first |
-| `morae` | `onset=0 nucleus=1 coda=1` | segment weights; also `X=2` for class `X`, `aː=2` for a phoneme (**repeatable**) |
-| `heavy-morae` | `2` | morae needed for a heavy syllable |
+| `morae` | `onset=0 nucleus=1 coda=1` | segment weights; also `X=2` for class `X` and `aː=2` for a phoneme (**repeatable**) |
+| `heavy-morae` | `2` | morae required for a heavy syllable |
 
 ## Stress
 
@@ -123,6 +148,9 @@ See [Compounds](11-compounds.md).
 
 Patterns are Java regular expressions; `{C}` matches any phoneme of class `C`.
 
-Processing order: shapes → cluster tables → filters → rejects → mora target →
-stress and tone. A solid compound's join goes through cluster tables, filters
-(matches spanning the join only) and rejects, and is then stressed as a whole.
+Each word passes through the following stages in order: shapes → cluster
+tables → filters → rejects → mora target → stress and tone. A filter therefore
+sees the word after cluster tables have been applied, and a reject sees it
+after filtering. When a solid compound is formed, the join between its members
+passes through cluster tables, filters (only matches that span the join) and
+rejects, and the compound is then stressed as a whole.

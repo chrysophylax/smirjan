@@ -1,4 +1,4 @@
-# Tone on each mora: long vowels carry two tones, which combine into contours.
+# One tone per mora, so that a long vowel carries two tones, written as a contour.
 seed: mora tone
 
 C: t k n s m l p

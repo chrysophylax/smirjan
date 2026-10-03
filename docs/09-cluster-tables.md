@@ -1,12 +1,13 @@
-# 9. Cluster tables
+# 9. Cluster Tables
 
-A cluster table decides, for pairs of adjacent phonemes, whether the pair is
-allowed, forbidden, or replaced by something else. It's a compact way to write
-many rules about consonant clusters, vowel sequences or assimilation at once.
+A **cluster table** states, for pairs of adjacent phonemes, whether each pair
+is allowed, forbidden or replaced by something else. Because one table covers
+every combination of the phonemes in its rows and columns, it can express in a
+few lines what would otherwise take many separate rules, which makes it the
+natural tool for consonant clusters, vowel sequences and assimilation.
 
-The idea and the notation come from William Annis's
-[Lexifer](https://lingweenie.org/conlang/lexifer/). smirjan's tables follow
-Lexifer's.
+Both the idea and the notation are taken from William Annis's
+[Lexifer](https://lingweenie.org/conlang/lexifer/).
 
 ## Notation
 
@@ -17,12 +18,12 @@ i -  +  uu
 u -  -  +
 ```
 
-- A table starts with a line beginning with `%`. The rest of that line lists
-  the **second** phoneme of each pair.
-- Each following line starts with the **first** phoneme of a pair, then has one
-  cell per column.
-- A blank line ends the table. So does a new `key: value` line or another `%`
-  line. Comment lines don't end it.
+A table begins with a line starting with `%`, and the rest of that line lists
+the **second** phoneme of each pair. Each following line begins with the
+**first** phoneme of a pair and continues with one cell per column, so the
+cell at row *a*, column *u* governs the sequence *au*. The table ends at a
+blank line, at a new `key: value` line or at another `%` line; comment lines
+do not end it.
 
 Each cell is one of:
 
@@ -32,30 +33,31 @@ Each cell is one of:
 | `-` | the pair is forbidden; any word containing it is discarded |
 | anything else | the pair is replaced by this text |
 
-So in the table above, *ai* is fine, *au* becomes *o*, *ia* is forbidden and
+In the table above, *ai* is allowed, *au* becomes *o*, *ia* is forbidden and
 *iu* becomes *uu*.
 
-Pairs that no table mentions are allowed. A file can have several tables; if
-two tables cover the same pair, the later one wins.
+A pair that no table mentions is allowed, so a table only needs to list the
+phonemes whose combinations matter. A file can contain several tables, and if
+two of them cover the same pair, the later one takes precedence.
 
-## What counts as a pair
+## What Counts as a Pair
 
 Tables check **every pair of adjacent phonemes in the word**, including pairs
-that straddle a syllable boundary. That's usually what matters for clusters:
-the coda of one syllable meeting the onset of the next.
+that span a syllable boundary. That's usually what matters for clusters, which
+mostly arise where the coda of one syllable meets the onset of the next.
 
-Pairs are phonemes, not characters. If `tʃ` is a phoneme, the table sees
-`tʃ` + `a`, never `ʃ` + `a`.
+A pair consists of two phonemes rather than two characters. If `tʃ` is defined
+as a phoneme, the table sees the pair `tʃ` + `a` and never `ʃ` + `a`.
 
-Row and column labels can be class names, which expand to every phoneme in the
-class:
+Row and column labels can also be class names, which expand to every phoneme
+of the class:
 
 ```
 % T
 N -        # no nasal directly before a member of T
 ```
 
-## Example: nasal assimilation
+## Example: Nasal Assimilation
 
 ([`examples/09-clusters.def`](examples/09-clusters.def))
 
@@ -72,46 +74,54 @@ m +  nt ŋk -  -
 n mp +  ŋk +  ll
 ```
 
-Read the rows as: *m* before *t* becomes *nt*, before *k* becomes *ŋk*, and
-can't come before *s* or *l*; *n* before *p* becomes *mp*, before *k* becomes
-*ŋk*, and before *l* becomes *ll*.
-
-Counting clusters in 2000 words with and without the table:
+Read row by row, the table says that *m* before *t* becomes *nt* and before
+*k* becomes *ŋk*, and that *m* may not precede *s* or *l* at all; *n* before
+*p* becomes *mp*, before *k* becomes *ŋk*, and before *l* becomes *ll*. The
+effect on 2000 words with and without the table is as follows:
 
 | | mp | mt | mk | ms | ml | np | nt | nk | ns | nl | ŋk | ll |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| without | 140 | 198 | 133 | 78 | 56 | 44 | 97 | 41 | 30 | 21 | 0 | 0 |
-| with | 190 | 0 | 0 | 0 | 0 | 0 | 287 | 0 | 31 | 0 | 177 | 20 |
+| without | 113 | 221 | 145 | 71 | 63 | 45 | 81 | 43 | 24 | 17 | 0 | 0 |
+| with | 153 | 0 | 0 | 0 | 0 | 0 | 305 | 0 | 28 | 0 | 189 | 19 |
 
-Nasals now always agree with a following stop:
+The clusters *mt*, *mk*, *np* and *nk* disappear because they are replaced,
+which is why *mp*, *nt* and *ŋk* become more frequent; *ms* and *ml* disappear
+because the words that contained them were discarded. As a result, a nasal
+always agrees in place of articulation with a following stop, as in the first
+six such words among the first hundred generated:
 
 ```
-saŋku santampi kempi piŋkatim pusimpa lintuŋkam
+kintu lento seŋka kempi piŋkatim kusaŋka
 ```
 
-## Substitutions in detail
+## Substitutions in Detail
 
-- A replacement made of **two phonemes** takes the pair's two places. With
-  `n` + `k` → `ŋk`, the `ŋ` stays the coda of one syllable and the `k` stays
-  the onset of the next: *saŋ.ku*, not *saŋk.u*. Replacements are split into
-  your defined phonemes, longest first.
-- Any other replacement (one phoneme, or three or more) becomes a single
-  segment in the syllable of the pair's **first** phoneme. If either phoneme of
-  the pair was in the nucleus, the replacement is too.
-- After a replacement, the new segment is checked against its neighbours again,
-  so replacements can feed further rules. A chain that never settles makes the
-  word fail rather than loop forever.
-- Tables are applied **before** [filters](08-filters-and-rejects.md), so
-  filters see the result of the tables.
-- Tables also apply where the two words of a solid
-  [compound](11-compounds.md#solid-compounds) meet.
+How a replacement fits back into the word depends on its length. A replacement
+of **two phonemes** occupies the two places of the original pair. With `n` +
+`k` → `ŋk`, the `ŋ` therefore remains the coda of one syllable and the `k` the
+onset of the next, giving *seŋ.ka* rather than *seŋk.a*. To find the two
+phonemes, smirjan splits the replacement into defined phonemes, trying the
+longest first. Any other replacement, whether of one phoneme or of three or
+more, becomes a single segment in the syllable of the pair's **first**
+phoneme, and if either phoneme of the pair belonged to the nucleus, so does
+the replacement.
 
-## Tables or filters?
+After a replacement, the new segment is checked against its neighbours again,
+so one replacement can create a pair that triggers another. A chain of
+replacements that never settles makes the word fail instead of looping
+forever.
 
-Both can do the same job. A table is clearer when you're thinking in pairs,
-especially many pairs at once (a full nasal-plus-stop grid is one small table
-but a dozen filter rules). Filters are better for anything longer than two
-phonemes, anything that depends on word edges (`^`, `$`), and for rewrites
-that aren't about adjacent pairs.
+Tables are applied **before** [filters](08-filters-and-rejects.md), so filters
+see the result of the tables. They also apply where the two words of a solid
+[compound](11-compounds.md#solid-compounds) meet.
 
-Next: [Output formats and meaning lists](10-output-and-meaning-lists.md)
+## Tables and Filters Compared
+
+Either mechanism can often do the same job, and the choice is mostly one of
+clarity. A table is clearer when you're thinking in pairs, particularly when
+many pairs are involved; a complete grid of nasals and stops, for instance,
+takes one small table but a dozen filter rules. Filters are the better choice
+for sequences longer than two phonemes, for anything that depends on the edges
+of the word (`^`, `$`), and for rewrites that do not concern adjacent pairs.
+
+Next: [Output Formats and Meaning Lists](10-output-and-meaning-lists.md)

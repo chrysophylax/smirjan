@@ -6,8 +6,11 @@ package smirjan;
  */
 enum Distribution {
     /**
-     * Borodovsky &amp; Gusein-Zade (1989): F(r) = (ln(n + 1) - ln r) / n.
-     * Parameter-free; depends only on the inventory size.
+     * Gusein-Zade (1988): the expected r-th largest coordinate of a point drawn
+     * uniformly from the simplex, F(r) = (1/r + 1/(r+1) + ... + 1/n) / n.
+     * Parameter-free; depends only on the inventory size, and sums to one.
+     * The paper's approximation (ln(n + 1) - ln r) / n is not used: it sums to
+     * less than one (see proofs/GuseinZade.v).
      */
     GUSEIN_ZADE,
     /**
@@ -33,10 +36,17 @@ enum Distribution {
 
     double[] weights(int n, Params p) {
         double[] w = new double[n];
+        // Tail sums 1/r + ... + 1/n, accumulated from the rarest rank upwards.
+        double tail = 0;
+        double[] tails = new double[n];
+        for (int r = n; r >= 1; r--) {
+            tail += 1.0 / r;
+            tails[r - 1] = tail;
+        }
         for (int i = 0; i < n; i++) {
             int r = i + 1;
             w[i] = switch (this) {
-                case GUSEIN_ZADE -> (Math.log(n + 1) - Math.log(r)) / n;
+                case GUSEIN_ZADE -> tails[i] / n;
                 case YULE -> Math.pow(r, -p.yuleB()) * Math.pow(p.yuleC(), r);
                 case ZIPF -> 1.0 / Math.pow(r, p.zipfS());
                 case FLAT -> 1.0;

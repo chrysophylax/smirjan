@@ -26,6 +26,10 @@ public final class Main {
                     usage(System.out);
                     return;
                 }
+                case "--version" -> {
+                    System.out.println("smirjan " + Version.get());
+                    return;
+                }
                 case "--tsv" -> tsvOutput = true;
                 case "--assign" -> {
                     if (i + 1 >= args.length) {
@@ -155,5 +159,7 @@ public final class Main {
         p.println("            lpj  Leipzig-Jakarta list (100)");
         p.println("            dlg  Dolgopolsky list (15)");
         p.println("            wlt  Loanword Typology / WOLD meaning list (1460)");
+        p.println("  --version");
+        p.println("          print the version and exit");
     }
 }

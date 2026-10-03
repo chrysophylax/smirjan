@@ -1,4 +1,4 @@
-# One consonant class and one vowel, so we can count how often each consonant is picked.
+# A single vowel and long words, so that the consonants can be counted under each distribution.
 seed: frequency
 distribution: gusein-zade
 

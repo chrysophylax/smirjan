@@ -1,4 +1,4 @@
-# Optional elements: ?, ?N and parentheses.
+# Three ways of making an element optional: a bare ?, ? with a percentage, and parentheses.
 seed: optional
 random-rate: 40%
 

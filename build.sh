@@ -5,13 +5,13 @@ cd "$(dirname "$0")"
 
 rm -rf build
 mkdir -p build/classes build/test-classes
-javac --release 27 -Xlint:all -Werror -d build/classes $(find src -name '*.java')
+javac --release 25 -Xlint:all -Werror -d build/classes $(find src -name '*.java')
 # Resources (the bundled meaning lists) go next to the classes.
-(cd src && find . -type f ! -name '*.java' -exec install -D -m 644 {} ../build/classes/{} \;)
+(cd resources && find . -type f -exec install -D -m 644 {} ../build/classes/{} \;)
 jar --create --file build/smirjan.jar --main-class smirjan.Main -C build/classes .
 
 if [[ "${1:-}" == "test" ]]; then
-    javac --release 27 -Xlint:all -Werror -cp build/classes -d build/test-classes $(find test -name '*.java')
+    javac --release 25 -Xlint:all -Werror -cp build/classes -d build/test-classes $(find test -name '*.java')
     java -cp build/classes:build/test-classes smirjan.SelfTest
 fi
 

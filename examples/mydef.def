@@ -24,7 +24,7 @@ syllable-mono: CVC C[-r]VC1C2 CA
 
 word-syllables: 2 3 1 4
 
-# Weight: long vowels are bimoraic, codas weigh one mora.
+# Long vowels weigh two morae, and a coda consonant weighs one.
 morae: onset=0 nucleus=1 coda=1 A=2
 heavy-morae: 2
 stress: heavy-penult           # Latin-style
@@ -35,7 +35,7 @@ syllable-separator: .
 tones: - acute
 tone-bearing: stressed
 
-# Nasal + stop clusters: rows are the first phoneme, columns the second.
+# Nasal + stop clusters; each row is the first phoneme of a pair, each column the second.
 % p  t  k  b  d  g
 n mp +  ŋk mb +  ŋg
 m +  nt ŋk +  nd ŋg

@@ -1,4 +1,4 @@
-# One tone per syllable, written as accents on the vowel.
+# One tone per syllable, written as a diacritic on the vowel; the first is unmarked.
 seed: tone
 
 C: t k n s m l p

@@ -1,11 +1,19 @@
-# 7. Tone and pitch accent
+# 7. Tone and Pitch Accent
 
-Tone is optional. Without a `tones:` key, words carry no tone.
+Tone is optional, and a definition without a `tones:` key produces words
+without it. In a **tone language** the pitch of a syllable distinguishes
+words in the same way as its consonants and vowels; in Yoruba, for example,
+words can differ in tone alone. smirjan can assign a tone to every syllable, or to
+every mora where a language treats a long vowel as carrying two tones, or to
+the stressed syllable only, which yields a pitch-accent system. This chapter
+treats these three arrangements in turn, together with the question of where
+in the written word the tone appears.
 
-## Tones per syllable
+## Tones per Syllable
 
-`tones:` lists the tones, most common first. `-` stands for a tone that isn't
-written, which is handy when one tone is left unmarked
+`tones:` lists the tones of the language, most common first. Many tonal
+orthographies leave one tone unwritten, typically the mid or the low, and
+`-` represents such a tone in the list
 ([`examples/07-tone.def`](examples/07-tone.def)):
 
 ```
@@ -20,20 +28,27 @@ tones: - acute grave
 ```
 
 ```
-tamo sa má la tan ti tu nú tin ni katu kú
+tamo sa má ma tan ti tu kí tin na katu kú
 ```
 
-A tone can be written as:
+Because the unwritten tone comes first in the list, it is also the most
+frequent, and most syllables in the output carry no mark. The acute appears
+in *má*, *kí* and *kú*. The grave, ranked last, is absent from these twelve
+words, although it occurs in 52 of the first 200 (*tà*, *tùn*, *tì*), so its
+absence here reflects its lower frequency and the size of the sample.
 
-- a diacritic name (`acute`, `grave`, `macron`, `circumflex`, `caron`, … the
-  same names as for [stress marks](06-stress.md#how-stress-is-written)),
-- a combining character typed directly,
-- tone letters (`˥ ˧ ˩`, `˧˥`),
-- numbers or any other text (`1 2 3`, `H L`).
+A tone can be written in four ways. It can be the name of a diacritic, from
+the same set of names that serves for
+[stress marks](06-stress.md#how-stress-is-written) (`acute`, `grave`,
+`macron`, `circumflex`, `caron` and so on); it can be the combining
+character itself, typed directly; it can be a sequence of tone letters such
+as `˥ ˧ ˩` or `˧˥`; or it can be any other text, such as the numbers `1 2 3`
+or the letters `H L` used in many descriptive grammars.
 
-## Where the tone is written
+## Where the Tone Is Written
 
-`tone-position:` chooses:
+`tone-position:` determines where the tone is placed relative to the
+syllable:
 
 | value | placement |
 |---|---|
@@ -41,7 +56,12 @@ A tone can be written as:
 | `after` | after the syllable (default otherwise) |
 | `before` | before the syllable |
 
-Chao tone letters after each syllable ([`examples/07-tone-letters.def`](examples/07-tone-letters.def)):
+The defaults follow from the form of the tones. A diacritic belongs on a
+vowel, whereas a tone letter or a number cannot be attached to one and is
+written beside the syllable instead. Chao tone letters, the usual IPA
+notation in descriptions of East and Southeast Asian languages, are
+therefore written after each syllable without further configuration
+([`examples/07-tone-letters.def`](examples/07-tone-letters.def)):
 
 ```
 syllable: CV
@@ -51,12 +71,16 @@ tones: ˥ ˧ ˩ ˧˥ ˥˩
 ```
 
 ```
-ke˥ su˥ ke˧ ki˥ta˧ ki˥ ka˧ka˧ sa˧ ku˧te˥ ta˥˩ ka˥
+ke˥ su˥ ke˧ ki˥ta˧ ki˥ ka˥ka˧ sa˧ ku˧te˥ ta˥˩ ka˥
 ```
 
-## Tone per mora
+The list contains three level tones (high, mid and low) and two contours, a
+rise `˧˥` and a fall `˥˩`. As with any list, the earlier tones are the more
+frequent, so the high and mid tones dominate the sample.
 
-`tone-bearing:` decides which units carry a tone:
+## Tone per Mora
+
+`tone-bearing:` determines which units carry a tone:
 
 | value | meaning |
 |---|---|
@@ -64,8 +88,12 @@ ke˥ su˥ ke˧ ki˥ta˧ ki˥ ka˧ka˧ sa˧ ku˧te˥ ta˥˩ ka˥
 | `mora` | one tone per mora of the nucleus |
 | `stressed` | only the stressed syllable ([pitch accent](#pitch-accent)) |
 
-With `tone-bearing: mora`, a long vowel weighing two morae gets two tones.
-`tone-contour:` says how two tones on one vowel are written
+In some languages a long vowel behaves as two tone-bearing units, so that a
+fall on a long vowel is analysed as a high tone followed by a low one.
+`tone-bearing: mora` models this directly by giving a long vowel of two morae
+two tones. A **contour tone**, a pitch movement within a
+single vowel, then arises from the combination of the two, and
+`tone-contour:` specifies how each combination is written
 ([`examples/07-mora-tone.def`](examples/07-mora-tone.def)):
 
 ```
@@ -84,23 +112,30 @@ tone-contour: acute+grave=circumflex grave+acute=caron
 ```
 
 ```
-nǐː níkà ní ká kà pá kǎː tásí síká tíː
+nǐː níkà ní ká kà pá kǎː tásí síká táː
 ```
 
-- *nǐː*: low then high on a long vowel, written with the `caron` contour.
-- *tíː*: high on both morae. A level tone is written once.
-- A combination with no `tone-contour:` entry stacks both marks.
-- If the nucleus is written with as many letters as it has tones (`aa`, `ai`),
-  each letter gets its own tone instead of a contour: *páà*.
+In *nǐː* the long vowel carries a low tone followed by a high one, and the
+entry `grave+acute=caron` writes that rise with a caron. In *táː* both morae
+carry the high tone, and a level tone is written only once. A combination
+for which no `tone-contour:` entry exists is written with both marks stacked
+on the vowel. A different rule applies when the nucleus is spelled with as
+many letters as it has tones, as in `aa` or `ai`: each letter then carries
+its own tone, giving forms such as *páà*, and no contour is needed.
 
-Only nucleus morae carry tone. Coda morae count for weight and stress, but not
-for tone.
+Only the morae of the nucleus carry tone. A coda consonant may add a mora to
+the weight of a syllable, and that mora counts for stress, but it never
+receives a tone of its own.
 
-## Pitch accent
+## Pitch Accent
 
-With `tone-bearing: stressed`, only the stressed syllable carries a tone; the
-others are unmarked. Combined with `stress-mark: none`, the tone *is* the
-accent ([`examples/07-pitch-accent.def`](examples/07-pitch-accent.def)):
+In a **pitch-accent** system, such as that of Japanese, a word has at most
+one prominent syllable, and the prominence is realised as a tone rather than
+as a stress. With `tone-bearing: stressed`, smirjan gives a tone to the
+stressed syllable only and leaves the others unmarked. Combined with
+`stress-mark: none`, which suppresses the stress mark, the tone becomes the
+only written sign of the accent
+([`examples/07-pitch-accent.def`](examples/07-pitch-accent.def)):
 
 ```
 syllable: CV CVC
@@ -113,10 +148,15 @@ tone-bearing: stressed
 ```
 
 ```
-tíka kapâka tutî karamî nimsikát natmónti tukíni titú tisî takú
+tíka kapâka tutá karamî nimsikát natmónti tukíni titú tisî takú
 ```
 
-Pitch accent needs a `stress:` rule. With no stress, no syllable is stressed,
-so no tone appears.
+Since the stress rule is `free`, the position of the accent varies from word
+to word. It falls on the first syllable in *tíka*, on the second in *kapâka*
+and on the last in *tutá*. Each accented syllable carries one of the two tones,
+acute or circumflex.
 
-Next: [Filters and rejects](08-filters-and-rejects.md)
+Pitch accent requires a `stress:` rule. Without one, no syllable is stressed,
+so no syllable receives a tone either, which is rarely what you want.
+
+Next: [Filters and Rejects](08-filters-and-rejects.md)

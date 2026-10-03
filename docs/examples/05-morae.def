@@ -1,4 +1,4 @@
-# Word length in morae: every word weighs exactly 3 or 4 morae.
+# Length measured in morae, with every word weighing exactly three or four.
 seed: morae
 
 C: t k n s m l r p

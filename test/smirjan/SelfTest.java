@@ -27,6 +27,7 @@ public final class SelfTest {
         compounds();
         clusterSplit();
         errors();
+        version();
 
         System.out.println(passed + " passed, " + failures.size() + " failed");
         failures.forEach(f -> System.out.println("FAIL: " + f));
@@ -38,12 +39,15 @@ public final class SelfTest {
     // ------------------------------------------------------------------ tests
 
     static void distributions() {
-        // Values from https://lachi-lochu.conlang.org/conlang/gusein-zade.html for 7 phonemes.
-        double[] expected = {29.71, 19.80, 14.01, 9.90, 6.71, 4.11, 1.91};
+        // Gusein-Zade (1988), formula (1), for 7 phonemes: (1/7)(1/r + ... + 1/7).
+        double[] expected = {37.04, 22.76, 15.61, 10.85, 7.28, 4.42, 2.04};
         double[] gz = Distribution.GUSEIN_ZADE.weights(7, null);
+        double sum = 0;
         for (int i = 0; i < 7; i++) {
             check(Math.abs(gz[i] * 100 - expected[i]) < 0.01, "gusein-zade rank " + (i + 1) + " = " + gz[i]);
+            sum += gz[i];
         }
+        check(Math.abs(sum - 1) < 1e-12, "gusein-zade weights sum to one: " + sum);
         double[] y = Distribution.YULE.weights(5, new Distribution.Params(0.5, 0.9, 1));
         check(Math.abs(y[2] - Math.pow(3, -0.5) * Math.pow(0.9, 3)) < 1e-12, "yule r^-b c^r");
         for (int i = 1; i < 5; i++) {
@@ -381,6 +385,11 @@ public final class SelfTest {
         error("C: p\nV: a\nsyllable: CV\ncompound-order: head-last\n", "unknown value 'head-last'");
         error("C: p\nV: a\nsyllable: CV\ncompound-types: dvandva dvandva\n", "given twice");
         error("C: p\nV: a\nsyllable: CV\ncompounds: maybe\n", "compounds:");
+    }
+
+    static void version() {
+        String v = Version.get();
+        check(v.equals("dev") || v.matches("[1-9][0-9]*"), "version is 'dev' or a release number: " + v);
     }
 
     // ---------------------------------------------------------------- helpers

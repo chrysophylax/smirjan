@@ -1,4 +1,4 @@
-# Filters rewrite, rejects discard.
+# Filters palatalise t and s before i and geminate a consonant before l; rejects remove three word shapes.
 seed: filters
 
 C: t k s n m l p

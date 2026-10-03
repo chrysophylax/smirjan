@@ -1,0 +1,198 @@
+name: CI/CD
+
+# Every push and pull request builds and tests the jar and the three native binaries.
+# Releases follow RELEASING.md: versions are plain integers that only ever increase, starting at
+# 954350000. Run this workflow by hand to release the next number, or push a tag that is a
+# higher integer than every existing release tag.
+#
+# Security (see RELEASING.md): pull requests run with the `pull_request` trigger only, so code
+# from a fork gets a read-only token and no secrets. Never switch to `pull_request_target` or
+# `workflow_run`. Actions are pinned to commit SHAs, untrusted values reach scripts only through
+# environment variables, and publishing is gated behind the `release` environment.
+on:
+  push:
+    branches: [master]
+    tags: ['[0-9]*']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        description: Mark the release as a pre-release
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+# Releases share one queue so two runs can never pick the same version number.
+concurrency:
+  group: ${{ github.workflow }}-${{ (github.event_name == 'workflow_dispatch' || github.ref_type == 'tag') && 'release' || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  version:
+    name: Version
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      release: ${{ steps.version.outputs.release }}
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - id: version
+        env:
+          FIRST: '954350000'
+          EVENT: ${{ github.event_name }}
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          if [[ "$EVENT" != workflow_dispatch && ! ( "$EVENT" == push && "$REF_TYPE" == tag ) ]]; then
+              echo "release=false" >> "$GITHUB_OUTPUT"
+              echo "version=dev" >> "$GITHUB_OUTPUT"
+              exit 0
+          fi
+
+          # The highest existing release tag, ignoring the tag being released (if it was pushed).
+          current=""
+          [[ "$REF_TYPE" == tag ]] && current="$REF_NAME"
+          latest=$(git ls-remote --tags --refs origin \
+              | sed 's#.*refs/tags/##' | grep -E '^[0-9]+$' | grep -vxF "${current:-none}" \
+              | sort -n | tail -n 1 || true)
+
+          if [[ "$EVENT" == workflow_dispatch ]]; then
+              version=$(( ${latest:-0} >= FIRST ? latest + 1 : FIRST ))
+          else
+              version="$current"
+              if [[ ! "$version" =~ ^[1-9][0-9]*$ ]]; then
+                  echo "release tags must be plain integers, got '$version'" >&2
+                  exit 1
+              fi
+              if (( version < FIRST )); then
+                  echo "release numbers start at $FIRST, got $version" >&2
+                  exit 1
+              fi
+              if [[ -n "$latest" ]] && (( version <= latest )); then
+                  echo "release numbers only increase: $version is not above $latest" >&2
+                  exit 1
+              fi
+          fi
+          echo "Releasing $version (previous: ${latest:-none})"
+          echo "release=true" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: ${{ matrix.target }}
+    needs: version
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: ubuntu-latest,  target: linux-amd64,   mill: ./mill,     exe: '' }
+          - { os: windows-latest, target: windows-amd64, mill: ./mill.bat, exe: .exe }
+          - { os: macos-latest,   target: macos-arm64,   mill: ./mill,     exe: '' }
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    env:
+      VERSION: ${{ needs.version.outputs.version }}
+      RELEASE: ${{ needs.version.outputs.release }}
+      MILL: ${{ matrix.mill }}
+      TARGET: ${{ matrix.target }}
+      EXE: ${{ matrix.exe }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # Release builds start from a clean cache, so nothing a previous run stored can end up in them.
+      - uses: coursier/cache-action@95e5b1029b6b86e7bac033ee44a0697d8a527d2d # v8.1.1
+        if: needs.version.outputs.release != 'true'
+      # native-image links with the MSVC toolchain on Windows.
+      - uses: ilammy/msvc-dev-cmd@0b201ec74fa43914dc39ae48a89fd1d8cb592756 # v1.13.0
+        if: runner.os == 'Windows'
+
+      # Bake the release number into the jar and binary; other builds keep the committed "dev".
+      - name: Set version
+        if: needs.version.outputs.release == 'true'
+        run: echo "$VERSION" > resources/smirjan/version.txt
+
+      # Mill fetches GraalVM CE 25 itself (jvmVersion in build.mill.yaml); no setup-java needed.
+      - name: Self-tests
+        run: $MILL test.run
+      - name: Jar
+        run: $MILL jar
+      - name: Native image
+        run: $MILL nativeImage
+
+      - name: Run every example with the native binary
+        run: |
+          bin="out/nativeImage.dest/native-executable$EXE"
+          reported=$("$bin" --version | tr -d '\r')
+          if [[ "$reported" != "smirjan $VERSION" ]]; then
+              echo "--version printed '$reported', expected 'smirjan $VERSION'" >&2
+              exit 1
+          fi
+          for def in examples/*.def docs/examples/*.def; do
+              status=0
+              "$bin" "$def" 5 > /dev/null 2> example.err || status=$?
+              # Status 3 (fewer distinct words than asked) is fine for tiny examples.
+              if [[ $status -ne 0 && $status -ne 3 ]]; then
+                  echo "example failed: $def" >&2
+                  cat example.err >&2
+                  exit 1
+              fi
+          done
+          # The meaning lists are bundled resources; make sure the image carries them.
+          for list in lpj dlg wlt; do
+              "$bin" --assign=$list examples/mydef.def 3 > /dev/null
+          done
+
+      - name: Stage artifacts
+        run: |
+          mkdir dist
+          cp "out/nativeImage.dest/native-executable$EXE" "dist/smirjan-$VERSION-$TARGET$EXE"
+          if [[ "$TARGET" == linux-amd64 ]]; then
+              cp out/jar.dest/out.jar "dist/smirjan-$VERSION.jar"
+          fi
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: smirjan-${{ matrix.target }}
+          path: dist/*
+          if-no-files-found: error
+
+  release:
+    name: Release
+    needs: [version, build]
+    # Belt and braces: the version job never marks pull requests as releases, and forks never publish.
+    if: >-
+      needs.version.outputs.release == 'true'
+      && github.event_name != 'pull_request'
+      && github.repository == 'chrysophylax/smirjan'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Configure required reviewers for this environment in the repository settings (RELEASING.md).
+    environment: release
+    permissions:
+      contents: write # create the tag and the release
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      VERSION: ${{ needs.version.outputs.version }}
+      PRERELEASE: ${{ inputs.prerelease }}
+    steps:
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Checksums
+        run: cd dist && sha256sum * > SHA256SUMS && cat SHA256SUMS
+      # Creates the tag at the built commit when it doesn't exist yet (workflow_dispatch).
+      - name: Publish release
+        run: |
+          prerelease=()
+          [[ "$PRERELEASE" == true ]] && prerelease=(--prerelease)
+          gh release create "$VERSION" dist/* --target "$GITHUB_SHA" --title "smirjan $VERSION" --generate-notes "${prerelease[@]}"

@@ -1,7 +1,8 @@
 # Var Ysalenn [ʋaɾ ˈy.salɛnː], Chrysophylax 2017.
 # Source: research/var-ysalenn-linguifex.pdf (Linguifex).
 #
-# Output is in the orthography, not IPA:
+# Output is written in the orthography of the language rather than in IPA,
+# in which these digraphs stand for single phonemes:
 #   ch /x/   dd /ð/   ts /t͡s/   tz /d͡z/   nn lengthened /nː/
 # Other letters have their IPA value. v is [ʋ] or [v]; r is a tap or trill.
 #

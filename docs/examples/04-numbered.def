@@ -1,4 +1,4 @@
-# Numbered slots: same number = same phoneme, different numbers = different phonemes.
+# Slots with the same number receive the same phoneme, slots with different numbers different ones.
 seed: numbered
 
 C: t k s p

@@ -1,4 +1,4 @@
-# Latin-style, weight-sensitive stress with secondary stress, marked with accents.
+# Latin-style weight-sensitive stress, with alternating secondary stress.
 seed: latin
 
 C: t k n s m l r p

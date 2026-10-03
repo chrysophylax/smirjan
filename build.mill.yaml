@@ -1,0 +1,13 @@
+extends: [JavaModule, NativeImageModule]
+mainClass: smirjan.Main
+# GraalVM CE is a full JDK 25, so it compiles the jar and provides native-image.
+jvmVersion: graalvm-community:25.0.2
+javacOptions: [--release, "25", -Xlint:all, -Werror]
+# Resources are declared in resources/META-INF/native-image/, which the jar carries.
+nativeIncludedResources: []
+
+# Dependency-free self-tests (a plain main class, no test framework): ./mill test.run
+object test:
+  extends: JavaTests
+  mainClass: smirjan.SelfTest
+  sources: [./]
