@@ -44,29 +44,40 @@ final class Tsv {
     private final boolean hasTones;
     private final boolean assigned;
     private final boolean compounds;
+    private final boolean shifts;
 
-    /** Output for {@code def}; {@code assigned} adds the --assign meaning columns. */
-    Tsv(Definition def, boolean assigned) {
+    /**
+     * Output for {@code def}; {@code assigned} adds the --assign meaning
+     * columns, and {@code shifts} the --shift columns.
+     */
+    Tsv(Definition def, boolean assigned, boolean shifts) {
         this.hasTones = def.tones != null;
         this.assigned = assigned;
         this.compounds = def.compounds;
+        this.shifts = shifts;
     }
 
     String header() {
-        return HEADER + (assigned ? "\tmeaning_number\tmeaning" : "") + (compounds ? "\tcompound\tcomponents" : "");
+        return HEADER + (assigned ? "\tmeaning_number\tmeaning" : "") + (compounds ? "\tcompound\tcomponents" : "")
+                + (shifts ? "\tshift\tshift_kind" : "");
     }
 
     /**
      * A full row: the word columns, then with --assign the meaning's number and
-     * gloss, then with compounds: yes the compound kind and its components.
+     * gloss, then with compounds: yes the compound kind and its components,
+     * then with --shift the new meaning and how the shift is realised.
      */
-    String row(Generator.Word w, Integer number, String gloss, List<String> components) {
+    String row(Generator.Word w, Integer number, String gloss, List<String> components, SemanticShifts.Shift shift) {
         StringBuilder b = new StringBuilder(row(w, hasTones));
         if (assigned) {
             b.append('\t').append(number == null ? "" : number).append('\t').append(clean(gloss));
         }
         if (compounds) {
             b.append('\t').append(w.kind()).append('\t').append(clean(String.join(" + ", components)));
+        }
+        if (shifts) {
+            b.append('\t').append(shift == null ? "" : clean(shift.target()))
+                    .append('\t').append(shift == null ? "" : shift.kind().label());
         }
         return b.toString();
     }

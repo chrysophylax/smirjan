@@ -10,9 +10,13 @@ purposes, provided that the source is attributed.
 The files are generated from pinned releases of these datasets by
 [`tools/BuildMeaningData.java`](tools/BuildMeaningData.java). **Changes
 made:** the generator retains only the columns that smirjan uses, restricts
-the data to the concepts on the three meaning lists, and converts it to
-smirjan's tab-separated format. In `concepts.tsv` a leading "the " is removed
-from WOLD glosses, whereas the list files keep the glosses as published.
+the data to the concepts on the three meaning lists (for semantic shifts, to
+shifts from those concepts), and converts it to smirjan's tab-separated
+format. In `concepts.tsv` a leading "the " is removed
+from WOLD glosses, whereas the list files keep the glosses as published. In
+`shifts.tsv` the asterisk with which DatSemShift marks duplicate entries is
+removed from glosses, and a shift recorded under both copies of an entry is
+counted once.
 
 ## Concepticon
 
@@ -25,8 +29,9 @@ Pinned at commit `918bc44e` of
 [concepticon/concepticon-data](https://github.com/concepticon/concepticon-data) (tag v3.4.0).
 
 Concepticon is the source of the meaning lists and of the concept glosses,
-semantic fields, ontological categories and concept relations (`lpj.tsv`,
-`dlg.tsv`, `wlt.tsv`, `concepts.tsv` and `relations.tsv`). The concept lists
+semantic fields, ontological categories, concept relations and semantic
+shifts (`lpj.tsv`, `dlg.tsv`, `wlt.tsv`, `concepts.tsv`, `relations.tsv` and
+`shifts.tsv`). The concept lists
 used are the following, each as published in Concepticon:
 
 - **Leipzig-Jakarta list:** Tadmor, Uri. 2009. Loanwords in the world's
@@ -45,6 +50,18 @@ used are the following, each as published in Concepticon:
 - **Urban (2011):** Urban, Matthias. 2011. *Asymmetries in overt marking and
   directionality in semantic change.* Journal of Historical Linguistics 1(1).
   3–47. (Concepticon list Urban-2011-160; used for "derived" relations.)
+- **Database of Semantic Shifts:** Zalizniak, Anna, Anna Smirnitskaya, Maksim
+  Russo (Rousseau), Ilya Gruntov, Timur Maisak, Dmitry Ganenkov, Maria Bulakh,
+  Maria Orlova, Marina Bobrik-Fremke, Oksana Dereza, Tatiana Mikhailova, Maria
+  Bibaeva & Mikhail Voronov. 2024. *Database of Semantic Shifts.* Moscow:
+  Institute of Linguistics, Russian Academy of Sciences.
+  <https://datsemshift.ru>. (Concepticon list Zalizniak-2024-4583, the dump
+  of 5 February 2024 converted to CLDF by Bocklage et al. 2024; the source of
+  `shifts.tsv`, used by `--shift`.) The conversion is described in Bocklage,
+  Katja, Anna Di Natale, Annika Tjuka & Johann-Mattis List. 2024. Representing
+  the Database of Semantic Shifts by Zalizniak et al. from 2024 in
+  Cross-Linguistic Data Formats. *Computer-Assisted Language Comparison in
+  Practice* 7(1). 25–35. <https://doi.org/10.15475/calcip.2024.1.4>.
 
 ## NoRaRe
 

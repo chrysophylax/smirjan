@@ -11,13 +11,14 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-/** {@code smirjan [--tsv] [--assign=LIST] <definitions.def> <count>}: prints distinct words, one per line. */
+/** {@code smirjan [--tsv] [--assign=LIST [--shift[=RATE]]] <definitions.def> <count>}: prints distinct words, one per line. */
 public final class Main {
     private Main() {}
 
     public static void main(String[] args) {
         boolean tsvOutput = false;
         Meanings assign = null;
+        double shiftRate = -1; // negative: no --shift
         List<String> positional = new ArrayList<>();
         for (int i = 0; i < args.length; i++) {
             String a = args[i];
@@ -31,6 +32,7 @@ public final class Main {
                     return;
                 }
                 case "--tsv" -> tsvOutput = true;
+                case "--shift" -> shiftRate = DEFAULT_SHIFT_RATE;
                 case "--assign" -> {
                     if (i + 1 >= args.length) {
                         fail("--assign needs a list: lpj, dlg or wlt");
@@ -42,6 +44,10 @@ public final class Main {
                         assign = meaningList(a.substring("--assign=".length()));
                         continue;
                     }
+                    if (a.startsWith("--shift=")) {
+                        shiftRate = rate(a.substring("--shift=".length()));
+                        continue;
+                    }
                     if (a.startsWith("-") && a.length() > 1 && !a.matches("-\\d+")) {
                         System.err.println("smirjan: unknown option '" + a + "'");
                         usage(System.err);
@@ -50,6 +56,9 @@ public final class Main {
                     positional.add(a);
                 }
             }
+        }
+        if (shiftRate >= 0 && assign == null) {
+            fail("--shift needs --assign: only words with meanings can shift");
         }
         if (positional.size() != 2) {
             usage(System.err);
@@ -92,26 +101,31 @@ public final class Main {
         PrintStream out = new PrintStream(
                 new BufferedOutputStream(new FileOutputStream(FileDescriptor.out)), false, StandardCharsets.UTF_8);
         Generator gen = new Generator(def);
-        Tsv tsv = tsvOutput ? new Tsv(def, assign != null) : null;
+        Tsv tsv = tsvOutput ? new Tsv(def, assign != null, shiftRate >= 0) : null;
         if (tsv != null) {
             out.println(tsv.header());
         }
         int made;
         if (assign == null) {
             if (tsv != null) {
-                made = gen.generateWords(count, w -> out.println(tsv.row(w, null, "", parts(w))));
+                made = gen.generateWords(count, w -> out.println(tsv.row(w, null, "", parts(w), null)));
             } else {
                 made = gen.generate(count, out::println);
             }
         } else {
             List<Lexicon.Entry> entries = Lexicon.build(def, gen, assign, count);
-            for (Lexicon.Entry e : entries) {
+            List<SemanticShifts.Shift> shifts = shiftRate >= 0
+                    ? SemanticShifts.simulate(entries, def.settings.seed, shiftRate) : null;
+            for (int i = 0; i < entries.size(); i++) {
+                Lexicon.Entry e = entries.get(i);
+                SemanticShifts.Shift shift = shifts == null ? null : shifts.get(i);
                 List<String> glosses = e.parts().stream().map(Lexicon.Entry::gloss).toList();
                 if (tsv != null) {
-                    out.println(tsv.row(e.word(), e.number(), e.gloss(), glosses));
+                    out.println(tsv.row(e.word(), e.number(), e.gloss(), glosses, shift));
                 } else {
                     out.println(e.word().text() + "\t" + e.gloss()
-                            + (glosses.isEmpty() ? "" : "\t= " + String.join(" + ", glosses)));
+                            + (glosses.isEmpty() ? "" : "\t= " + String.join(" + ", glosses))
+                            + (shift == null ? "" : "\t> " + shift.target() + " (" + shift.kind().label() + ")"));
                 }
             }
             made = (int) entries.stream().filter(Lexicon.Entry::requested).count();
@@ -132,6 +146,28 @@ public final class Main {
         return w.compound() == null ? List.of() : w.compound().parts().stream().map(Generator.Word::text).toList();
     }
 
+    /** The share of words that shift when --shift gives no rate. */
+    private static final double DEFAULT_SHIFT_RATE = 0.25;
+
+    /** A --shift rate: a percentage ("40%"), or a fraction ("0.4"). */
+    private static double rate(String s) {
+        String v = s.endsWith("%") ? s.substring(0, s.length() - 1).strip() : s;
+        double d;
+        try {
+            d = Double.parseDouble(v);
+        } catch (NumberFormatException e) {
+            fail("--shift: '" + s + "' is not a number or percentage");
+            return 0;
+        }
+        if (s.endsWith("%") || d > 1) {
+            d /= 100;
+        }
+        if (!(d >= 0 && d <= 1)) {
+            fail("--shift must be between 0 and 100%");
+        }
+        return d;
+    }
+
     private static Meanings meaningList(String name) {
         try {
             return Meanings.parse(name);
@@ -148,7 +184,7 @@ public final class Main {
     }
 
     private static void usage(PrintStream p) {
-        p.println("usage: smirjan [--tsv] [--assign=lpj|dlg|wlt] <definitions.def> <count>");
+        p.println("usage: smirjan [--tsv] [--assign=lpj|dlg|wlt [--shift[=RATE]]] <definitions.def> <count>");
         p.println("Generates <count> distinct words from the phonology in <definitions.def>.");
         p.println();
         p.println("  --tsv   tab-separated output with a header row and one row per word:");
@@ -159,6 +195,10 @@ public final class Main {
         p.println("            lpj  Leipzig-Jakarta list (100)");
         p.println("            dlg  Dolgopolsky list (15)");
         p.println("            wlt  Loanword Typology / WOLD meaning list (1460)");
+        p.println("  --shift[=RATE]");
+        p.println("          with --assign: let words shift to a new meaning recorded in the");
+        p.println("          Database of Semantic Shifts, chosen by the seed; RATE is the chance");
+        p.println("          for each word whose meaning has recorded shifts (default 25%)");
         p.println("  --version");
         p.println("          print the version and exit");
     }
