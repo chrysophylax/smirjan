@@ -20,8 +20,12 @@ enum Meanings {
     DLG("dlg", "Dolgopolsky list"),
     WLT("wlt", "Loanword Typology (WOLD) meaning list");
 
-    /** @param concept the Concepticon concept set ID, or 0 where the list entry has none */
-    record Meaning(int number, int concept, String gloss) {}
+    /**
+     * @param concept the Concepticon concept set ID, or 0 where the list entry has none
+     * @param rank    how basic the meaning is, 1 being the most basic: the
+     *                list's published ranking (lpj, wlt) or order (dlg)
+     */
+    record Meaning(int number, int concept, String gloss, int rank) {}
 
     final String key;
     final String title;
@@ -48,7 +52,7 @@ enum Meanings {
         if (list == null) {
             List<Meaning> out = new ArrayList<>();
             read(key + ".tsv", cols -> out.add(new Meaning(Integer.parseInt(cols[0]),
-                    cols[1].isEmpty() ? 0 : Integer.parseInt(cols[1]), cols[2])));
+                    cols[1].isEmpty() ? 0 : Integer.parseInt(cols[1]), cols[2], Integer.parseInt(cols[3]))));
             list = List.copyOf(out);
         }
         return list;

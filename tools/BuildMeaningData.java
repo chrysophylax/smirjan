@@ -30,7 +30,8 @@ import java.util.zip.ZipInputStream;
  *
  * Outputs:
  * <ul>
- * <li>lpj.tsv, dlg.tsv, wlt.tsv: the meaning lists (number, Concepticon ID, gloss)</li>
+ * <li>lpj.tsv, dlg.tsv, wlt.tsv: the meaning lists (number, Concepticon ID, gloss,
+ *     rank by basicness)</li>
  * <li>concepts.tsv: every concept on any list, with gloss, semantic field,
  *     ontological category, simplicity and CLICS colexification community</li>
  * <li>relations.tsv: part/whole and broader/narrower relations (Concepticon),
@@ -60,9 +61,12 @@ public class BuildMeaningData {
         // WOLD's SIMPLICITY_SCORE, or the Leipzig-Jakarta ANALYZABILITY_SCORE.
         Map<Integer, String> simplicity = new HashMap<>();
         String[][] lists = {
-                {"lpj", "Tadmor-2009-100", "Leipzig-Jakarta list (Tadmor 2009)"},
-                {"dlg", "Dolgopolsky-1964-15", "Dolgopolsky list (Dolgopolsky 1964)"},
-                {"wlt", "Haspelmath-2009-1460", "Loanword Typology / WOLD meaning list (Haspelmath & Tadmor 2009)"},
+                {"lpj", "Tadmor-2009-100", "Leipzig-Jakarta list (Tadmor 2009)",
+                        "Tadmor's RANK by composite score (ties share a rank)"},
+                {"dlg", "Dolgopolsky-1964-15", "Dolgopolsky list (Dolgopolsky 1964)",
+                        "the list's own order, by stability"},
+                {"wlt", "Haspelmath-2009-1460", "Loanword Typology / WOLD meaning list (Haspelmath & Tadmor 2009)",
+                        "WOLD's RANK by composite score (ties share a rank)"},
         };
         for (String[] l : lists) {
             List<Map<String, String>> rows = tsv(fetch(CONCEPTICON + "conceptlists/" + l[1] + ".tsv"));
@@ -71,11 +75,14 @@ public class BuildMeaningData {
             sb.append("# ").append(l[2]).append('\n');
             sb.append("# Source: Concepticon conceptlist ").append(l[1])
                     .append(" (https://concepticon.clld.org, v3.4.0), CC BY 4.0\n");
-            sb.append("# number\tconcepticon_id\tgloss\n");
+            sb.append("# rank: how basic the meaning is, 1 being the most basic; ").append(l[3]).append('\n');
+            sb.append("# number\tconcepticon_id\tgloss\trank\n");
             for (Map<String, String> r : rows) {
                 String gloss = r.get("ENGLISH").strip().replaceAll("\\s+", " ");
                 String cid = r.get("CONCEPTICON_ID");
-                sb.append(Integer.parseInt(r.get("NUMBER"))).append('\t').append(cid).append('\t').append(gloss).append('\n');
+                String rank = r.containsKey("RANK") ? r.get("RANK") : r.get("NUMBER");
+                sb.append(Integer.parseInt(r.get("NUMBER"))).append('\t').append(cid).append('\t').append(gloss)
+                        .append('\t').append(Integer.parseInt(rank)).append('\n');
                 if (!cid.isEmpty()) {
                     int id = Integer.parseInt(cid);
                     glossOf.putIfAbsent(id, stripArticle(gloss)); // lpj, then dlg, then wlt

@@ -111,16 +111,16 @@ compound-separator: space
 
 ```
 $ ./smirjan docs/examples/11-compounds.def 300 --assign=wlt | grep '= '
-martan nan	the cave	= the furrow + the spring or well
-kamti saka	the lagoon	= the ocean + the water
-sita ni	the low tide	= the high tide + the tide
-titla kiti	the mare	= the foal or colt + the stallion
-taku ten	the mosquito	= the fly + the snake
-pat situ	the earlobe	= the ear + the gill
-katek kate	the nostril	= the beak + the nasal mucus
-mirkap tir	the udder	= the nipple or teat + the chest
-lamta nuta	the food	= the flour + the lunch
-nuta mak	the dinner	= the lunch + the dough
+tula tila	the cave	= the furrow + the spring or well
+tisi tire	the low tide	= rough(2) + the tide
+tatka sitit	the darkness	= the afternoon + the night
+ni kasem	the flame	= the tongue + the post or pole
+kasem nola	the firewood	= the post or pole + the club
+to lana	the sandfly or midge or gnat	= the snake + the fly
+mirkap to	the mosquito	= the insect + the snake
+kik meki	the dandruff	= the shell + the scale
+tusak tim	the vein or artery	= the linen + the thread
+sun manki	the earlobe	= the earring + the gill
 …
 ```
 
@@ -130,28 +130,31 @@ gives the kind (`dvandva`, `head-final` or `head-first`), and `components`:
 
 | word | meaning_number | meaning | compound | components |
 |---|---:|---|---|---|
-| martan nan | 14 | the cave | dvandva | the furrow + the spring or well |
-| kamti saka | 23 | the lagoon | head-first | the ocean + the water |
-| sita ni | 28 | the low tide | dvandva | the high tide + the tide |
-| titla kiti | 171 | the mare | head-final | the foal or colt + the stallion |
+| tula tila | 14 | the cave | head-final | the furrow + the spring or well |
+| tisi tire | 28 | the low tide | head-final | rough(2) + the tide |
+| tatka sitit | 49 | the darkness | dvandva | the afternoon + the night |
+| ni kasem | 61 | the flame | dvandva | the tongue + the post or pole |
 
-The second and fourth rows show the two head orders. *kamti saka* 'lagoon' is
-head-first, so its head *kamti* 'ocean' precedes the modifier *saka* 'water';
-in the head-final *titla kiti* 'mare', the head *kiti* 'stallion' comes last.
+The first two rows are head-final, so their heads come last: *tila* 'spring
+or well' in *tula tila* 'cave', and *tire* 'tide' in *tisi tire* 'low tide'.
+The last two are dvandvas, whose parts are coordinate; *tatka sitit*
+'darkness' joins 'afternoon' and 'night'. Head-first compounds are rare with
+`compound-order: head-final*90 head-first*10`, and none occurs among these
+300 meanings.
 
 ### Words Stay Consistent
 
 Each meaning is expressed by exactly one simple word throughout the lexicon. A
 part that occurs in several compounds is the same word every time, and if its
 meaning is also on the list, the same word appears as that meaning's own
-entry. In the 1460-meaning Var Ysalenn lexicon, *tivun* 'the meal' is an entry
-of its own and also the second part of the compounds for 'the lunch', 'the
-dinner' and 'the supper'. A pair of parts is used only once, so no two
+entry. In the 1460-meaning Var Ysalenn lexicon, *eskyn* 'the meal' is an entry
+of its own, the second part of the compounds for 'the breakfast' and 'the
+supper', and the first part of the compound for 'the flour'. A pair of parts is used only once, so no two
 compounds are made of the same parts.
 
 Parts whose meanings were not requested are added to the output as entries of
 their own, which gives every part of every compound a gloss. This is why
-`… 300 --assign=wlt` prints more than 300 lines (365 with this definition): the
+`… 300 --assign=wlt` prints more than 300 lines (358 with this definition): the
 count refers to meanings from the list, and the additional lines are parts
 that compounds brought in.
 
@@ -162,7 +165,7 @@ category, are expressed as compounds; actions, properties and numbers always
 receive simple words. The modifier of a determinative compound may
 nevertheless be a property, as in 'afternoon' = 'to be late' + 'night', which
 this chapter's example produces with some seeds (two of 200 tried, among them
-`seed: probe79`).
+`seed: probe84`).
 
 Among things, the likelihood of compounding follows the practice of the
 world's languages. For each of its meanings WOLD records the proportion of
@@ -179,8 +182,8 @@ does not score is compounded at `compound-rate` itself.
 A meaning selected for compounding still receives a simple word if no two
 suitably related meanings exist, or if every candidate compound breaks a rule
 of the phonology. For all these reasons the actual share of compounds lies well
-below `compound-rate`. With `compound-rate: 40%`, the example yields 135
-compounds among the 1460 WOLD meanings, about 9 %, but only 4 among the 100
+below `compound-rate`. With `compound-rate: 40%`, the example yields 155
+compounds among the 1460 WOLD meanings, about 11 %, but only 5 among the 100
 meanings of the Leipzig-Jakarta list. The second figure is to be expected:
 the Leipzig-Jakarta list was compiled from the meanings least likely to be
 borrowed or analysable.
@@ -218,8 +221,8 @@ a compound never contains another compound.
 
 The relations describe tendencies across many languages, not facts about the
 language being built, and the results vary accordingly. Some pairs are apt,
-such as 'east' = 'dawn' + 'morning' and 'lagoon' = 'ocean' + 'water'; others,
-such as 'mosquito' = 'fly' + 'snake', are merely odd. The output is best
+such as 'east' = 'morning' + 'dawn' and 'eyelash' = 'eyelid' + 'eyebrow';
+others, such as 'mosquito' = 'insect' + 'snake', are merely odd. The output is best
 treated as a draft lexicon: you can keep the compounds that work and edit the
 rest by hand, or run again with another seed.
 
@@ -278,18 +281,24 @@ n mp +  ŋk
 ```
 
 ```
-ˈkum.mi	the shore	= the side + the corner
-ˈta.ku.pum	the high tide	= the tide + the wave
-ˈpen.siŋ.ka.to	the spring or well	= the hole + the cave
-ˈni.neŋ.ki	the ash	= the dust + the steam
-ˈkin.ta.ti.ki	the foal or colt	= the stallion + the mule
+$ ./smirjan docs/examples/11-solid.def 100 --assign=wlt | grep '= '
+ˈpam.pi.kum	the shore	= the corner + the edge
+ˈla.ta.so.ka	the tide	= rough(1) + the wave
+ˈsi.ta.ti.ko	the eyelash	= the eye + the eyebrow
+ˈsu.kun.le.sa	the thumb	= the knee + the palm of the hand
+ˈma.se	the heel	= the foot + the bone
+ˈsin.tan	the ditch	= the cave + the grave
+ˈtam.pe	the maize/corn	= the seed + the barley
+ˈle.ko	the sculptor	= the carpenter + the mason
+ˈkam.pi.tim	the spring(2)	= the summer + the autumn/fall
+…
 ```
 
 At the join, the phonotactics of the language take effect.
 [Cluster tables](09-cluster-tables.md) govern the consonants that meet there,
-so in *pen.siŋ.ka.to* the *m* that ends *pen.sim* 'hole' and the *k* that
-begins *ka.to* 'cave' appear as *ŋk*; a compound whose join violates a rule is
-discarded.
+so in *kam.pi.tim* 'spring' the *n* that ends *kan* 'summer' and the *p*
+that begins *pi.tim* 'autumn' appear as *mp*; a compound whose join violates
+a rule is discarded.
 [Filters](08-filters-and-rejects.md) rewrite only matches that span the join,
 because each part has already been filtered as a word of its own, and a rule
 such as `a > aa` is therefore not applied twice to the same vowel. Rejects, by

@@ -310,23 +310,35 @@ public final class SelfTest {
                 .filter(e -> !e.parts().isEmpty()).count();
         check(lpj < 10 && wlt > 50, "compounds follow simplicity: lpj " + lpj + ", wlt " + wlt);
 
-        // Head order: a determinative's head is a broader term whenever the meaning has one.
+        // Head order: a determinative's head is a broader term whenever the meaning has
+        // one that is a simple word (a compound is never a component) and doesn't merely
+        // restate it (knife(2) for knife(1)).
         Definition hf = DefinitionParser.parse(CPD + "compounds: yes\ncompound-rate: 100%\n"
                 + "compound-types: determinative\ncompound-order: head-final\n");
-        java.util.Map<String, String> heads = java.util.Map.of("the old man", "the man", "the young woman",
-                "the woman", "the molar tooth", "the tooth", "the lunch", "the meal");
+        List<Lexicon.Entry> hfLex = Lexicon.build(hf, new Generator(hf), Meanings.WLT, 1460);
+        java.util.Set<Integer> simpleConcepts = new java.util.HashSet<>();
+        hfLex.stream().filter(e -> e.parts().isEmpty()).forEach(e -> simpleConcepts.add(e.concept()));
+        ConceptGraph graph = ConceptGraph.get();
         int checked = 0;
-        for (Lexicon.Entry e : Lexicon.build(hf, new Generator(hf), Meanings.WLT, 1460)) {
+        for (Lexicon.Entry e : hfLex) {
             if (e.parts().isEmpty()) {
                 continue;
             }
             check(e.word().kind().equals("head-final"), "only head-final compounds");
-            if (heads.containsKey(e.gloss())) {
+            java.util.Set<Integer> broader = new java.util.HashSet<>();
+            for (ConceptGraph.Link l : graph.links(e.concept())) {
+                if ((l.kind() == ConceptGraph.Kind.BROADER || l.kind() == ConceptGraph.Kind.DERIVED_FROM)
+                        && !Lexicon.restates(graph.concept(l.concept()), graph.concept(e.concept()))) {
+                    broader.add(l.concept());
+                }
+            }
+            if (broader.stream().anyMatch(simpleConcepts::contains)) {
                 checked++;
-                check(e.parts().get(1).gloss().equals(heads.get(e.gloss())), e.gloss() + ": head last: " + e.parts());
+                check(broader.contains(e.parts().get(1).concept()), e.gloss() + ": head last: "
+                        + e.parts().stream().map(Lexicon.Entry::gloss).toList());
             }
         }
-        check(checked >= 1, "broader-headed compounds checked: " + checked);
+        check(checked >= 5, "broader-headed compounds checked: " + checked);
 
         // Without --assign: compounds of earlier words, at roughly the compound rate.
         List<Generator.Word> ws = new ArrayList<>();

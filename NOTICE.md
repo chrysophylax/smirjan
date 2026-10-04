@@ -13,7 +13,10 @@ made:** the generator retains only the columns that smirjan uses, restricts
 the data to the concepts on the three meaning lists (for semantic shifts, to
 shifts from those concepts), and converts it to smirjan's tab-separated
 format. In `concepts.tsv` a leading "the " is removed
-from WOLD glosses, whereas the list files keep the glosses as published. In
+from WOLD glosses, whereas the list files keep the glosses as published. The
+`rank` column of the list files is Concepticon's `RANK` for the
+Leipzig-Jakarta and WOLD lists, and the published order for the Dolgopolsky
+list. In
 `shifts.tsv` the asterisk with which DatSemShift marks duplicate entries is
 removed from glosses, and a shift recorded under both copies of an entry is
 counted once.

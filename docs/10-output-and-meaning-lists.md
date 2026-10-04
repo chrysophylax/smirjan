@@ -64,25 +64,51 @@ basic-vocabulary list:
 ```
 $ ./smirjan docs/examples/06-stress.def 5 --assign=lpj
 ˈna.te	mouth
-taˈse.kor	to take
-ˈti.ma	long
-ˈse.pa	to tie
-ˈtun.kak	bird
+ˈti.ma	to take
+ˈse.pa	long
+ˈtun.kak	to tie
+taˈse.kor	bird
 ```
 
-The words themselves are those the definition produces without `--assign`.
-The seed puts the meanings of the list into a random order, and the words
-receive meanings from that order one by one, so that the first word
-generated, *ˈna.te*, receives the first meaning drawn, 'mouth'. The pairs are
-then printed in the order of the published list, which makes a complete run
-read like the list itself. Because both the words and the order of the
-meanings derive from the seed, the same seed always gives the same pairs,
-and a different seed pairs the words differently.
+The words themselves are those the definition produces without `--assign`,
+which adds only their pairing with meanings. The seed first decides which
+meanings are used: it puts the list into a random order, and when fewer
+words are requested than the list has meanings, the first ones drawn are
+taken. This is why the example above uses 5 of the 100 Leipzig-Jakarta
+meanings.
 
-When fewer words are requested than the list has meanings, only as many
-meanings are drawn as there are words, which is why the example above uses 5
-of the 100 Leipzig-Jakarta meanings. When more words are requested than the
-list has meanings, the extra words are printed last, without a meaning, and a
+The selected meanings then receive their words in order of **basicness**,
+the most basic meaning first. For the Leipzig-Jakarta list the order is the
+ranking published with it (Tadmor 2009), which combines how rarely the words
+for a meaning are borrowed with how old and how often unanalysable they are.
+For the Dolgopolsky list it is the list's own order, from the most stable
+meaning down, and for the WOLD list it is the rank that Concepticon's edition
+of the list records for each meaning, which, like the Leipzig-Jakarta
+ranking, places 'fire' first.
+
+Each meaning in turn takes one of the words that are still unassigned. The
+lengths of these words, counted in phonemes, are ranked from the shortest,
+and the meaning draws a length from a Yule distribution over the ranks,
+F(r) = r^-1 × 0.9^r, which chooses the shortest length about half the time
+when five lengths remain. It then takes the earliest generated word of that
+length. Since the most basic meanings choose first, they usually receive
+short words, as basic vocabulary tends to in natural languages, and the
+longest words remain for the meanings that choose last. In the example the
+pairing follows the ranks exactly: 'mouth', fifth on the list, receives
+*ˈna.te*, one of the three words of four phonemes, whereas 'bird', ranked
+91st, receives the longest, *taˈse.kor*, with seven.
+
+The tendency is deliberately loose. Before the meanings are ordered, the
+rank of each is multiplied by a random factor between 0.5 and 1.5, so that a
+basic meaning sometimes chooses after less basic ones and receives a long
+word. Natural languages show the same exceptions; English 'sibling', for
+instance, is longer than 'mother'. The pairs are finally printed in the order
+of the published list, which makes a complete run read like the list itself.
+Because the words, the selection of meanings and the pairing all derive from
+the seed, the same seed always gives the same pairs, and a different seed
+pairs the words differently.
+
+When more words are requested than the list has meanings, the extra words are printed last, without a meaning, and a
 warning goes to standard error:
 
 ```
@@ -107,10 +133,10 @@ parts joined with ` + `; in the Var Ysalenn example, for instance, the
 ```
 $ ./smirjan --tsv --assign=dlg docs/examples/06-stress.def 4
 word	phonemes	syllables	syllable_count	morae	weights	stress	tones	meaning_number	meaning
-ˈti.ma	t i m a	ti.ma	2	2	1.1	1		3	second person marker
-ˈna.te	n a t e	na.te	2	2	1.1	1		4	who/what
-taˈse.kor	t a s e k o r	ta.se.kor	3	4	1.1.2	2		9	tooth
-ˈse.pa	s e p a	se.pa	2	2	1.1	1		12	louse
+ˈna.te	n a t e	na.te	2	2	1.1	1		3	second person marker
+ˈse.pa	s e p a	se.pa	2	2	1.1	1		4	who/what
+ˈti.ma	t i m a	ti.ma	2	2	1.1	1		9	tooth
+taˈse.kor	t a s e k o r	ta.se.kor	3	4	1.1.2	2		12	louse
 ```
 
 The lists are bundled with smirjan and taken from
@@ -133,22 +159,22 @@ without it smirjan rejects the command line with exit status 2.
 ```
 $ ./smirjan docs/examples/06-stress.def 8 --assign=lpj --shift=50%
 ˈna.te	mouth	> face (polysemy)
-ˈta.me	egg	> potato (derivation)
-kuˈna.kil	new	> bride (derivation)
-turˈmit.su	to know	> to recall, recollect (derivation)
-taˈse.kor	to take	> to marry (polysemy)
-ˈti.ma	long
-ˈse.pa	to tie	> to begin (polysemy)
-ˈtun.kak	bird	> omen (polysemy)
+ˈti.ma	egg	> potato (derivation)
+taˈse.kor	new	> bride (derivation)
+ˈse.pa	to know	> to recall, recollect (derivation)
+turˈmit.su	to take	> to marry (polysemy)
+ˈtun.kak	long
+ˈta.me	to tie	> to begin (polysemy)
+kuˈna.kil	bird	> omen (polysemy)
 ```
 
-The words and their meanings are those printed without `--shift`, as a
-comparison with the five-word example above shows. A word that has shifted
+The words and their meanings are those that the same command prints without
+`--shift`. A word that has shifted
 gains a last field, introduced by `>`, which gives its new meaning and the
 way the shift is realised. Under **polysemy** the word itself comes to carry
-the new meaning in addition to the old one, so that *taˈse.kor* means both
+the new meaning in addition to the old one, so that *turˈmit.su* means both
 'to take' and 'to marry'. Under **derivation** the new meaning is expressed
-by a word derived from the old one; a derivative of *ˈta.me* 'egg' thus
+by a word derived from the old one; a derivative of *ˈti.ma* 'egg' thus
 names the potato. smirjan does not build the derived word, because a
 definition file describes no derivational morphology.
 
@@ -181,14 +207,14 @@ for a word that keeps its meaning.
 ```
 $ ./smirjan --tsv --assign=dlg --shift docs/examples/06-stress.def 4
 word	phonemes	syllables	syllable_count	morae	weights	stress	tones	meaning_number	meaning	shift	shift_kind
-ˈti.ma	t i m a	ti.ma	2	2	1.1	1		3	second person marker		
-ˈna.te	n a t e	na.te	2	2	1.1	1		4	who/what		
-taˈse.kor	t a s e k o r	ta.se.kor	3	4	1.1.2	2		9	tooth		
-ˈse.pa	s e p a	se.pa	2	2	1.1	1		12	louse	bad	derivation
+ˈna.te	n a t e	na.te	2	2	1.1	1		3	second person marker		
+ˈse.pa	s e p a	se.pa	2	2	1.1	1		4	who/what		
+ˈti.ma	t i m a	ti.ma	2	2	1.1	1		9	tooth		
+taˈse.kor	t a s e k o r	ta.se.kor	3	4	1.1.2	2		12	louse	bad	derivation
 ```
 
 At the default rate, one of the four words has shifted: a derivative of
-*ˈse.pa* 'louse' means 'bad'. The other three rows end in two empty fields.
+*taˈse.kor* 'louse' means 'bad'. The other three rows end in two empty fields.
 
 The new meanings carry the glosses of DatSemShift, which are often more
 specific than those of the meaning lists and sometimes include a Latin name,
