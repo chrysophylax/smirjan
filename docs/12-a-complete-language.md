@@ -154,24 +154,24 @@ compound-separator: space
 
 With a meaning list, compounds are formed from the words for related meanings.
 Run with the full WOLD list (`… 1460 --assign=wlt`), the definition expresses
-140 of the 1460 meanings as compounds. Eight of them, selected from that output
+145 of the 1460 meanings as compounds. Eight of them, selected from that output
 to show different kinds of relation between the parts, are:
 
 ```
-tadkea las	the livestock	= the ox + the bull
-kur niles	the boar	= the sow + the pig
-tis daiker	the honey	= the bee + the beehive
-toztaddnar merer	the thunder	= the bolt of lightning + the lightning
-ainir ranin	the east	= the dawn + the morning
-un to	the older sibling	= the older sister + the older brother
-kagky dyrnod	the beak	= the nose + the mouth
-tyreddtum norna	the hut	= the house + the garden-house
+yla kairea	the bolt of lightning	= the thunder + the lightning
+lem um	the bull	= the animal + the livestock
+aildu red	the sow	= the boar + the pig
+nidan eskyn	the breakfast	= the bread + the meal
+kydous emve	the mill	= the pestle + the mortar(1)
+itin dekas	the mead	= the wine + the beer
+veker talga	the morning	= the dawn + the east
+elmai tysteinval	the older sibling	= the older brother + the older sister
 ```
 
 Each part is also a word in its own right, with an entry of its own in the
-lexicon: *tadkea* 'ox', *las* 'bull', *tis* 'bee' and *ainir* 'dawn' all
-appear as simple words. *un to* 'older sibling' shows the treatment of
-kinship terms described in
+lexicon: *lem* 'animal', *um* 'livestock', *aildu* 'boar' and *veker* 'dawn'
+all appear as simple words. *elmai tysteinval* 'older sibling' shows the
+treatment of kinship terms described in
 [Where the Related Meanings Come From](11-compounds.md#where-the-related-meanings-come-from).
 Its parts are linked to it by explicit relations in the data, whereas
 colexification plays no part in kinship terms.
@@ -181,22 +181,32 @@ colexification plays no part in kinship terms.
 The sample words *var* and *kair* from the description are among the words
 this definition generates (in a run of 20,000 words, as the 649th and the
 3087th). A first basic vocabulary follows. The Leipzig-Jakarta list consists
-almost entirely of meanings that languages express with simple words, so none
-of the first ten is a compound, and only three of all hundred are:
+almost entirely of meanings that languages express with simple words, and in
+a run of all hundred meanings only two, 'neck' and 'thigh', are compounds.
+The first ten lines of that run, which give the ten highest-ranked meanings
+of the list, are:
 
 ```
-$ ./smirjan examples/var-ysalenn.def 10 --assign=lpj
-nin	to go
-nad	rain
-irler	house
-dir	who?
-detoz	3sg pronoun
-disdeir	to bite
-lar	not
-nimdyn	knee
-okun	skin/hide
-vorar	to crush/grind
+$ ./smirjan examples/var-ysalenn.def 100 --assign=lpj | head
+okun	fire
+teikeizta	nose
+irler	to go
+nad	water
+on	mouth
+enad	tongue
+te	blood
+malnodrar	bone
+vorar	2sg pronoun
+ta	root
 ```
+
+Most of these basic meanings have short words, such as *on* 'mouth' and *te*
+'blood'. The random element in the pairing (see
+[chapter 10](10-output-and-meaning-lists.md#--assign-meaning-lists)) has
+nevertheless given 'nose' a word of seven phonemes, *teikeizta*, and 'bone'
+one of the two longest words in the run, *malnodrar*, with nine. Over the
+whole run, however, the simple words for the ten most basic meanings
+have 4.3 phonemes on average, and those for the ten least basic 5.7.
 
 ## Ideas for Going Further
 

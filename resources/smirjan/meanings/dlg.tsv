@@ -1,18 +1,19 @@
 # Dolgopolsky list (Dolgopolsky 1964)
 # Source: Concepticon conceptlist Dolgopolsky-1964-15 (https://concepticon.clld.org, v3.4.0), CC BY 4.0
-# number	concepticon_id	gloss
-1	1209	first person marker
-2	1498	two
-3	1215	second person marker
-4	2147	who/what
-5	1205	tongue
-6	1405	name
-7	1248	eye
-8	1223	heart
-9	1380	tooth
-10	1269	verbal negation
-11	1896	finger-nail/toe-nail
-12	1392	louse
-13	1651	tear (noun)
-14	948	water
-15	1625	dead
+# rank: how basic the meaning is, 1 being the most basic; the list's own order, by stability
+# number	concepticon_id	gloss	rank
+1	1209	first person marker	1
+2	1498	two	2
+3	1215	second person marker	3
+4	2147	who/what	4
+5	1205	tongue	5
+6	1405	name	6
+7	1248	eye	7
+8	1223	heart	8
+9	1380	tooth	9
+10	1269	verbal negation	10
+11	1896	finger-nail/toe-nail	11
+12	1392	louse	12
+13	1651	tear (noun)	13
+14	948	water	14
+15	1625	dead	15

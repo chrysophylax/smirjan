@@ -50,8 +50,12 @@ the conventions of [Lexifer](https://lingweenie.org/conlang/lexifer/).
 The `--tsv` option prints each word with its analysis into phonemes,
 syllables, weights, stress and tone. The `--assign` option pairs words with
 meanings from one of three standard lists: the Leipzig-Jakarta list, the
-Dolgopolsky list or the Loanword Typology (WOLD) list. When compounds are
-enabled, some meanings are expressed as compounds of related meanings, which
+Dolgopolsky list or the Loanword Typology (WOLD) list. Meanings receive their
+words in the order in which each list ranks them by basicness, and each
+draws the length of its word from a Yule distribution that favours the
+shortest words left. Basic meanings therefore tend to have short words, as
+they do in natural languages, while seeded noise on the ranks leaves room
+for exceptions. When compounds are enabled, some meanings are expressed as compounds of related meanings, which
 smirjan finds in data derived from Concepticon and NoRaRe; *bee* and
 *beehive*, for example, combine to give 'honey'. Compounds can be dvandva or
 determinative, head-final or head-first, and written as one word or as

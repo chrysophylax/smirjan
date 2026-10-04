@@ -15,7 +15,7 @@ smirjan --version
 | option | description |
 |---|---|
 | `--tsv` | Prints tab-separated output with a header row ([details](10-output-and-meaning-lists.md#--tsv)) |
-| `--assign=LIST`, `--assign LIST` | Pairs words with meanings from `lpj`, `dlg` or `wlt` ([details](10-output-and-meaning-lists.md#--assign-meaning-lists)); with `compounds: yes`, some meanings become [compounds](11-compounds.md) |
+| `--assign=LIST`, `--assign LIST` | Pairs words with meanings from `lpj`, `dlg` or `wlt`, giving shorter words preferably to more basic meanings ([details](10-output-and-meaning-lists.md#--assign-meaning-lists)); with `compounds: yes`, some meanings become [compounds](11-compounds.md) |
 | `--shift`, `--shift=RATE` | Gives each word whose meaning has a shift recorded in DatSemShift the chance `RATE` (default `25%`) of acquiring a new meaning by polysemy or derivation, and prints the new meaning after `>`; with `--tsv`, adds the columns `shift` and `shift_kind`. Requires `--assign` ([details](10-output-and-meaning-lists.md#--shift-semantic-shifts)) |
 | `-h`, `--help` | Prints usage information. |
 | `--version` | Prints the version: a release number, or `dev` for local builds. |

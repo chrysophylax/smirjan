@@ -9,12 +9,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
 /**
  * Pairs generated words with meanings from a list (--assign), expressing some
  * meanings as compounds of words for related meanings.
+ *
+ * <p>Basic meanings tend to have short words (Zipf's law of abbreviation): a
+ * language rarely spends four syllables on 'I' or 'two'. The words are
+ * generated first, and the meanings then take their words from most to least
+ * basic, each drawing the length of its word from a Yule distribution over
+ * the lengths still available, shortest first. The most basic meanings thus
+ * usually, but not always, receive the shortest words.
  *
  * <p>Compounds are built backwards, as a language made from nothing must: for a
  * meaning such as 'body', find two related meanings in the concept graph
@@ -37,6 +45,20 @@ import java.util.regex.Pattern;
  */
 final class Lexicon {
     private static final int PAIR_ATTEMPTS = 6;
+    /**
+     * Yule weights r^-b c^r for the r-th shortest length still available. With
+     * b = 1 and c = 0.9, a meaning takes a word of the shortest length about
+     * half the time when five lengths remain.
+     */
+    private static final Distribution.Params LENGTH_WEIGHTS = new Distribution.Params(1.0, 0.9, 1.0);
+    /**
+     * Seeded noise on each meaning's basicness rank, which multiplies it by a
+     * factor between 1 - RANK_JITTER and 1 + RANK_JITTER. Basicness is not the
+     * only thing that shapes a word's length, and some basic words are long
+     * ('sibling' beside 'mother'); the noise lets a basic meaning sometimes
+     * choose after less basic ones and so receive a longer word.
+     */
+    private static final double RANK_JITTER = 0.5;
 
     /**
      * @param number    the meaning's number in the list, or null if it isn't on it
@@ -58,11 +80,15 @@ final class Lexicon {
     private final Map<Integer, Entry> byConcept = new HashMap<>();
     /** Component pairs already used, in either order: one pair makes one compound. */
     private final Set<String> pairs = new HashSet<>();
+    /** Simple words generated but not yet given a meaning, in the order they were generated. */
+    private final List<Generator.Word> pool = new ArrayList<>();
+    private final Random lengths;
 
     private Lexicon(Definition def, Generator gen, Meanings list) {
         this.def = def;
         this.gen = gen;
         this.graph = def.compounds ? ConceptGraph.get() : null;
+        this.lengths = Rng.stream(def.settings.seed, "assign:lengths");
         for (Meanings.Meaning m : list.load()) {
             if (m.concept() > 0) {
                 onList.putIfAbsent(m.concept(), m);
@@ -71,9 +97,10 @@ final class Lexicon {
     }
 
     /**
-     * Words for {@code count} meanings of {@code list}, chosen and paired by the
-     * seed, plus any component words compounds needed. Sorted by list number;
-     * components that aren't on the list follow, then words beyond the list's end.
+     * Words for {@code count} meanings of {@code list}, chosen by the seed and
+     * paired by basicness and length, plus any component words compounds
+     * needed. Sorted by list number; components that aren't on the list
+     * follow, then words beyond the list's end.
      */
     static List<Entry> build(Definition def, Generator gen, Meanings list, int count) {
         return new Lexicon(def, gen, list).build(list, count);
@@ -81,8 +108,23 @@ final class Lexicon {
 
     private List<Entry> build(Meanings list, int count) {
         List<Meanings.Meaning> order = list.shuffled(def.settings.seed);
+        List<Meanings.Meaning> chosen = new ArrayList<>(order.subList(0, Math.min(count, order.size())));
+        Random noise = Rng.stream(def.settings.seed, "assign:basicness");
+        Map<Meanings.Meaning, Double> basicness = new HashMap<>();
+        for (Meanings.Meaning m : list.load()) { // in list order, so each meaning's noise is fixed by the seed
+            basicness.put(m, m.rank() * Rng.jitter(noise, RANK_JITTER));
+        }
+        chosen.sort(Comparator.comparingDouble((Meanings.Meaning m) -> basicness.get(m))
+                .thenComparingInt(Meanings.Meaning::number));
+        for (int i = 0; i < count; i++) { // the same words as without --assign
+            Generator.Word w = gen.nextSimple();
+            if (w == null) {
+                break; // the phonology has run out of distinct words
+            }
+            pool.add(w);
+        }
         Random r = gen.compoundRandom();
-        for (Meanings.Meaning m : order.subList(0, Math.min(count, order.size()))) {
+        for (Meanings.Meaning m : chosen) {
             Entry existing = m.concept() > 0 ? byConcept.get(m.concept()) : null;
             if (existing != null && !existing.requested
                     && (existing.number == null || existing.number == m.number())) {
@@ -97,7 +139,7 @@ final class Lexicon {
                 e = compound(m, r);
             }
             if (e == null) {
-                Generator.Word w = gen.nextSimple();
+                Generator.Word w = simple();
                 if (w == null) {
                     break; // the phonology has run out of distinct words
                 }
@@ -106,7 +148,7 @@ final class Lexicon {
             add(e);
         }
         for (int i = order.size(); i < count; i++) {
-            Generator.Word w = gen.nextSimple();
+            Generator.Word w = pool.isEmpty() ? gen.nextSimple() : pool.removeFirst();
             if (w == null) {
                 break;
             }
@@ -180,13 +222,47 @@ final class Lexicon {
         return null;
     }
 
+    /**
+     * A simple word for the next meaning: a length drawn from the Yule
+     * weights over the lengths left in the pool, shortest first, and the
+     * earliest generated word of that length. Null if the phonology has run
+     * out of distinct words.
+     */
+    private Generator.Word simple() {
+        if (pool.isEmpty()) { // compounds' components can use up the pool
+            Generator.Word w = gen.nextSimple();
+            if (w == null) {
+                return null;
+            }
+            pool.add(w);
+        }
+        TreeMap<Integer, Generator.Word> shortest = new TreeMap<>();
+        for (Generator.Word w : pool) {
+            shortest.putIfAbsent(length(w), w);
+        }
+        double[] weights = Distribution.YULE.weights(shortest.size(), LENGTH_WEIGHTS);
+        Map<Generator.Word, Double> candidates = new LinkedHashMap<>();
+        int i = 0;
+        for (Generator.Word w : shortest.values()) {
+            candidates.put(w, weights[i++]);
+        }
+        Generator.Word w = Weighted.of(candidates).pick(lengths);
+        pool.remove(w);
+        return w;
+    }
+
+    /** A word's length in phonemes. */
+    static int length(Generator.Word w) {
+        return w.syllables().stream().mapToInt(List::size).sum();
+    }
+
     /** The word for a component meaning: the existing one, or a new simple word. */
     private Entry component(int concept) {
         Entry e = byConcept.get(concept);
         if (e != null) {
             return e;
         }
-        Generator.Word w = gen.nextSimple();
+        Generator.Word w = simple();
         if (w == null) {
             return null;
         }
@@ -297,7 +373,7 @@ final class Lexicon {
     private static final Pattern ALTERNATIVES = Pattern.compile("/| or |,");
 
     /** A part that is one of the meaning's own glosses (leg/foot: foot) says nothing new. */
-    private static boolean restates(ConceptGraph.Concept part, ConceptGraph.Concept whole) {
+    static boolean restates(ConceptGraph.Concept part, ConceptGraph.Concept whole) {
         String p = headword(part.gloss());
         for (String alt : ALTERNATIVES.split(withoutParentheses(whole.gloss()))) {
             if (withoutArticle(alt.strip()).equals(p)) {

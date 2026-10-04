@@ -1,103 +1,104 @@
 # Leipzig-Jakarta list (Tadmor 2009)
 # Source: Concepticon conceptlist Tadmor-2009-100 (https://concepticon.clld.org, v3.4.0), CC BY 4.0
-# number	concepticon_id	gloss
-1	221	fire
-2	1221	nose
-3	695	to go
-4	948	water
-5	674	mouth
-6	1205	tongue
-7	946	blood
-8	1394	bone
-9	1215	2sg pronoun
-10	670	root
-11	1446	to come
-12	1402	breast
-13	658	rain
-14	1209	1sg pronoun
-15	1405	name
-16	1392	louse
-17	1257	wing
-18	2615	flesh/meat
-19	2121	arm/hand
-20	1504	fly
-21	1233	night
-22	1247	ear
-23	1333	neck
-24	1406	far
-25	2575	to do/make
-26	1252	house
-27	2125	stone/rock
-28	887	bitter
-29	1458	to say
-30	1380	tooth
-31	1040	hair
-32	1202	big
-33	1493	one
-34	1235	who?
-35	262	3sg pronoun
-36	2133	to hit/beat
-37	2098	leg/foot
-38	1393	horn
-39	1214	this
-40	227	fish
-41	1174	yesterday
-42	1401	to drink
-43	163	black
-44	1838	navel
-45	1442	to stand
-46	1403	to bite
-47	1291	back
-48	960	wind
-49	778	smoke
-50	1236	what?
-51	1801	child (kin term)
-52	744	egg
-53	1447	to give
-54	1231	new
-55	1428	to burn (intr.)
-56	1240	not
-57	1035	good
-58	3626	to know
-59	1371	knee
-60	671	sand
-61	1355	to laugh
-62	1408	to hear
-63	1228	soil
-64	628	leaf
-65	156	red
-66	1224	liver
-67	2486	to hide
-68	763	skin/hide
-69	1421	to suck
-70	700	to carry
-71	587	ant
-72	1210	heavy
-73	1749	to take
-74	1229	old
-75	1336	to eat
-76	471	thigh
-77	1244	thick
-78	1203	long
-79	175	to blow
-80	1803	wood
-81	1519	to run
-82	1280	to fall
-83	1248	eye
-84	646	ash
-85	1220	tail
-86	2009	dog
-87	1839	to cry/weep
-88	1917	to tie
-89	1409	to see
-90	717	sweet
-91	1218	rope
-92	1388	shade/shadow
-93	937	bird
-94	1274	salt
-95	1246	small
-96	1243	wide
-97	1430	star
-98	1460	in
-99	1884	hard
-100	1033	to crush/grind
+# rank: how basic the meaning is, 1 being the most basic; Tadmor's RANK by composite score (ties share a rank)
+# number	concepticon_id	gloss	rank
+1	221	fire	1
+2	1221	nose	2
+3	695	to go	3
+4	948	water	4
+5	674	mouth	5
+6	1205	tongue	6
+7	946	blood	7
+8	1394	bone	7
+9	1215	2sg pronoun	9
+10	670	root	9
+11	1446	to come	11
+12	1402	breast	12
+13	658	rain	13
+14	1209	1sg pronoun	14
+15	1405	name	15
+16	1392	louse	15
+17	1257	wing	17
+18	2615	flesh/meat	18
+19	2121	arm/hand	19
+20	1504	fly	20
+21	1233	night	20
+22	1247	ear	22
+23	1333	neck	23
+24	1406	far	23
+25	2575	to do/make	25
+26	1252	house	26
+27	2125	stone/rock	27
+28	887	bitter	28
+29	1458	to say	28
+30	1380	tooth	28
+31	1040	hair	31
+32	1202	big	32
+33	1493	one	32
+34	1235	who?	34
+35	262	3sg pronoun	34
+36	2133	to hit/beat	36
+37	2098	leg/foot	37
+38	1393	horn	38
+39	1214	this	38
+40	227	fish	38
+41	1174	yesterday	41
+42	1401	to drink	42
+43	163	black	42
+44	1838	navel	42
+45	1442	to stand	45
+46	1403	to bite	46
+47	1291	back	46
+48	960	wind	48
+49	778	smoke	49
+50	1236	what?	50
+51	1801	child (kin term)	51
+52	744	egg	52
+53	1447	to give	53
+54	1231	new	53
+55	1428	to burn (intr.)	53
+56	1240	not	56
+57	1035	good	56
+58	3626	to know	58
+59	1371	knee	59
+60	671	sand	59
+61	1355	to laugh	61
+62	1408	to hear	61
+63	1228	soil	63
+64	628	leaf	64
+65	156	red	64
+66	1224	liver	66
+67	2486	to hide	67
+68	763	skin/hide	67
+69	1421	to suck	67
+70	700	to carry	70
+71	587	ant	71
+72	1210	heavy	71
+73	1749	to take	71
+74	1229	old	74
+75	1336	to eat	75
+76	471	thigh	76
+77	1244	thick	76
+78	1203	long	78
+79	175	to blow	79
+80	1803	wood	80
+81	1519	to run	81
+82	1280	to fall	81
+83	1248	eye	83
+84	646	ash	84
+85	1220	tail	84
+86	2009	dog	84
+87	1839	to cry/weep	87
+88	1917	to tie	88
+89	1409	to see	89
+90	717	sweet	89
+91	1218	rope	91
+92	1388	shade/shadow	91
+93	937	bird	91
+94	1274	salt	91
+95	1246	small	91
+96	1243	wide	96
+97	1430	star	97
+98	1460	in	97
+99	1884	hard	99
+100	1033	to crush/grind	100

@@ -1,1463 +1,1464 @@
 # Loanword Typology / WOLD meaning list (Haspelmath & Tadmor 2009)
 # Source: Concepticon conceptlist Haspelmath-2009-1460 (https://concepticon.clld.org, v3.4.0), CC BY 4.0
-# number	concepticon_id	gloss
-1	965	the world
-2	626	the land
-3	1228	the soil
-4	2	the dust
-5	640	the mud
-6	671	the sand
-7	2118	the mountain or hill
-8	618	the cliff or precipice
-9	652	the plain
-10	921	the valley
-11	622	the island
-12	166	the mainland
-13	113	the shore
-14	1155	the cave
-15	948	the water
-16	1474	the sea
-17	258	calm
-18	259	rough(2)
-19	1768	the foam
-20	645	the ocean
-21	624	the lake
-22	663	the bay
-23	623	the lagoon
-24	660	the reef
-25	1662	the cape
-26	978	the wave
-27	891	the tide
-28	1026	the low tide
-29	613	the high tide
-30	3311	the river or stream
-31	1982	the whirlpool
-32	2144	the spring or well
-33	1145	the swamp
-34	943	the waterfall
-35	420	the woods or forest
-36	1803	the wood
-37	2125	the stone or rock
-38	6	the earthquake
-39	1732	the sky
-40	1343	the sun
-41	1313	the moon
-42	1430	the star
-43	1654	the lightning
-44	1150	the thunder
-45	2007	the bolt of lightning
-46	858	the storm
-47	1733	the rainbow
-48	630	the light
-49	11	the darkness
-50	1388	the shade or shadow
-51	1977	the dew
-52	27	the air
-53	960	the wind
-54	1489	the cloud
-55	249	the fog
-56	658	the rain
-57	784	the snow
-58	617	the ice
-59	952	the weather
-60	221	the fire
-61	889	the flame
-62	778	the smoke
-63	646	the ash
-64	67	the embers
-65	141	to burn(1)
-66	1428	to burn(2)
-67	737	to light
-68	127	to extinguish
-69	1133	the match
-70	10	the firewood
-71	1188	the charcoal
-72	683	the person
-73	1554	the man
-74	962	the woman
-75	2261	male(1)
-76	2260	female(1)
-77	1366	the boy
-78	76	the young man
-79	1646	the girl
-80	77	the young woman
-81	1304	the child(1)
-82	1289	the baby
-83	1200	the husband
-84	1199	the wife
-85	203	to marry
-86	1259	the wedding
-87	1134	the divorce
-88	1217	the father
-89	1216	the mother
-90	505	the parents
-91	424	the married man
-92	426	the married woman
-93	1620	the son
-94	1357	the daughter
-95	1479	the porpoise or dolphin
-96	1801	the child(2)
-97	1262	the brother
-98	1759	the older brother
-99	1760	the younger brother
-100	1263	the sister
-101	1758	the older sister
-102	1761	the younger sister
-103	1640	the sibling
-104	1005	the twins
-105	1383	the grandfather
-106	406	the old man
-107	1496	the grandmother
-108	907	the old woman
-109	1618	the grandson
-110	1619	the granddaughter
-111	1327	the uncle
-112	2692	the mother's brother
-113	1985	the father's brother
-114	1272	the aunt
-115	2693	the mother's sister
-116	2691	the father's sister
-117	1063	the nephew
-118	1642	the niece
-119	1643	the cousin
-120	1669	the ancestors
-121	490	the descendants
-122	2255	the father-in-law (of a man)
-123	2254	the father-in-law (of a woman)
-124	2257	the mother-in-law (of a man)
-125	2256	the mother-in-law (of a woman)
-126	2267	the son-in-law (of a man)
-127	2266	the son-in-law (of a woman)
-128	2265	the daughter-in-law (of a man)
-129	2264	the daughter-in-law (of a woman)
-130	237	the stepfather
-131	236	the stepmother
-132	1059	the stepson
-133	1058	the stepdaughter
-134	1149	the orphan
-135	1756	the widow
-136	1981	the widower
-137	1644	the relatives
-138	194	the family
-139	1209	I
-140	1215	you (singular)
-141	262	he/she/it
-142	1212	we
-143	1131	we (inclusive)
-144	1130	we (exclusive)
-145	1213	you (plural)
-146	817	they
-147	619	the animal
-148	2263	male(2)
-149	2262	female(2)
-150	631	the livestock
-151	649	the pasture
-152	263	the herdsman
-153	851	the stable or stall
-154	1153	the cattle
-155	1008	the bull
-156	1169	the ox
-157	1007	the cow
-158	1989	the calf
-159	1331	the sheep
-160	1344	the ram
-161	1345	the ewe
-162	820	the lamb
-163	1348	the boar
-164	1351	the sow
-165	1337	the pig
-166	1502	the goat
-167	2475	the he-goat
-168	1972	the kid
-169	615	the horse
-170	936	the stallion
-171	938	the mare
-172	1647	the foal or colt
-173	1862	the donkey
-174	890	the mule
-175	265	the fowl
-176	1511	the cock/rooster
-177	1514	the hen
-178	1318	the chicken
-179	1187	the goose
-180	1360	the duck
-181	539	the nest
-182	937	the bird
-183	950	the seagull
-184	758	the heron
-185	1905	the eagle
-186	307	the hawk
-187	1185	the vulture
-188	1793	the bat
-189	882	the parrot
-190	913	the crow
-191	1853	the dove
-192	735	the owl
-193	2009	the dog
-194	1136	the rabbit
-195	1208	the cat
-196	309	the opossum
-197	2139	the mouse or rat
-198	227	the fish
-199	213	the fin
-200	266	the scale
-201	1916	the gill
-202	598	the shell
-203	1110	the shark
-204	957	the whale
-205	1910	the stingray
-206	1013	the freshwater eel
-207	522	the wolf
-208	1386	the lion
-209	1820	the bear
-210	1312	the fox
-211	1936	the deer
-212	1350	the monkey
-213	1290	the elephant
-214	1871	the camel
-215	620	the insect
-216	310	the head louse
-217	267	the nit
-218	232	the flea
-219	1974	the centipede
-220	1538	the scorpion
-221	1575	the cockroach
-222	587	the ant
-223	843	the spider
-224	1065	the spider web
-225	665	the bee
-226	1931	the beeswax
-227	88	the beehive
-228	1517	the wasp
-229	1504	the fly
-230	95	the sandfly or midge or gnat
-231	1509	the mosquito
-232	1219	the worm
-233	730	the snake
-234	206	the firefly
-235	1791	the butterfly
-236	607	the grasshopper
-237	1543	the snail
-238	503	the frog
-239	632	the lizard
-240	1857	the crocodile or alligator
-241	112	the turtle
-242	1480	the body
-243	763	the skin or hide
-244	2259	the flesh
-245	2648	the hair
-246	678	the beard
-247	189	the body hair
-248	36	the pubic hair
-249	576	the dandruff
-250	946	the blood
-251	525	the vein or artery
-252	1394	the bone
-253	801	the rib
-254	1393	the horn
-255	1220	the tail
-256	1291	the back
-257	805	the spine
-258	1256	the head
-259	1604	the temples
-260	1605	the skull
-261	1583	the brain
-262	1560	the face
-263	123	the forehead
-264	798	the jaw
-265	1730	the cheek
-266	1510	the chin
-267	1248	the eye
-268	1173	the eyebrow
-269	17	the eyelid
-270	1540	the eyelash
-271	1655	to blink
-272	1247	the ear
-273	18	the earlobe
-274	32	the earwax
-275	1221	the nose
-276	1178	the nostril
-277	208	the nasal mucus
-278	674	the mouth
-279	73	the beak
-280	478	the lip
-281	1205	the tongue
-282	1380	the tooth
-283	139	the gums
-284	1049	the molar tooth
-285	1333	the neck
-286	1347	the nape of the neck
-287	1346	the throat
-288	1482	the shoulder
-289	172	the shoulderblade
-290	1994	the collarbone
-291	1673	the arm
-292	1886	the armpit
-293	981	the elbow
-294	799	the wrist
-295	1277	the hand
-296	1183	the palm of the hand
-297	1303	the finger
-298	1781	the thumb
-299	1258	the fingernail
-300	72	the claw
-301	1297	the leg
-302	471	the thigh
-303	498	the calf of the leg
-304	1371	the knee
-305	1301	the foot
-306	803	the ankle
-307	980	the heel
-308	318	the footprint
-309	1389	the toe
-310	1257	the wing
-311	1201	the feather
-312	1592	the chest
-313	1402	the breast
-314	796	the nipple or teat
-315	154	the udder
-316	1838	the navel
-317	1223	the heart
-318	688	the lung
-319	1224	the liver
-320	489	the kidney
-321	1744	the spleen
-322	819	the stomach
-323	1991	the intestines or guts
-324	1681	the waist
-325	1745	the hip
-326	834	the buttocks
-327	804	the womb
-328	797	the testicles
-329	1222	the penis
-330	1407	to breathe
-331	1028	to yawn
-332	162	to hiccough
-333	879	to cough
-334	1621	to sneeze
-335	126	to perspire
-336	1440	to spit
-337	1278	to vomit
-338	1403	to bite
-339	319	to lick
-340	268	to dribble
-341	1585	to sleep
-342	1983	to snore
-343	1920	to dream
-344	1602	to wake up
-345	1159	to fart
-346	592	to piss
-347	676	to shit
-348	549	to have sex
-349	52	to shiver
-350	138	to bathe
-351	1152	to beget
-352	1090	to be born
-353	1123	pregnant
-354	1087	to conceive
-355	1422	to be alive
-356	1494	to die
-357	1904	to drown
-358	1417	to kill
-359	767	the corpse
-360	1719	to bury
-361	1773	the grave
-362	785	strong
-363	1601	weak
-364	1364	healthy
-365	1847	sick/ill
-366	1534	the fever
-367	1957	the goitre/goiter
-368	102	the cold
-369	1109	the wound or sore
-370	1148	the bruise
-371	1903	the swelling
-372	148	the itch
-373	1584	the blister
-374	793	the boil
-375	1808	the pus
-376	497	the scar
-377	499	to cure
-378	597	the physician
-379	1372	the medicine
-380	655	the poison
-381	1757	tired
-382	168	to rest
-383	1564	lazy
-384	1125	bald
-385	320	lame
-386	996	deaf
-387	1666	mute
-388	1653	blind
-389	1463	drunk
-390	590	naked
-391	1336	to eat
-392	256	the food
-393	269	cooked
-394	1959	raw
-395	178	ripe
-396	1958	unripe
-397	1728	rotten
-398	1401	to drink
-399	1533	to be hungry
-400	199	the famine
-401	3474	to be thirsty
-402	1421	to suck
-403	321	to chew
-404	897	to swallow
-405	129	to choke
-406	1100	to cook
-407	792	to boil
-408	2146	to roast or fry
-409	183	to bake
-410	1143	the oven
-411	1462	the pot
-412	854	the kettle
-413	31	the pan
-414	481	the dish
-415	480	the plate
-416	1530	the bowl
-417	270	the jug/pitcher
-418	476	the cup
-419	271	the saucer
-420	1378	the spoon
-421	3210	the knife(1)
-422	1302	the fork
-423	272	the tongs
-424	1526	the meal
-425	1322	the breakfast
-426	768	the lunch
-427	1833	the dinner
-428	1833	the supper
-429	275	to peel
-430	3448	to sieve or to strain
-431	1767	to scrape
-432	2017	to stir or to mix
-433	1368	the bread
-434	273	the dough
-435	274	to knead
-436	1594	the flour
-437	1033	to crush or to grind
-438	636	the mill
-439	224	the mortar(1)
-440	225	the pestle
-441	634	the meat
-442	1874	the sausage
-443	1547	the soup
-444	924	the vegetables
-445	832	the bean
-446	593	the potato
-447	1507	the fruit
-448	1966	the bunch
-449	322	the fig
-450	920	the grape
-451	191	the nut
-452	1154	the olive
-453	1484	the oil
-454	323	the grease or fat
-455	1274	the salt
-456	1385	the pepper
-457	919	the chili pepper
-458	942	the honey
-459	862	the sugar
-460	635	the milk
-461	93	to milk
-462	1569	the cheese
-463	1245	the butter
-464	731	the drink
-465	941	the mead
-466	1524	the wine
-467	1639	the beer
-468	404	the fermented drink
-469	744	the egg
-470	1556	the yolk
-471	158	to put on
-472	1895	the clothing or clothes
-473	881	the tailor
-474	1616	the cloth
-475	964	the wool
-476	916	the linen
-477	1850	the cotton
-478	1641	the silk
-479	325	the felt
-480	580	the fur
-481	629	the leather
-482	121	to spin
-483	277	the spindle
-484	133	to weave
-485	1787	the loom
-486	1457	to sew
-487	1382	the needle(1)
-488	278	the awl
-489	1161	the thread
-490	157	to dye
-491	326	the cloak
-492	327	the poncho
-493	1464	the ladder
-494	474	the (woman's) dress
-495	603	the coat
-496	1622	the shirt
-497	2012	the collar
-498	1600	the skirt
-499	328	the grass-skirt
-500	809	the trousers
-501	329	the sock or stocking
-502	1381	the shoe
-503	585	the boot
-504	875	the shoemaker
-505	2130	the hat or cap
-506	772	the belt
-507	867	the glove
-508	1151	the veil
-509	1851	the pocket
-510	757	the button
-511	64	the pin
-512	917	the ornament or adornment
-513	1029	the jewel
-514	1374	the ring
-515	1754	the bracelet
-516	1961	the necklace
-517	1860	the bead
-518	770	the earring
-519	3457	the headband or headdress
-520	68	the tattoo
-521	332	the handkerchief or rag
-522	1021	the towel
-523	1475	the comb
-524	1821	the brush
-525	1043	the plait/braid
-526	151	the razor
-527	1926	the ointment
-528	788	the soap
-529	1171	the mirror
-530	363	to live
-531	1252	the house
-532	1678	the hut
-533	403	the garden-house
-534	1316	the tent
-535	736	the yard or court
-536	408	the men's house
-537	334	the cookhouse
-538	335	the meeting house
-539	1450	the room
-540	1567	the door or gate
-541	80	the doorpost
-542	1596	the lock
-543	1012	the latch or door-bolt
-544	1472	the key
-545	1375	the window
-546	1632	the floor
-547	933	the wall
-548	185	the fireplace
-549	859	the stove
-550	1305	the chimney
-551	1663	the bed
-552	1044	the pillow
-553	806	the blanket
-554	1476	the chair
-555	1775	the table
-556	2131	the lamp or torch
-557	1273	the candle
-558	745	the shelf
-559	205	the trough
-560	769	the roof
-561	279	the thatch
-562	280	the ridgepole
-563	829	the rafter
-564	1132	the beam
-565	281	the post or pole
-566	1227	the board
-567	876	the arch
-568	877	the mason
-569	1006	the brick
-570	1731	the mortar(2)
-571	901	the adobe
-572	979	the farmer
-573	212	the field
-574	586	the garden
-575	1541	to cultivate
-576	1690	the fence
-577	2002	the ditch
-578	1921	to plough/plow
-579	1794	the furrow
-580	1418	to dig
-581	1176	the spade
-582	1901	the shovel
-583	284	the hoe
-584	337	the fork(2)/pitchfork
-585	338	the rake
-586	748	to sow
-587	714	the seed
-588	190	to mow
-589	2132	the sickle or scythe
-590	285	to thresh
-591	223	the threshing-floor
-592	3541	the harvest
-593	605	the grain
-594	1077	the wheat
-595	932	the barley
-596	23	the rye
-597	60	the oats
-598	506	the maize/corn
-599	926	the rice
-600	606	the grass
-601	342	the hay
-602	653	the plant
-603	1486	to plant
-604	670	the root
-605	3223	the branch
-606	628	the leaf
-607	239	the flower
-608	906	the tree
-609	644	the oak
-610	1950	the beech
-611	1855	the birch
-612	1740	the pine
-613	1915	the fir
-614	968	the acorn
-615	343	the vine
-616	974	the tobacco
-617	1689	to smoke
-618	1124	the pipe
-619	241	the tree stump
-620	344	the tree trunk
-621	409	the forked branch
-622	1204	the bark
-623	345	the sap
-624	1181	the palm tree
-625	970	the coconut
-626	1126	the citrus fruit
-627	868	the banana
-628	346	the banyan
-629	159	the sweet potato
-630	410	the yam
-631	925	the cassava/manioc
-632	411	the gourd
-633	864	the pumpkin or squash
-634	1927	the bamboo
-635	146	the sugar cane
-636	348	the fish poison
-637	33	the nettle
-638	641	the mushroom
-639	813	to do
-640	984	the work
-641	2004	to bend
-642	1470	to fold
-643	1917	to tie
-644	352	to untie
-645	1627	the chain
-646	1218	the rope
-647	760	the knot
-648	2133	to strike or hit or beat
-649	354	to pound
-650	1432	to cut
-651	355	to cut down
-652	155	to chop
-653	3189	to stab
-654	1352	the knife(2)
-655	356	the scissors or shears
-656	677	the axe/ax
-657	290	the adze
-658	680	to break
-659	3190	broken
-660	1437	to split
-661	1735	to tear
-662	1002	the statue
-663	291	to skin
-664	1449	to rub
-665	214	to stretch
-666	1455	to pull
-667	38	to spread out
-668	357	to hang up
-669	1913	to press
-670	1414	to squeeze
-671	1487	to pour
-672	1453	to wash
-673	230	to sweep
-674	245	the broom
-675	1361	the tool
-676	1042	the carpenter
-677	1840	to build
-678	1501	to bore
-679	46	to hollow out
-680	1948	the saw
-681	1481	the hammer
-682	502	the nail
-683	1069	the glue
-684	1001	the blacksmith
-685	288	to forge
-686	1648	the anvil
-687	211	to cast
-688	1369	the gold
-689	759	the silver
-690	1825	the copper
-691	621	the iron
-692	627	the lead
-693	3217	the tin or tinplate
-694	359	the potter
-695	289	to mould/mold
-696	1399	the clay
-697	604	the glass
-698	3294	to weave or plait/braid
-699	1539	the basket
-700	195	the mat
-701	292	the rug
-702	293	the netbag
-703	1971	the fan
-704	360	to fan
-705	228	to carve
-706	914	the sculptor
-708	1979	the chisel
-709	647	the paint
-710	2001	to paint
-711	765	to move
-712		to turn
-713	1444	to turn around
-714	1113	to wrap
-715	827	to roll
-716	2866	to drop
-717	3199	to twist
-718	568	to rise
-719	501	to raise or lift
-720	1280	to fall
-721	2253	to drip
-722	1456	to throw
-723	702	to catch
-724	1909	to shake
-725	2003	to flow
-726	1088	to sink
-727	1574	to float
-728	1439	to swim
-729	119	to dive
-730	365	to splash
-731	787	to sail
-732	1441	to fly
-733	175	to blow
-734	3456	to crawl
-735	66	to kneel
-736	296	to crouch
-737	1324	to slide or slip
-738	1829	to jump
-739	1135	to kick
-740	1879	to dance
-741	1443	to walk
-742	366	to limp
-743	1519	to run
-744	695	to go
-745	705	to go up
-746	1102	to climb
-747	2014	to go down
-748	1107	to go out
-749	1446	to come
-750	581	to come back
-751	1752	to leave
-752	485	to disappear
-753	956	to flee
-754	1085	to follow
-755	1047	to pursue
-756	1387	to arrive
-757	1778	to approach
-758	749	to enter
-759	700	to carry
-760	412	to carry in hand
-761	413	to carry on shoulder
-762	414	to carry on head
-763	415	to carry under the arm
-764	692	to bring
-765	1127	to send
-766	43	to lead
-767	741	to drive
-768	367	to ride
-769	1452	to push
-770	667	the road
-771	2252	the path
-772	1011	the bridge
-773	122	the cart or wagon
-774	710	the wheel
-775	1769	the axle
-776	14	the yoke
-777	740	the ship
-778	1844	the boat
-779	1970	the canoe
-780	416	the outrigger
-781	1664	the raft
-782	3137	the oar
-783	234	the paddle
-784	1849	to row
-785	108	the rudder
-786	184	the mast
-787	786	the sail
-788	1870	the anchor
-789	610	the port
-790	1922	to land
-791	773	to have
-792	684	to own
-793	1749	to take
-794	855	to grasp
-795	1448	to hold
-796	694	to get
-797	1477	to keep
-798	738	the thing
-799	1447	to give
-800	85	to give back
-801	1997	to preserve
-803	2008	to rescue
-804	681	to destroy
-805	44	to injure
-806	1468	to look for
-807	719	to find
-808	3072	to lose
-809	1095	to let go
-810	1559	the money
-811	1867	the coin
-812	712	rich
-813	1674	poor
-814	1934	the beggar
-815	1774	stingy
-816	582	to lend
-817	1823	to borrow
-818	369	to owe
-819	1914	the debt
-820	718	to pay
-821	1081	the bill
-822	873	the tax
-823	856	to hire
-824	1122	the wages
-825	733	to earn
-826	1869	to buy
-827	1571	to sell
-828	2135	to trade or barter
-829	1082	the merchant
-830	633	the market
-831	752	the shop/store
-832	657	the price
-833	1426	expensive
-834	1887	cheap
-835	884	to share
-836	1098	to weigh
-837	1685	after
-838	1686	behind
-839	1816	beside
-840	1326	down
-841	1882	before
-842	1883	in front of
-843	1606	inside
-844	762	outside
-845	1485	under
-846	1591	up
-847	723	the place
-849	998	to put
-850	1416	to sit
-851	215	to lie down
-852	1442	to stand
-853	987	to remain
-854	838	the remains
-855	7	to gather
-856	371	to pick up
-857	1576	to pile up
-858	1743	to join
-859	1359	to separate
-860	1119	to divide
-861	1156	to open
-862	1046	to shut
-863	761	to cover
-864	602	to hide
-865	1265	high
-866	721	low
-867	1753	the top
-868	690	the bottom
-869	742	the end(1)
-870	372	pointed
-871	863	the edge
-872	682	the side
-873	1093	the middle
-874	1019	right(1)
-875	244	left
-876	1942	near
-877	1406	far
-878	1877	the east
-879	1817	the west
-880	1598	the north
-881	1595	the south
-882	479	to grow
-883	1506	to measure
-884	81	the fathom
-885	1202	big
-886	1246	small
-887	1203	long
-888	711	tall
-889	1645	short
-890	1243	wide
-891	1267	narrow
-892	1244	thick
-893	2249	thin
-894	1593	deep
-895	193	shallow
-896	1633	flat
-897	1404	straight
-898	297	crooked
-899	1071	the hook
-900	192	the corner
-901	1367	the cross
-902	850	the square
-903	1395	round
-904	1467	the circle
-905	1845	the ball
-906	1048	the line
-907	1667	the hole
-908	1558	similar
-909	1264	to change
-910	1294	zero
-911	1493	one
-912	1498	two
-913	492	three
-914	1500	four
-915	493	five
-916	1703	six
-917	1704	seven
-918	1705	eight
-919	1483	nine
-920	1515	ten
-921	1706	eleven
-922	1707	twelve
-923	1709	fifteen
-924	1710	twenty
-925	1634	a hundred
-926	1843	a thousand
-927	1420	to count
-928	98	all
-929	1198	many
-930	1992	more
-931	1242	few
-932	1881	enough
-933	1241	some
-934	2023	the crowd
-935	1429	full
-936	1624	empty
-937	779	the part
-938	816	the half
-939	1580	only
-940	728	first
-941	1529	last
-942	1384	second
-943	1888	the pair
-944	1546	twice/two times
-945	1859	third
-946	417	three times
-947	892	the time
-948	1789	the age
-949	1231	new
-950	1207	young
-951	1229	old
-952	672	early
-953	477	late
-954	1376	now
-955	1963	immediately
-956	1631	fast
-957	701	slow
-958	754	to hurry
-959	425	to be late
-960	1806	to begin
-961	1186	to last
-962	743	the end(2)
-963	1766	to finish
-964	1928	to cease
-965	790	ready
-966	1676	always
-967	1852	often
-968	1544	sometimes
-969	703	soon
-970	418	for a long time
-971	1656	never
-972	204	again
-973	1260	the day(1)
-974	1233	the night
-975	729	the dawn
-976	1339	the morning
-977	12	the midday
-978	1807	the afternoon
-979	1629	the evening
-980	1283	today
-981	1329	tomorrow
-982	1179	the day after tomorrow
-983	1174	yesterday
-984	1180	the day before yesterday
-985	1353	the hour
-986	1323	the clock
-987	1469	the week
-988	1699	Sunday
-989	1697	Monday
-990	1695	Tuesday
-991	1694	Wednesday
-992	1693	Thursday
-993	1692	Friday
-994	1700	Saturday
-995	1370	the month
-996	1226	the year
-997	1471	the winter
-998	1537	the spring(2)
-999	1342	the summer
-1000	1276	the autumn/fall
-1001	691	the season
-1002	1587	to smell(1)
-1003	380	wrinkled
-1004	375	to sniff
-1005	1586	to smell(2)
-1006	376	fragrant
-1007	42	stinking
-1008	21	to taste
-1009	717	sweet
-1010	1091	salty
-1011	887	bitter
-1012	1906	sour
-1013	70	brackish
-1014	1408	to hear
-1015	1608	to listen
-1016	1811	the sound or noise
-1017	377	loud
-1018	1314	quiet
-1019	1409	to see
-1020	1819	to look
-1021	1039	to show
-1022	708	to shine
-1023	679	bright
-1024	1613	the colour/color
-1025	250	light(2)
-1026	706	dark
-1027	1335	white
-1028	163	black
-1029	156	red
-1030	837	blue
-1031	1425	green
-1032	1424	yellow
-1033	1892	to touch
-1034	378	to pinch
-1035	1079	to feel
-1036	1884	hard
-1037	1856	soft
-1038	1923	rough(1)
-1039	1234	smooth
-1040	1396	sharp
-1041	379	blunt
-1042	1210	heavy
-1043	1052	light(1)
-1044	1726	wet
-1045	1398	dry
-1046	1286	hot
-1047	1232	warm
-1048	1287	cold
-1049	704	clean
-1050	1230	dirty
-1051	811	the soul or spirit
-1052	1572	surprised or astonished
-1053	720	the good luck
-1054	56	the bad luck
-1055	1495	happy
-1056	1355	to laugh
-1057	1451	to smile
-1058	1413	to play
-1059	923	to love
-1060	578	to kiss
-1061	928	to embrace
-1062	1783	the pain
-1063	1668	the grief
-1064	1000	the anxiety
-1065	1875	to regret or be sorry
-1066	1141	the pity
-1067	1839	to cry
-1068	1651	the tear
-1069	716	to groan
-1070	1607	to hate
-1071	82	the anger
-1072	40	the envy or jealousy
-1073	1776	the shame
-1074	174	proud
-1075	1779	to dare
-1076	3	brave
-1077	781	the fear
-1078	1810	the danger
-1079	1784	to want
-1080	1750	to choose
-1081	3212	to hope
-1082	100	faithful
-1083	1657	true
-1084	601	to lie(2)
-1085	13	the deceit
-1086	1528	to forgive
-1087	1035	good
-1088	1292	bad
-1089	1725	right(2)
-1090	1390	wrong
-1091	134	the fault
-1092	1293	the mistake
-1093	381	the blame
-1094	1687	the praise
-1095	1427	beautiful
-1096	1548	ugly
-1097	2018	greedy
-1098	1310	clever
-1099	1562	the mind
-1100	1415	to think(1)
-1101	1513	to think(2)
-1102	1890	to believe
-1103	1536	to understand
-1104	1410	to know
-1105	1932	to guess
-1106	117	to imitate
-1107	1521	to seem
-1108	1609	the idea
-1109	698	wise
-1110	1518	stupid
-1111	1899	mad
-1112	504	to learn
-1113	1929	to study
-1114	709	to teach
-1115	753	the pupil
-1116	1038	the teacher
-1117	673	the school
-1118	707	to remember
-1119	1523	to forget
-1120	989	clear
-1121	1764	obscure
-1122	1121	secret
-1123	509	certain
-1124	1626	to explain
-1125	1162	the intention
-1126	860	the cause
-1127	1308	the doubt
-1128	1841	to suspect
-1129	1902	to betray
-1130	643	the need or necessity
-1131	686	easy
-1132	584	difficult
-1133	1812	to try
-1134	488	the manner
-1135	1577	and
-1136	1157	because
-1137	1459	if
-1138	1014	or
-1139	1268	yes
-1140	1269	no
-1141	1239	how?
-1142	3450	how many?
-1143	531	how much?
-1144	1236	what?
-1145	1238	when?
-1146	1237	where?
-1147	727	which?
-1148	1235	who?
-1149	1270	why?
-1150	1363	the voice
-1151	1261	to sing
-1152	715	to shout
-1153	55	to whisper
-1154	128	to mumble
-1155	1025	to whistle
-1156	298	to shriek
-1157	526	to howl
-1158	1623	to speak or talk
-1159	1866	to stutter or stammer
-1160	1458	to say
-1161	1711	to tell
-1162	1115	the speech
-1163	48	to be silent
-1164	1307	the language
-1165	1599	the word
-1166	1405	the name
-1167	1309	to ask(1)
-1168	1275	to answer
-1169	2022	to admit
-1170	755	to deny
-1171	1828	to ask(2)
-1172	1675	to promise
-1173	49	to refuse
-1174	83	to forbid
-1175	299	to scold
-1176	1084	to call(1)
-1177	180	to call(2)
-1178	9	to announce
-1179	1192	to threaten
-1180	101	to boast
-1181	1672	to write
-1182	724	to read
-1183	648	the paper
-1184	794	the pen
-1185	963	the book
-1186	1045	the poet
-1187	777	the flute
-1188	908	the drum
-1189	2136	the horn or trumpet
-1190	300	the rattle
-1191	1300	the country
-1192	89	the native country
-1193	1391	the town
-1194	930	the village
-1195	1010	the boundary
-1196	789	the people
-1197	302	the clan
-1198	301	the chieftain
-1199	1296	the walking stick
-1200	1846	to rule or govern
-1201	1508	the king
-1202	1306	the queen
-1203	482	the noble
-1204	1032	the citizen
-1205	383	the master
-1206	812	the slave
-1207	255	the servant
-1208	384	the freeman
-1209	1998	to command or order
-1210	1635	to obey
-1211	1003	to permit
-1212	1325	the friend
-1213	1358	the enemy
-1214	1332	the neighbour
-1215	791	the stranger
-1216	1782	the guest
-1217	1545	the host
-1218	1897	to help
-1219	1550	to prevent
-1220	1747	the custom
-1221	1848	the quarrel
-1222	2024	the plot
-1223	1831	to meet
-1224	1610	the prostitute
-1225	1423	to fight
-1226	579	the war or battle
-1227	1338	the peace
-1228	1561	the army
-1229	1941	the soldier
-1230	951	the weapons
-1231	1763	the club
-1232	386	the battle-axe
-1233	387	the sling
-1234	994	the bow
-1235	977	the arrow
-1236	945	the spear
-1237	1535	the sword
-1238	1566	the gun
-1239	1061	the armour
-1240	1680	the helmet
-1241	1064	the shield
-1242	1938	the fortress
-1243	1671	the tower
-1244	783	the victory
-1245	782	the defeat
-1246	722	the attack
-1247	1330	to defend
-1248	421	to retreat
-1249	1696	to surrender
-1250	1072	the captive or prisoner
-1251	1940	the guard
-1252	1022	the booty
-1253	65	the ambush
-1254	1858	the fisherman
-1255	1074	the fishhook
-1256	19	the fishing line
-1257	388	the fishnet
-1258	389	the fish trap
-1259	2013	the bait
-1260	1435	to hunt
-1261	1172	to shoot
-1262	161	to miss
-1263	1075	the trap
-1264	1170	to trap
-1265	1062	the law
-1266	1068	the court
-1267	1461	at
-1268	1818	to adjudicate
-1269	1067	the judgment
-1270	861	the judge
-1271	2020	the plaintiff
-1272	1034	the defendant
-1273	1144	the witness
-1274	1939	to swear
-1275	1712	the oath
-1276	1814	to accuse
-1277	484	to condemn
-1278	983	to convict
-1279	988	to acquit
-1280	1682	guilty
-1281	90	innocent
-1282	390	the penalty or punishment
-1283	218	the fine
-1284	1281	the prison
-1285	845	the murder
-1286	902	the adultery
-1287	953	the rape
-1288	1889	the arson
-1289	1792	the perjury
-1290	713	to steal
-1291	1160	the thief
-1292	661	the religion
-1293	3231	the god
-1294	911	the temple
-1295	853	the altar
-1296	1103	the sacrifice
-1297	257	to worship
-1298	24	to pray
-1299	852	the priest
-1300	1702	holy
-1301	304	to preach
-1302	391	to bless
-1303	8	to curse
-1304	303	to fast
-1305	1565	the heaven
-1306	878	the hell
-1307	1973	the demon
-1308	1945	the idol
-1309	392	the magic
-1310	2137	the sorcerer or witch
-1311	3206	the fairy or elf
-1312	1175	the ghost
-1313	107	the omen
-1314	1315	the radio
-1315	1788	the television
-1316	1379	the telephone
-1317	638	the motorcycle
-1318	1111	the car
-1319	1070	the bus
-1320	1597	the airplane
-1321	59	the electricity
-1322	662	the battery
-1323	616	the hospital
-1324	1104	the nurse
-1325	395	the pill or tablet
-1326	1805	the injection
-1327	1488	the tap/faucet
-1328	915	the sink
-1329	219	the toilet
-1330	105	the mattress
-1331	815	the government
-1332	899	the president
-1333	486	the minister
-1334	656	the police
-1335	599	the driver's license
-1336	1066	the crime
-1337	240	the election
-1338	167	the post/mail
-1339	596	the postage stamp
-1340	1612	the letter
-1341	1284	the bank
-1342	1051	the tin/can
-1343	1802	the screw
-1344	836	the screwdriver
-1345	1321	the bottle
-1346	874	the candy/sweets
-1347	1898	the spectacles/glasses
-1348	654	the plastic
-1349	1804	the bomb
-1350	1677	the workshop
-1351	969	the cigarette
-1352	1967	the calendar
-1353	216	the film/movie
-1354	642	the music
-1355	1096	the song
-1356	1298	the newspaper
-1357	591	the address
-1358	1356	the number
-1359	900	the train
-1360	397	the birth certificate
-1361	966	to brake
-1362	650	the petroleum
-1363	110	the motor
-1364	144	the machine
-1365	747	the bicycle
-1366	1362	the street
-1367	37	to liberate
-1368	1611	to invite
-1369	1790	the license plate
-1370	1497	the postcard
-1371	1579	to be
-1372	1990	to become
-1373	1478	without
-1374	97	through
-1375	200	same
-1376	1240	not
-1377	1214	this
-1378	78	that
-1379	136	here
-1380	1937	there
-1381	197	other
-1382	1836	the vagina
-1383	1373	the tea
-1384	1299	the coffee
-1385	1354	next
-1386	912	the coyote
-1387	1190	the hare
-1388	1893	the quail
-1389	828	the raccoon
-1390	1628	the squirrel
-1391	1876	the reindeer/caribou
-1392	1772	the elk/moose
-1393	1194	the beaver
-1394	16	the sledge/sled
-1395	340	the lasso
-1396	116	the larch
-1397	286	the needle(2)
-1398	261	the arctic lights
-1399	1137	the sinew or tendon
-1400	247	to tan
-1401	233	the snowshoe
-1402	393	the circumcision
-1403	1946	the initiation ceremony
-1404	287	the cone
-1405	311	the body louse
-1406	1837	the vulva
-1407	312	the tapir
-1408	295	the whetstone
-1409	294	the tumpline
-1410	1105	the camp
-1411	339	the digging stick (=yamstick)
-1412	840	the cormorant
-1413	2686	the prawns or shrimp
-1414	883	the termites
-1415	1527	the tick
-1416	135	the boomerang
-1417	164	the kangaroo
-1418	181	the anteater
-1419	308	the toucan
-1420	1250	the jaguar
-1421	407	the manioc bread
-1422	2019	the hammock
-1423	931	the millet or sorghum
-1424	1555	the chameleon
-1425	1911	to draw water
-1426	361	the peg
-1427	142	to go or return home
-1428	934	the buffalo
-1429	260	the savanna
-1430	1193	the steam
-1431	405	the older sibling
-1432	427	the younger sibling
-1433	305	the grandparents
-1434	1617	the grandchild
-1435	173	the sibling’s child
-1436	306	the parents-in-law
-1437	1060	the child-in-law
-1438	1832	the sibling-in-law
-1439	1211	he
-1440	1834	she
-1441	169	it
-1442	210	the life
-1443	1770	the carcass
-1444	1986	the disease
-1445	336	the padlock
-1446	140	the paddy
-1447	1116	to damage
-1448	1741	above
-1449	594	the piece
-1450	1964	alone
-1451	1557	the beginning
-1452	1225	the day(2)
-1453	1349	the church
-1454	1603	the mosque
-1455	687	nothing
-1456	1625	dead
-1457	1436	to scratch
-1458	734	to make
-1459	1251	the belly
-1460	1454	to wipe
-1461	1431	to freeze
-1462	1340	with
-1463	1460	in
+# rank: how basic the meaning is, 1 being the most basic; WOLD's RANK by composite score (ties share a rank)
+# number	concepticon_id	gloss	rank
+1	965	the world	497
+2	626	the land	26
+3	1228	the soil	90
+4	2	the dust	41
+5	640	the mud	444
+6	671	the sand	121
+7	2118	the mountain or hill	49
+8	618	the cliff or precipice	161
+9	652	the plain	23
+10	921	the valley	500
+11	622	the island	337
+12	166	the mainland	754
+13	113	the shore	527
+14	1155	the cave	969
+15	948	the water	24
+16	1474	the sea	229
+17	258	calm	183
+18	259	rough(2)	1114
+19	1768	the foam	454
+20	645	the ocean	902
+21	624	the lake	401
+22	663	the bay	1157
+23	623	the lagoon	726
+24	660	the reef	727
+25	1662	the cape	184
+26	978	the wave	830
+27	891	the tide	1333
+28	1026	the low tide	1116
+29	613	the high tide	1454
+30	3311	the river or stream	42
+31	1982	the whirlpool	1314
+32	2144	the spring or well	859
+33	1145	the swamp	915
+34	943	the waterfall	968
+35	420	the woods or forest	207
+36	1803	the wood	5
+37	2125	the stone or rock	44
+38	6	the earthquake	947
+39	1732	the sky	13
+40	1343	the sun	46
+41	1313	the moon	45
+42	1430	the star	76
+43	1654	the lightning	770
+44	1150	the thunder	619
+45	2007	the bolt of lightning	302
+46	858	the storm	1209
+47	1733	the rainbow	446
+48	630	the light	64
+49	11	the darkness	164
+50	1388	the shade or shadow	19
+51	1977	the dew	176
+52	27	the air	12
+53	960	the wind	14
+54	1489	the cloud	47
+55	249	the fog	273
+56	658	the rain	17
+57	784	the snow	58
+58	617	the ice	617
+59	952	the weather	678
+60	221	the fire	1
+61	889	the flame	87
+62	778	the smoke	504
+63	646	the ash	137
+64	67	the embers	1035
+65	141	to burn(1)	74
+66	1428	to burn(2)	332
+67	737	to light	746
+68	127	to extinguish	63
+69	1133	the match	1434
+70	10	the firewood	57
+71	1188	the charcoal	107
+72	683	the person	6
+73	1554	the man	72
+74	962	the woman	697
+75	2261	male(1)	166
+76	2260	female(1)	275
+77	1366	the boy	201
+78	76	the young man	189
+79	1646	the girl	103
+80	77	the young woman	325
+81	1304	the child(1)	351
+82	1289	the baby	1100
+83	1200	the husband	115
+84	1199	the wife	375
+85	203	to marry	924
+86	1259	the wedding	1050
+87	1134	the divorce	1132
+88	1217	the father	276
+89	1216	the mother	130
+90	505	the parents	402
+91	424	the married man	1068
+92	426	the married woman	1310
+93	1620	the son	110
+94	1357	the daughter	200
+95	1479	the porpoise or dolphin	860
+96	1801	the child(2)	109
+97	1262	the brother	136
+98	1759	the older brother	336
+99	1760	the younger brother	418
+100	1263	the sister	922
+101	1758	the older sister	716
+102	1761	the younger sister	1175
+103	1640	the sibling	382
+104	1005	the twins	956
+105	1383	the grandfather	666
+106	406	the old man	828
+107	1496	the grandmother	445
+108	907	the old woman	1239
+109	1618	the grandson	352
+110	1619	the granddaughter	636
+111	1327	the uncle	160
+112	2692	the mother's brother	1245
+113	1985	the father's brother	929
+114	1272	the aunt	424
+115	2693	the mother's sister	1178
+116	2691	the father's sister	438
+117	1063	the nephew	515
+118	1642	the niece	680
+119	1643	the cousin	1042
+120	1669	the ancestors	1101
+121	490	the descendants	691
+122	2255	the father-in-law (of a man)	596
+123	2254	the father-in-law (of a woman)	1146
+124	2257	the mother-in-law (of a man)	1023
+125	2256	the mother-in-law (of a woman)	622
+126	2267	the son-in-law (of a man)	389
+127	2266	the son-in-law (of a woman)	551
+128	2265	the daughter-in-law (of a man)	286
+129	2264	the daughter-in-law (of a woman)	119
+130	237	the stepfather	547
+131	236	the stepmother	560
+132	1059	the stepson	1208
+133	1058	the stepdaughter	682
+134	1149	the orphan	760
+135	1756	the widow	268
+136	1981	the widower	594
+137	1644	the relatives	660
+138	194	the family	478
+139	1209	I	120
+140	1215	you (singular)	437
+141	262	he/she/it	964
+142	1212	we	25
+143	1131	we (inclusive)	1325
+144	1130	we (exclusive)	1441
+145	1213	you (plural)	1171
+146	817	they	1028
+147	619	the animal	620
+148	2263	male(2)	3
+149	2262	female(2)	18
+150	631	the livestock	811
+151	649	the pasture	818
+152	263	the herdsman	779
+153	851	the stable or stall	536
+154	1153	the cattle	307
+155	1008	the bull	327
+156	1169	the ox	150
+157	1007	the cow	442
+158	1989	the calf	106
+159	1331	the sheep	29
+160	1344	the ram	270
+161	1345	the ewe	479
+162	820	the lamb	856
+163	1348	the boar	367
+164	1351	the sow	185
+165	1337	the pig	340
+166	1502	the goat	178
+167	2475	the he-goat	278
+168	1972	the kid	542
+169	615	the horse	226
+170	936	the stallion	488
+171	938	the mare	309
+172	1647	the foal or colt	212
+173	1862	the donkey	641
+174	890	the mule	321
+175	265	the fowl	743
+176	1511	the cock/rooster	419
+177	1514	the hen	56
+178	1318	the chicken	65
+179	1187	the goose	81
+180	1360	the duck	238
+181	539	the nest	108
+182	937	the bird	983
+183	950	the seagull	1371
+184	758	the heron	1084
+185	1905	the eagle	371
+186	307	the hawk	816
+187	1185	the vulture	831
+188	1793	the bat	721
+189	882	the parrot	774
+190	913	the crow	561
+191	1853	the dove	205
+192	735	the owl	926
+193	2009	the dog	99
+194	1136	the rabbit	37
+195	1208	the cat	1010
+196	309	the opossum	1268
+197	2139	the mouse or rat	809
+198	227	the fish	292
+199	213	the fin	1423
+200	266	the scale	242
+201	1916	the gill	876
+202	598	the shell	1141
+203	1110	the shark	1195
+204	957	the whale	358
+205	1910	the stingray	507
+206	1013	the freshwater eel	1051
+207	522	the wolf	252
+208	1386	the lion	417
+209	1820	the bear	353
+210	1312	the fox	512
+211	1936	the deer	135
+212	1350	the monkey	1156
+213	1290	the elephant	1184
+214	1871	the camel	597
+215	620	the insect	237
+216	310	the head louse	131
+217	267	the nit	550
+218	232	the flea	457
+219	1974	the centipede	562
+220	1538	the scorpion	765
+221	1575	the cockroach	1079
+222	587	the ant	326
+223	843	the spider	380
+224	1065	the spider web	1201
+225	665	the bee	978
+226	1931	the beeswax	204
+227	88	the beehive	464
+228	1517	the wasp	341
+229	1504	the fly	181
+230	95	the sandfly or midge or gnat	995
+231	1509	the mosquito	790
+232	1219	the worm	263
+233	730	the snake	331
+234	206	the firefly	1210
+235	1791	the butterfly	685
+236	607	the grasshopper	889
+237	1543	the snail	377
+238	503	the frog	323
+239	632	the lizard	952
+240	1857	the crocodile or alligator	303
+241	112	the turtle	1217
+242	1480	the body	355
+243	763	the skin or hide	33
+244	2259	the flesh	52
+245	2648	the hair	97
+246	678	the beard	652
+247	189	the body hair	126
+248	36	the pubic hair	938
+249	576	the dandruff	1244
+250	946	the blood	39
+251	525	the vein or artery	757
+252	1394	the bone	95
+253	801	the rib	244
+254	1393	the horn	118
+255	1220	the tail	143
+256	1291	the back	262
+257	805	the spine	1123
+258	1256	the head	291
+259	1604	the temples	852
+260	1605	the skull	1316
+261	1583	the brain	704
+262	1560	the face	539
+263	123	the forehead	510
+264	798	the jaw	529
+265	1730	the cheek	520
+266	1510	the chin	461
+267	1248	the eye	132
+268	1173	the eyebrow	1039
+269	17	the eyelid	1420
+270	1540	the eyelash	919
+271	1655	to blink	930
+272	1247	the ear	251
+273	18	the earlobe	1153
+274	32	the earwax	1118
+275	1221	the nose	48
+276	1178	the nostril	1361
+277	208	the nasal mucus	1097
+278	674	the mouth	61
+279	73	the beak	511
+280	478	the lip	192
+281	1205	the tongue	114
+282	1380	the tooth	8
+283	139	the gums	868
+284	1049	the molar tooth	676
+285	1333	the neck	362
+286	1347	the nape of the neck	827
+287	1346	the throat	293
+288	1482	the shoulder	140
+289	172	the shoulderblade	1383
+290	1994	the collarbone	1459
+291	1673	the arm	196
+292	1886	the armpit	1274
+293	981	the elbow	847
+294	799	the wrist	1312
+295	1277	the hand	129
+296	1183	the palm of the hand	473
+297	1303	the finger	656
+298	1781	the thumb	1317
+299	1258	the fingernail	308
+300	72	the claw	623
+301	1297	the leg	15
+302	471	the thigh	366
+303	498	the calf of the leg	1119
+304	1371	the knee	403
+305	1301	the foot	228
+306	803	the ankle	1237
+307	980	the heel	1258
+308	318	the footprint	1057
+309	1389	the toe	987
+310	1257	the wing	92
+311	1201	the feather	222
+312	1592	the chest	742
+313	1402	the breast	54
+314	796	the nipple or teat	1350
+315	154	the udder	38
+316	1838	the navel	7
+317	1223	the heart	578
+318	688	the lung	280
+319	1224	the liver	40
+320	489	the kidney	312
+321	1744	the spleen	1085
+322	819	the stomach	315
+323	1991	the intestines or guts	319
+324	1681	the waist	378
+325	1745	the hip	545
+326	834	the buttocks	606
+327	804	the womb	1033
+328	797	the testicles	301
+329	1222	the penis	421
+330	1407	to breathe	1190
+331	1028	to yawn	1137
+332	162	to hiccough	1205
+333	879	to cough	463
+334	1621	to sneeze	935
+335	126	to perspire	1075
+336	1440	to spit	404
+337	1278	to vomit	311
+338	1403	to bite	21
+339	319	to lick	71
+340	268	to dribble	1304
+341	1585	to sleep	282
+342	1983	to snore	748
+343	1920	to dream	414
+344	1602	to wake up	1179
+345	1159	to fart	290
+346	592	to piss	501
+347	676	to shit	304
+348	549	to have sex	440
+349	52	to shiver	1198
+350	138	to bathe	310
+351	1152	to beget	707
+352	1090	to be born	259
+353	1123	pregnant	1424
+354	1087	to conceive	1438
+355	1422	to be alive	413
+356	1494	to die	662
+357	1904	to drown	861
+358	1417	to kill	257
+359	767	the corpse	675
+360	1719	to bury	394
+361	1773	the grave	687
+362	785	strong	744
+363	1601	weak	1167
+364	1364	healthy	187
+365	1847	sick/ill	882
+366	1534	the fever	1072
+367	1957	the goitre/goiter	637
+368	102	the cold	1136
+369	1109	the wound or sore	942
+370	1148	the bruise	1331
+371	1903	the swelling	484
+372	148	the itch	422
+373	1584	the blister	1019
+374	793	the boil	1024
+375	1808	the pus	73
+376	497	the scar	972
+377	499	to cure	1364
+378	597	the physician	1159
+379	1372	the medicine	525
+380	655	the poison	472
+381	1757	tired	693
+382	168	to rest	477
+383	1564	lazy	909
+384	1125	bald	833
+385	320	lame	618
+386	996	deaf	249
+387	1666	mute	801
+388	1653	blind	553
+389	1463	drunk	927
+390	590	naked	657
+391	1336	to eat	32
+392	256	the food	803
+393	269	cooked	492
+394	1959	raw	649
+395	178	ripe	295
+396	1958	unripe	1135
+397	1728	rotten	587
+398	1401	to drink	191
+399	1533	to be hungry	986
+400	199	the famine	368
+401	3474	to be thirsty	574
+402	1421	to suck	452
+403	321	to chew	324
+404	897	to swallow	647
+405	129	to choke	1360
+406	1100	to cook	706
+407	792	to boil	866
+408	2146	to roast or fry	239
+409	183	to bake	460
+410	1143	the oven	762
+411	1462	the pot	470
+412	854	the kettle	410
+413	31	the pan	573
+414	481	the dish	1034
+415	480	the plate	1367
+416	1530	the bowl	288
+417	270	the jug/pitcher	247
+418	476	the cup	1065
+419	271	the saucer	1243
+420	1378	the spoon	768
+421	3210	the knife(1)	281
+422	1302	the fork	1430
+423	272	the tongs	1401
+424	1526	the meal	651
+425	1322	the breakfast	1379
+426	768	the lunch	1399
+427	1833	the dinner	1391
+428	1833	the supper	1391
+429	275	to peel	1193
+430	3448	to sieve or to strain	334
+431	1767	to scrape	254
+432	2017	to stir or to mix	659
+433	1368	the bread	146
+434	273	the dough	1036
+435	274	to knead	369
+436	1594	the flour	194
+437	1033	to crush or to grind	217
+438	636	the mill	221
+439	224	the mortar(1)	420
+440	225	the pestle	1287
+441	634	the meat	102
+442	1874	the sausage	1405
+443	1547	the soup	552
+444	924	the vegetables	629
+445	832	the bean	289
+446	593	the potato	1259
+447	1507	the fruit	236
+448	1966	the bunch	1106
+449	322	the fig	1249
+450	920	the grape	884
+451	191	the nut	993
+452	1154	the olive	147
+453	1484	the oil	903
+454	323	the grease or fat	100
+455	1274	the salt	466
+456	1385	the pepper	582
+457	919	the chili pepper	449
+458	942	the honey	411
+459	862	the sugar	749
+460	635	the milk	376
+461	93	to milk	814
+462	1569	the cheese	499
+463	1245	the butter	604
+464	731	the drink	172
+465	941	the mead	563
+466	1524	the wine	430
+467	1639	the beer	1306
+468	404	the fermented drink	1271
+469	744	the egg	27
+470	1556	the yolk	1152
+471	158	to put on	177
+472	1895	the clothing or clothes	261
+473	881	the tailor	1125
+474	1616	the cloth	681
+475	964	the wool	104
+476	916	the linen	458
+477	1850	the cotton	359
+478	1641	the silk	453
+479	325	the felt	1354
+480	580	the fur	233
+481	629	the leather	219
+482	121	to spin	646
+483	277	the spindle	1150
+484	133	to weave	20
+485	1787	the loom	363
+486	1457	to sew	234
+487	1382	the needle(1)	348
+488	278	the awl	686
+489	1161	the thread	250
+490	157	to dye	264
+491	326	the cloak	279
+492	327	the poncho	1011
+493	1464	the ladder	875
+494	474	the (woman's) dress	804
+495	603	the coat	1365
+496	1622	the shirt	630
+497	2012	the collar	965
+498	1600	the skirt	1041
+499	328	the grass-skirt	1457
+500	809	the trousers	841
+501	329	the sock or stocking	1218
+502	1381	the shoe	1202
+503	585	the boot	1372
+504	875	the shoemaker	1377
+505	2130	the hat or cap	1052
+506	772	the belt	802
+507	867	the glove	1226
+508	1151	the veil	208
+509	1851	the pocket	1099
+510	757	the button	1402
+511	64	the pin	1170
+512	917	the ornament or adornment	1257
+513	1029	the jewel	750
+514	1374	the ring	1199
+515	1754	the bracelet	1260
+516	1961	the necklace	1161
+517	1860	the bead	819
+518	770	the earring	1422
+519	3457	the headband or headdress	1234
+520	68	the tattoo	1182
+521	332	the handkerchief or rag	1110
+522	1021	the towel	1322
+523	1475	the comb	654
+524	1821	the brush	1382
+525	1043	the plait/braid	1247
+526	151	the razor	1255
+527	1926	the ointment	1278
+528	788	the soap	775
+529	1171	the mirror	518
+530	363	to live	50
+531	1252	the house	169
+532	1678	the hut	1324
+533	403	the garden-house	1318
+534	1316	the tent	821
+535	736	the yard or court	992
+536	408	the men's house	1351
+537	334	the cookhouse	1442
+538	335	the meeting house	1345
+539	1450	the room	714
+540	1567	the door or gate	158
+541	80	the doorpost	1207
+542	1596	the lock	710
+543	1012	the latch or door-bolt	870
+544	1472	the key	1204
+545	1375	the window	773
+546	1632	the floor	734
+547	933	the wall	737
+548	185	the fireplace	1172
+549	859	the stove	476
+550	1305	the chimney	370
+551	1663	the bed	521
+552	1044	the pillow	601
+553	806	the blanket	1242
+554	1476	the chair	1222
+555	1775	the table	855
+556	2131	the lamp or torch	1224
+557	1273	the candle	558
+558	745	the shelf	1283
+559	205	the trough	113
+560	769	the roof	1130
+561	279	the thatch	799
+562	280	the ridgepole	1053
+563	829	the rafter	1192
+564	1132	the beam	1029
+565	281	the post or pole	826
+566	1227	the board	1356
+567	876	the arch	1212
+568	877	the mason	1293
+569	1006	the brick	835
+570	1731	the mortar(2)	541
+571	901	the adobe	733
+572	979	the farmer	1294
+573	212	the field	429
+574	586	the garden	683
+575	1541	to cultivate	1160
+576	1690	the fence	180
+577	2002	the ditch	225
+578	1921	to plough/plow	916
+579	1794	the furrow	141
+580	1418	to dig	548
+581	1176	the spade	1094
+582	1901	the shovel	1417
+583	284	the hoe	896
+584	337	the fork(2)/pitchfork	1281
+585	338	the rake	1014
+586	748	to sow	745
+587	714	the seed	85
+588	190	to mow	1001
+589	2132	the sickle or scythe	134
+590	285	to thresh	450
+591	223	the threshing-floor	1054
+592	3541	the harvest	1044
+593	605	the grain	78
+594	1077	the wheat	224
+595	932	the barley	220
+596	23	the rye	1358
+597	60	the oats	1297
+598	506	the maize/corn	931
+599	926	the rice	766
+600	606	the grass	240
+601	342	the hay	1309
+602	653	the plant	441
+603	1486	to plant	151
+604	670	the root	195
+605	3223	the branch	112
+606	628	the leaf	30
+607	239	the flower	86
+608	906	the tree	1168
+609	644	the oak	385
+610	1950	the beech	70
+611	1855	the birch	1012
+612	1740	the pine	1000
+613	1915	the fir	2
+614	968	the acorn	36
+615	343	the vine	635
+616	974	the tobacco	1077
+617	1689	to smoke	1138
+618	1124	the pipe	890
+619	241	the tree stump	932
+620	344	the tree trunk	1246
+621	409	the forked branch	1277
+622	1204	the bark	967
+623	345	the sap	638
+624	1181	the palm tree	806
+625	970	the coconut	1087
+626	1126	the citrus fruit	1384
+627	868	the banana	1425
+628	346	the banyan	1285
+629	159	the sweet potato	1124
+630	410	the yam	387
+631	925	the cassava/manioc	937
+632	411	the gourd	1045
+633	864	the pumpkin or squash	886
+634	1927	the bamboo	1216
+635	146	the sugar cane	123
+636	348	the fish poison	1185
+637	33	the nettle	502
+638	641	the mushroom	111
+639	813	to do	35
+640	984	the work	344
+641	2004	to bend	1063
+642	1470	to fold	1069
+643	1917	to tie	125
+644	352	to untie	640
+645	1627	the chain	1355
+646	1218	the rope	190
+647	760	the knot	1133
+648	2133	to strike or hit or beat	853
+649	354	to pound	493
+650	1432	to cut	1149
+651	355	to cut down	756
+652	155	to chop	786
+653	3189	to stab	1251
+654	1352	the knife(2)	281
+655	356	the scissors or shears	879
+656	677	the axe/ax	614
+657	290	the adze	1436
+658	680	to break	412
+659	3190	broken	913
+660	1437	to split	388
+661	1735	to tear	572
+662	1002	the statue	887
+663	291	to skin	1181
+664	1449	to rub	174
+665	214	to stretch	317
+666	1455	to pull	313
+667	38	to spread out	595
+668	357	to hang up	789
+669	1913	to press	694
+670	1414	to squeeze	528
+671	1487	to pour	203
+672	1453	to wash	425
+673	230	to sweep	709
+674	245	the broom	589
+675	1361	the tool	695
+676	1042	the carpenter	951
+677	1840	to build	433
+678	1501	to bore	625
+679	46	to hollow out	1411
+680	1948	the saw	1021
+681	1481	the hammer	1290
+682	502	the nail	482
+683	1069	the glue	1062
+684	1001	the blacksmith	731
+685	288	to forge	782
+686	1648	the anvil	1341
+687	211	to cast	69
+688	1369	the gold	339
+689	759	the silver	60
+690	1825	the copper	165
+691	621	the iron	1080
+692	627	the lead	537
+693	3217	the tin or tinplate	1321
+694	359	the potter	698
+695	289	to mould/mold	519
+696	1399	the clay	475
+697	604	the glass	1098
+698	3294	to weave or plait/braid	780
+699	1539	the basket	949
+700	195	the mat	591
+701	292	the rug	936
+702	293	the netbag	1081
+703	1971	the fan	283
+704	360	to fan	232
+705	228	to carve	235
+706	914	the sculptor	769
+708	1979	the chisel	1238
+709	647	the paint	1117
+710	2001	to paint	1086
+711	765	to move	898
+712		to turn	763
+713	1444	to turn around	1366
+714	1113	to wrap	613
+715	827	to roll	912
+716	2866	to drop	794
+717	3199	to twist	1066
+718	568	to rise	570
+719	501	to raise or lift	648
+720	1280	to fall	256
+721	2253	to drip	474
+722	1456	to throw	626
+723	702	to catch	485
+724	1909	to shake	725
+725	2003	to flow	347
+726	1088	to sink	211
+727	1574	to float	982
+728	1439	to swim	559
+729	119	to dive	1349
+730	365	to splash	904
+731	787	to sail	699
+732	1441	to fly	361
+733	175	to blow	843
+734	3456	to crawl	785
+735	66	to kneel	585
+736	296	to crouch	1330
+737	1324	to slide or slip	628
+738	1829	to jump	538
+739	1135	to kick	632
+740	1879	to dance	1064
+741	1443	to walk	862
+742	366	to limp	941
+743	1519	to run	318
+744	695	to go	11
+745	705	to go up	661
+746	1102	to climb	793
+747	2014	to go down	1139
+748	1107	to go out	1155
+749	1446	to come	93
+750	581	to come back	834
+751	1752	to leave	758
+752	485	to disappear	715
+753	956	to flee	741
+754	1085	to follow	917
+755	1047	to pursue	1067
+756	1387	to arrive	439
+757	1778	to approach	462
+758	749	to enter	540
+759	700	to carry	133
+760	412	to carry in hand	1340
+761	413	to carry on shoulder	644
+762	414	to carry on head	1173
+763	415	to carry under the arm	1030
+764	692	to bring	600
+765	1127	to send	272
+766	43	to lead	426
+767	741	to drive	1049
+768	367	to ride	218
+769	1452	to push	480
+770	667	the road	124
+771	2252	the path	214
+772	1011	the bridge	381
+773	122	the cart or wagon	467
+774	710	the wheel	532
+775	1769	the axle	372
+776	14	the yoke	79
+777	740	the ship	608
+778	1844	the boat	390
+779	1970	the canoe	481
+780	416	the outrigger	1336
+781	1664	the raft	416
+782	3137	the oar	784
+783	234	the paddle	822
+784	1849	to row	639
+785	108	the rudder	784
+786	184	the mast	946
+787	786	the sail	117
+788	1870	the anchor	602
+789	610	the port	957
+790	1922	to land	1378
+791	773	to have	633
+792	684	to own	778
+793	1749	to take	116
+794	855	to grasp	248
+795	1448	to hold	330
+796	694	to get	294
+797	1477	to keep	581
+798	738	the thing	1091
+799	1447	to give	77
+800	85	to give back	1323
+801	1997	to preserve	1189
+803	2008	to rescue	1206
+804	681	to destroy	1174
+805	44	to injure	1058
+806	1468	to look for	316
+807	719	to find	688
+808	3072	to lose	810
+809	1095	to let go	1186
+810	1559	the money	186
+811	1867	the coin	989
+812	712	rich	838
+813	1674	poor	400
+814	1934	the beggar	1108
+815	1774	stingy	1320
+816	582	to lend	486
+817	1823	to borrow	350
+818	369	to owe	1165
+819	1914	the debt	624
+820	718	to pay	575
+821	1081	the bill	342
+822	873	the tax	872
+823	856	to hire	897
+824	1122	the wages	973
+825	733	to earn	338
+826	1869	to buy	128
+827	1571	to sell	193
+828	2135	to trade or barter	188
+829	1082	the merchant	306
+830	633	the market	533
+831	752	the shop/store	1005
+832	657	the price	1061
+833	1426	expensive	970
+834	1887	cheap	729
+835	884	to share	908
+836	1098	to weigh	792
+837	1685	after	607
+838	1686	behind	1308
+839	1816	beside	920
+840	1326	down	451
+841	1882	before	586
+842	1883	in front of	1093
+843	1606	inside	979
+844	762	outside	911
+845	1485	under	1183
+846	1591	up	428
+847	723	the place	335
+849	998	to put	823
+850	1416	to sit	305
+851	215	to lie down	274
+852	1442	to stand	503
+853	987	to remain	405
+854	838	the remains	925
+855	7	to gather	990
+856	371	to pick up	705
+857	1576	to pile up	1240
+858	1743	to join	231
+859	1359	to separate	1233
+860	1119	to divide	505
+861	1156	to open	483
+862	1046	to shut	491
+863	761	to cover	322
+864	602	to hide	138
+865	1265	high	436
+866	721	low	771
+867	1753	the top	415
+868	690	the bottom	783
+869	742	the end(1)	496
+870	372	pointed	844
+871	863	the edge	80
+872	682	the side	1211
+873	1093	the middle	258
+874	1019	right(1)	431
+875	244	left	836
+876	1942	near	999
+877	1406	far	772
+878	1877	the east	1076
+879	1817	the west	1300
+880	1598	the north	1272
+881	1595	the south	1022
+882	479	to grow	569
+883	1506	to measure	1016
+884	81	the fathom	383
+885	1202	big	96
+886	1246	small	287
+887	1203	long	66
+888	711	tall	182
+889	1645	short	1403
+890	1243	wide	530
+891	1267	narrow	1147
+892	1244	thick	209
+893	2249	thin	68
+894	1593	deep	567
+895	193	shallow	1071
+896	1633	flat	579
+897	1404	straight	1115
+898	297	crooked	197
+899	1071	the hook	923
+900	192	the corner	781
+901	1367	the cross	1261
+902	850	the square	1389
+903	1395	round	149
+904	1467	the circle	824
+905	1845	the ball	1002
+906	1048	the line	245
+907	1667	the hole	751
+908	1558	similar	1298
+909	1264	to change	329
+910	1294	zero	1090
+911	1493	one	122
+912	1498	two	84
+913	492	three	53
+914	1500	four	215
+915	493	five	216
+916	1703	six	271
+917	1704	seven	101
+918	1705	eight	349
+919	1483	nine	230
+920	1515	ten	155
+921	1706	eleven	1187
+922	1707	twelve	1280
+923	1709	fifteen	1315
+924	1710	twenty	719
+925	1634	a hundred	508
+926	1843	a thousand	611
+927	1420	to count	526
+928	98	all	253
+929	1198	many	976
+930	1992	more	1074
+931	1242	few	1059
+932	1881	enough	1043
+933	1241	some	1342
+934	2023	the crowd	702
+935	1429	full	127
+936	1624	empty	722
+937	779	the part	392
+938	816	the half	153
+939	1580	only	894
+940	728	first	408
+941	1529	last	1374
+942	1384	second	557
+943	1888	the pair	210
+944	1546	twice/two times	1269
+945	1859	third	840
+946	417	three times	1265
+947	892	the time	556
+948	1789	the age	703
+949	1231	new	333
+950	1207	young	593
+951	1229	old	434
+952	672	early	1017
+953	477	late	605
+954	1376	now	590
+955	1963	immediately	1346
+956	1631	fast	807
+957	701	slow	665
+958	754	to hurry	910
+959	425	to be late	1256
+960	1806	to begin	1225
+961	1186	to last	739
+962	743	the end(2)	498
+963	1766	to finish	1112
+964	1928	to cease	701
+965	790	ready	432
+966	1676	always	1253
+967	1852	often	869
+968	1544	sometimes	1337
+969	703	soon	1220
+970	418	for a long time	713
+971	1656	never	1343
+972	204	again	1105
+973	1260	the day(1)	67
+974	1233	the night	34
+975	729	the dawn	1109
+976	1339	the morning	878
+977	12	the midday	1154
+978	1807	the afternoon	456
+979	1629	the evening	564
+980	1283	today	395
+981	1329	tomorrow	812
+982	1179	the day after tomorrow	1223
+983	1174	yesterday	144
+984	1180	the day before yesterday	1082
+985	1353	the hour	850
+986	1323	the clock	730
+987	1469	the week	1122
+988	1699	Sunday	664
+989	1697	Monday	832
+990	1695	Tuesday	531
+991	1694	Wednesday	788
+992	1693	Thursday	679
+993	1692	Friday	948
+994	1700	Saturday	668
+995	1370	the month	94
+996	1226	the year	59
+997	1471	the winter	653
+998	1537	the spring(2)	962
+999	1342	the summer	328
+1000	1276	the autumn/fall	752
+1001	691	the season	1414
+1002	1587	to smell(1)	892
+1003	380	wrinkled	1390
+1004	375	to sniff	448
+1005	1586	to smell(2)	1162
+1006	376	fragrant	692
+1007	42	stinking	690
+1008	21	to taste	1284
+1009	717	sweet	296
+1010	1091	salty	513
+1011	887	bitter	170
+1012	1906	sour	858
+1013	70	brackish	1332
+1014	1408	to hear	825
+1015	1608	to listen	255
+1016	1811	the sound or noise	1089
+1017	377	loud	960
+1018	1314	quiet	1395
+1019	1409	to see	346
+1020	1819	to look	1078
+1021	1039	to show	944
+1022	708	to shine	934
+1023	679	bright	867
+1024	1613	the colour/color	1375
+1025	250	light(2)	849
+1026	706	dark	22
+1027	1335	white	299
+1028	163	black	171
+1029	156	red	356
+1030	837	blue	848
+1031	1425	green	1267
+1032	1424	yellow	298
+1033	1892	to touch	1235
+1034	378	to pinch	791
+1035	1079	to feel	854
+1036	1884	hard	243
+1037	1856	soft	379
+1038	1923	rough(1)	728
+1039	1234	smooth	631
+1040	1396	sharp	820
+1041	379	blunt	1329
+1042	1210	heavy	82
+1043	1052	light(1)	471
+1044	1726	wet	277
+1045	1398	dry	396
+1046	1286	hot	364
+1047	1232	warm	615
+1048	1287	cold	148
+1049	704	clean	907
+1050	1230	dirty	1092
+1051	811	the soul or spirit	51
+1052	1572	surprised or astonished	1363
+1053	720	the good luck	1266
+1054	56	the bad luck	1038
+1055	1495	happy	1264
+1056	1355	to laugh	494
+1057	1451	to smile	1221
+1058	1413	to play	655
+1059	923	to love	489
+1060	578	to kiss	645
+1061	928	to embrace	720
+1062	1783	the pain	928
+1063	1668	the grief	1286
+1064	1000	the anxiety	1299
+1065	1875	to regret or be sorry	800
+1066	1141	the pity	1176
+1067	1839	to cry	163
+1068	1651	the tear	864
+1069	716	to groan	1113
+1070	1607	to hate	718
+1071	82	the anger	603
+1072	40	the envy or jealousy	798
+1073	1776	the shame	689
+1074	174	proud	873
+1075	1779	to dare	598
+1076	3	brave	1413
+1077	781	the fear	62
+1078	1810	the danger	899
+1079	1784	to want	612
+1080	1750	to choose	546
+1081	3212	to hope	1047
+1082	100	faithful	1319
+1083	1657	true	516
+1084	601	to lie(2)	1327
+1085	13	the deceit	1409
+1086	1528	to forgive	672
+1087	1035	good	154
+1088	1292	bad	988
+1089	1725	right(2)	168
+1090	1390	wrong	534
+1091	134	the fault	1188
+1092	1293	the mistake	1073
+1093	381	the blame	1129
+1094	1687	the praise	1126
+1095	1427	beautiful	285
+1096	1548	ugly	874
+1097	2018	greedy	1200
+1098	1310	clever	345
+1099	1562	the mind	83
+1100	1415	to think(1)	1302
+1101	1513	to think(2)	708
+1102	1890	to believe	609
+1103	1536	to understand	384
+1104	1410	to know	145
+1105	1932	to guess	880
+1106	117	to imitate	1111
+1107	1521	to seem	891
+1108	1609	the idea	985
+1109	698	wise	673
+1110	1518	stupid	974
+1111	1899	mad	900
+1112	504	to learn	747
+1113	1929	to study	1428
+1114	709	to teach	407
+1115	753	the pupil	1348
+1116	1038	the teacher	1070
+1117	673	the school	991
+1118	707	to remember	1328
+1119	1523	to forget	159
+1120	989	clear	1025
+1121	1764	obscure	1393
+1122	1121	secret	980
+1123	509	certain	738
+1124	1626	to explain	724
+1125	1162	the intention	1142
+1126	860	the cause	1131
+1127	1308	the doubt	1151
+1128	1841	to suspect	1369
+1129	1902	to betray	1015
+1130	643	the need or necessity	443
+1131	686	easy	514
+1132	584	difficult	406
+1133	1812	to try	871
+1134	488	the manner	554
+1135	1577	and	202
+1136	1157	because	1027
+1137	1459	if	906
+1138	1014	or	1194
+1139	1268	yes	627
+1140	1269	no	447
+1141	1239	how?	994
+1142	3450	how many?	173
+1143	531	how much?	565
+1144	1236	what?	700
+1145	1238	when?	808
+1146	1237	where?	1107
+1147	727	which?	795
+1148	1235	who?	360
+1149	1270	why?	1279
+1150	1363	the voice	246
+1151	1261	to sing	523
+1152	715	to shout	1166
+1153	55	to whisper	921
+1154	128	to mumble	1311
+1155	1025	to whistle	1040
+1156	298	to shriek	1380
+1157	526	to howl	320
+1158	1623	to speak or talk	966
+1159	1866	to stutter or stammer	1120
+1160	1458	to say	459
+1161	1711	to tell	1215
+1162	1115	the speech	955
+1163	48	to be silent	1429
+1164	1307	the language	427
+1165	1599	the word	524
+1166	1405	the name	88
+1167	1309	to ask(1)	669
+1168	1275	to answer	373
+1169	2022	to admit	796
+1170	755	to deny	544
+1171	1828	to ask(2)	397
+1172	1675	to promise	813
+1173	49	to refuse	764
+1174	83	to forbid	1143
+1175	299	to scold	468
+1176	1084	to call(1)	755
+1177	180	to call(2)	1102
+1178	9	to announce	1013
+1179	1192	to threaten	845
+1180	101	to boast	1103
+1181	1672	to write	674
+1182	724	to read	677
+1183	648	the paper	365
+1184	794	the pen	817
+1185	963	the book	260
+1186	1045	the poet	1006
+1187	777	the flute	398
+1188	908	the drum	954
+1189	2136	the horn or trumpet	1203
+1190	300	the rattle	1088
+1191	1300	the country	568
+1192	89	the native country	1435
+1193	1391	the town	787
+1194	930	the village	399
+1195	1010	the boundary	1339
+1196	789	the people	736
+1197	302	the clan	1121
+1198	301	the chieftain	723
+1199	1296	the walking stick	943
+1200	1846	to rule or govern	469
+1201	1508	the king	895
+1202	1306	the queen	863
+1203	482	the noble	1032
+1204	1032	the citizen	865
+1205	383	the master	105
+1206	812	the slave	711
+1207	255	the servant	1196
+1208	384	the freeman	1398
+1209	1998	to command or order	888
+1210	1635	to obey	1056
+1211	1003	to permit	939
+1212	1325	the friend	851
+1213	1358	the enemy	670
+1214	1332	the neighbour	977
+1215	791	the stranger	1229
+1216	1782	the guest	198
+1217	1545	the host	1437
+1218	1897	to help	839
+1219	1550	to prevent	1275
+1220	1747	the custom	1095
+1221	1848	the quarrel	877
+1222	2024	the plot	535
+1223	1831	to meet	1303
+1224	1610	the prostitute	1219
+1225	1423	to fight	767
+1226	579	the war or battle	1127
+1227	1338	the peace	179
+1228	1561	the army	996
+1229	1941	the soldier	1213
+1230	951	the weapons	1037
+1231	1763	the club	1357
+1232	386	the battle-axe	805
+1233	387	the sling	1169
+1234	994	the bow	227
+1235	977	the arrow	732
+1236	945	the spear	1227
+1237	1535	the sword	576
+1238	1566	the gun	549
+1239	1061	the armour	269
+1240	1680	the helmet	961
+1241	1064	the shield	815
+1242	1938	the fortress	1134
+1243	1671	the tower	1231
+1244	783	the victory	517
+1245	782	the defeat	490
+1246	722	the attack	914
+1247	1330	to defend	829
+1248	421	to retreat	671
+1249	1696	to surrender	386
+1250	1072	the captive or prisoner	777
+1251	1940	the guard	1359
+1252	1022	the booty	776
+1253	65	the ambush	1313
+1254	1858	the fisherman	1352
+1255	1074	the fishhook	953
+1256	19	the fishing line	1426
+1257	388	the fishnet	663
+1258	389	the fish trap	1148
+1259	2013	the bait	1031
+1260	1435	to hunt	1307
+1261	1172	to shoot	842
+1262	161	to miss	580
+1263	1075	the trap	423
+1264	1170	to trap	1008
+1265	1062	the law	740
+1266	1068	the court	1241
+1267	1461	at	75
+1268	1818	to adjudicate	1083
+1269	1067	the judgment	1385
+1270	861	the judge	1292
+1271	2020	the plaintiff	1276
+1272	1034	the defendant	1427
+1273	1144	the witness	933
+1274	1939	to swear	950
+1275	1712	the oath	642
+1276	1814	to accuse	1096
+1277	484	to condemn	89
+1278	983	to convict	918
+1279	988	to acquit	1400
+1280	1682	guilty	391
+1281	90	innocent	1288
+1282	390	the penalty or punishment	495
+1283	218	the fine	1228
+1284	1281	the prison	1232
+1285	845	the murder	963
+1286	902	the adultery	265
+1287	953	the rape	1177
+1288	1889	the arson	1191
+1289	1792	the perjury	1416
+1290	713	to steal	354
+1291	1160	the thief	696
+1292	661	the religion	712
+1293	3231	the god	142
+1294	911	the temple	300
+1295	853	the altar	717
+1296	1103	the sacrifice	1396
+1297	257	to worship	1362
+1298	24	to pray	885
+1299	852	the priest	984
+1300	1702	holy	506
+1301	304	to preach	753
+1302	391	to bless	1370
+1303	8	to curse	1344
+1304	303	to fast	1386
+1305	1565	the heaven	1018
+1306	878	the hell	1007
+1307	1973	the demon	465
+1308	1945	the idol	1026
+1309	392	the magic	684
+1310	2137	the sorcerer or witch	945
+1311	3206	the fairy or elf	393
+1312	1175	the ghost	940
+1313	107	the omen	435
+1314	1315	the radio	1456
+1315	1788	the television	1440
+1316	1379	the telephone	1451
+1317	638	the motorcycle	1452
+1318	1111	the car	1439
+1319	1070	the bus	1460
+1320	1597	the airplane	1433
+1321	59	the electricity	1347
+1322	662	the battery	1448
+1323	616	the hospital	1418
+1324	1104	the nurse	1250
+1325	395	the pill or tablet	1291
+1326	1805	the injection	1376
+1327	1488	the tap/faucet	1252
+1328	915	the sink	1455
+1329	219	the toilet	1004
+1330	105	the mattress	1009
+1331	815	the government	1046
+1332	899	the president	1419
+1333	486	the minister	1128
+1334	656	the police	1335
+1335	599	the driver's license	1445
+1336	1066	the crime	616
+1337	240	the election	658
+1338	167	the post/mail	1296
+1339	596	the postage stamp	1282
+1340	1612	the letter	1145
+1341	1284	the bank	1412
+1342	1051	the tin/can	1164
+1343	1802	the screw	1263
+1344	836	the screwdriver	1388
+1345	1321	the bottle	905
+1346	874	the candy/sweets	667
+1347	1898	the spectacles/glasses	1140
+1348	654	the plastic	1450
+1349	1804	the bomb	1443
+1350	1677	the workshop	1180
+1351	969	the cigarette	1373
+1352	1967	the calendar	759
+1353	216	the film/movie	1449
+1354	642	the music	650
+1355	1096	the song	284
+1356	1298	the newspaper	1305
+1357	591	the address	1431
+1358	1356	the number	1387
+1359	900	the train	1381
+1360	397	the birth certificate	1262
+1361	966	to brake	1289
+1362	650	the petroleum	1394
+1363	110	the motor	1432
+1364	144	the machine	1230
+1365	747	the bicycle	1421
+1366	1362	the street	997
+1367	37	to liberate	1270
+1368	1611	to invite	1060
+1369	1790	the license plate	1447
+1370	1497	the postcard	1406
+1371	1579	to be	223
+1372	1990	to become	566
+1373	1478	without	588
+1374	97	through	266
+1375	200	same	1408
+1376	1240	not	4
+1377	1214	this	409
+1378	78	that	1104
+1379	136	here	797
+1380	1937	there	577
+1381	197	other	981
+1382	1836	the vagina	1368
+1383	1373	the tea	893
+1384	1299	the coffee	1295
+1385	1354	next	971
+1386	912	the coyote	156
+1387	1190	the hare	1003
+1388	1893	the quail	599
+1389	828	the raccoon	1214
+1390	1628	the squirrel	901
+1391	1876	the reindeer/caribou	374
+1392	1772	the elk/moose	643
+1393	1194	the beaver	959
+1394	16	the sledge/sled	509
+1395	340	the lasso	621
+1396	116	the larch	139
+1397	286	the needle(2)	1048
+1398	261	the arctic lights	1446
+1399	1137	the sinew or tendon	314
+1400	247	to tan	455
+1401	233	the snowshoe	1353
+1402	393	the circumcision	857
+1403	1946	the initiation ceremony	1453
+1404	287	the cone	1254
+1405	311	the body louse	241
+1406	1837	the vulva	543
+1407	312	the tapir	1158
+1408	295	the whetstone	883
+1409	294	the tumpline	1197
+1410	1105	the camp	1236
+1411	339	the digging stick (=yamstick)	1338
+1412	840	the cormorant	975
+1413	2686	the prawns or shrimp	610
+1414	883	the termites	571
+1415	1527	the tick	583
+1416	135	the boomerang	1301
+1417	164	the kangaroo	1444
+1418	181	the anteater	1407
+1419	308	the toucan	1397
+1420	1250	the jaguar	555
+1421	407	the manioc bread	1458
+1422	2019	the hammock	1144
+1423	931	the millet or sorghum	162
+1424	1555	the chameleon	1404
+1425	1911	to draw water	1163
+1426	361	the peg	343
+1427	142	to go or return home	1334
+1428	934	the buffalo	1415
+1429	260	the savanna	1392
+1430	1193	the steam	592
+1431	405	the older sibling	297
+1432	427	the younger sibling	199
+1433	305	the grandparents	634
+1434	1617	the grandchild	584
+1435	173	the sibling’s child	487
+1436	306	the parents-in-law	55
+1437	1060	the child-in-law	9
+1438	1832	the sibling-in-law	16
+1439	1211	he	10
+1440	1834	she	43
+1441	169	it	98
+1442	210	the life	761
+1443	1770	the carcass	1410
+1444	1986	the disease	998
+1445	336	the padlock	1273
+1446	140	the paddy	167
+1447	1116	to damage	1055
+1448	1741	above	846
+1449	594	the piece	206
+1450	1964	alone	1020
+1451	1557	the beginning	1248
+1452	1225	the day(2)	31
+1453	1349	the church	1326
+1454	1603	the mosque	28
+1455	687	nothing	357
+1456	1625	dead	175
+1457	1436	to scratch	958
+1458	734	to make	152
+1459	1251	the belly	91
+1460	1454	to wipe	837
+1461	1431	to freeze	522
+1462	1340	with	735
+1463	1460	in	213
