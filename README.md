@@ -1,5 +1,6 @@
 # smirjan
-[![CI/CD](https://github.com/chrysophylax/smirjan/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/chrysophylax/smirjan/actions/workflows/ci.yml)
+[![CI/CD](https://github.com/chrysophylax/smirjan/actions/workflows/ci.yml/badge.svg?branch=master&event=push)](https://github.com/chrysophylax/smirjan/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/chrysophylax/smirjan)](https://github.com/chrysophylax/smirjan/releases/latest)
 smirjan generates words for constructed languages. The phonology of a
 language is described in a definition file, a plain-text `.def` file that
 lists the phonemes of the language in classes, the shapes its syllables may
