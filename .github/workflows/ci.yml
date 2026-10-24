@@ -109,7 +109,7 @@ jobs:
         with:
           persist-credentials: false
       # Release builds start from a clean cache, so nothing a previous run stored can end up in them.
-      - uses: coursier/cache-action@95e5b1029b6b86e7bac033ee44a0697d8a527d2d # v8.1.1
+      - uses: coursier/cache-action@057d08c2f9a2c4e7a4d33df3aae657b7db88b8cc # v8.2.0
         if: needs.version.outputs.release != 'true'
       # native-image links with the MSVC toolchain on Windows.
       - uses: ilammy/msvc-dev-cmd@0b201ec74fa43914dc39ae48a89fd1d8cb592756 # v1.13.0
